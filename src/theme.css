@@ -1,0 +1,46 @@
+/* color defs */
+:root {
+  --color-light-text-raw: 70, 64, 64; /* #464040 */
+  --color-light-text: rgb(var(--color-light-text-raw));
+  --color-light-caption: rgb(153, 153, 153); /* #999 */
+  --color-light-border: rgb(238, 238, 238); /* #eee */
+  --color-light-accent: rgb(27, 169, 204); /* #1ba9cc */
+  --color-light-alert: rgb(204, 26, 26); /* #cc1a1a */
+  --color-light-foreground: rgb(255, 255, 255); /* #fff */
+  --color-light-background: rgb(223, 244, 250); /* #dff4fa */
+
+  --color-dark-text-raw: 255, 255, 255; /* #fff */
+  --color-dark-text: rgb(var(--color-dark-text-raw));
+  --color-dark-caption: rgb(192, 192, 192); /* #c0c0c0 */
+  --color-dark-border: rgb(41, 41, 43); /* #29292b */
+  --color-dark-accent: rgb(27, 169, 204); /* #1ba9cc */
+  --color-dark-alert: rgb(204, 26, 26); /* #cc1a1a */
+  --color-dark-foreground: rgb(28, 28, 30); /* #1c1c1e */
+  --color-dark-background: rgb(0, 0, 0); /* #000 */
+}
+
+/* light */
+:root {
+  --color-auto-text-raw: var(--color-light-text-raw);
+  --color-auto-text: var(--color-light-text);
+  --color-auto-caption: var(--color-light-caption);
+  --color-auto-border: var(--color-light-border);
+  --color-auto-accent: var(--color-light-accent);
+  --color-auto-alert: var(--color-light-alert);
+  --color-auto-foreground: var(--color-light-foreground);
+  --color-auto-background: var(--color-light-background);
+}
+
+/* dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-auto-text-raw: var(--color-dark-text-raw);
+    --color-auto-text: var(--color-dark-text);
+    --color-auto-caption: var(--color-dark-caption);
+    --color-auto-border: var(--color-dark-border);
+    --color-auto-accent: var(--color-dark-accent);
+    --color-auto-alert: var(--color-dark-alert);
+    --color-auto-foreground: var(--color-dark-foreground);
+    --color-auto-background: var(--color-dark-background);
+  }
+}

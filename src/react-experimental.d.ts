@@ -116,10 +116,7 @@ declare module 'react' {
 
   export type MutableSourceVersion = unknown;
   export type MutableSourceGetSnapshotFn<Source, Snapshot> = (source: Source) => Snapshot;
-  export type MutableSourceSubscribeFn<Source, Snapshot> = (
-    source: Source,
-    callback: (snapshot: Snapshot) => void
-  ) => () => void;
+  export type MutableSourceSubscribeFn<Source> = (source: Source, callback: () => void) => () => void;
   export type MutableSourceGetVersionFn = () => MutableSourceVersion;
 
   export interface MutableSource<Source> {

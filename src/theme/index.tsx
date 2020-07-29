@@ -11,6 +11,10 @@ export const colors = Object.freeze({
   background: 'var(--color-background)',
 });
 
+export const sizes = Object.freeze({
+  minTappable: 'var(--size-minimal-tappable)',
+});
+
 export type ColorThemeProps = {
   mode?: 'light' | 'dark' | 'auto';
 };

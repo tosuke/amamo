@@ -1,6 +1,7 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const DotenvPlugin = require('dotenv-webpack');
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -9,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
  */
 module.exports = {
   entry: {
-    main: [path.join(__dirname, 'src/index.tsx'), path.join(__dirname, 'src/theme.css')],
+    main: [path.join(__dirname, 'src/index.tsx')],
   },
   module: {
     rules: [
@@ -36,6 +37,7 @@ module.exports = {
   },
   plugins: [
     ...(dev ? [new ReactRefreshPlugin({ overlay: true })] : []),
+    new DotenvPlugin({ safe: true, systemvars: true }),
     new HTMLPlugin({
       template: path.join(__dirname, 'src/index.html'),
     }),

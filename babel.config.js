@@ -7,9 +7,17 @@ module.exports = (api) => {
       '@babel/preset-env',
       {
         targets: '>2%',
+        useBuiltIns: 'usage',
+        corejs: 3,
       },
     ]);
   } else {
+    presets.push([
+      '@babel/preset-env',
+      {
+        targets: '>2%',
+      },
+    ]);
     plugins.push('react-refresh/babel');
   }
   api.cache.using(() => process.env.NODE_ENV);

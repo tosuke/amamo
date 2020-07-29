@@ -17,6 +17,9 @@
   --color-dark-alert: rgb(204, 26, 26); /* #cc1a1a */
   --color-dark-foreground: rgb(28, 28, 30); /* #1c1c1e */
   --color-dark-background: rgb(0, 0, 0); /* #000 */
+
+  --image-border-radius: 4px;
+  --size-minimum-tappable: 44px;
 }
 
 /* light */

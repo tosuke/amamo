@@ -1,8 +1,8 @@
-import React, { Suspense, useState, Children } from 'react';
+import React, { Suspense } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
-import { SeaApiProvider, useSeaApi, createSeaApi } from '@/infra/sea';
+import { createSeaApi } from '@/infra/sea';
 import { Home } from '../pages/Home';
-import { CacheProvider, createSeaDataSource } from '@/dataSource';
+import { CacheProvider } from '@/dataSource';
 import { useCacheSet } from '@/dataSource/_cache';
 import { AppStateProvider } from '@/appState';
 
@@ -23,13 +23,11 @@ export const App = () => {
       <ColorTheme mode="auto" />
       <GlobalStyles />
       <CacheProvider>
-        <SeaApiProvider>
-          <AppContainer>
-            <Suspense fallback={null}>
-              <Home />
-            </Suspense>
-          </AppContainer>
-        </SeaApiProvider>
+        <AppContainer>
+          <Suspense fallback={null}>
+            <Home />
+          </Suspense>
+        </AppContainer>
       </CacheProvider>
     </>
   );

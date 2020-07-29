@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/tosuke-lab/amamo.git",
   "author": "Tosuke <tasukeprg@gmail.com>",
-  "license": "MIT",
+  "license": "GPL",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --hot --mode development",

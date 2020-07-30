@@ -13,6 +13,10 @@ const defaultCacheState: CacheState = { seaUsers: {}, seaPosts: {} };
 
 const CacheStateContext = createContext<CacheState>(defaultCacheState);
 const CacheSetContext = createContext<CacheSetFn>(() => {}); // noop
+if (process.env.NODE_ENV === 'development') {
+  CacheStateContext.displayName = 'CacheStateContext';
+  CacheSetContext.displayName = 'CacheSetContext';
+}
 
 export const CacheProvider: React.FC<{ defaultValue?: CacheState }> = ({ defaultValue, children }) => {
   const [cache, setCache] = useState<CacheState>(defaultValue ?? defaultCacheState);

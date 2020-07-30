@@ -2,6 +2,7 @@ import React from 'react';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { AppState } from '@/appState';
+import { Link } from '@/router';
 
 export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   <div className="account">
@@ -16,9 +17,9 @@ export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
 
 export const SettingButton = () => (
   <div className="setting">
-    <a>
+    <Link href="/settings">
       <i className="uil uil-cog" />
-    </a>
+    </Link>
     <style jsx>{`
       .setting {
         width: ${sizes.minTappable};
@@ -77,5 +78,7 @@ export const LoginedHeader = ({ user }: ReturnType<typeof getLoginedHeaderInitia
     </HeaderLayout>
   );
 };
+
+export const HeaderPlaceholder = () => <HeaderLayout></HeaderLayout>;
 
 export const AuthHeader = () => <HeaderLayout />;

@@ -1,22 +1,26 @@
 import React, { Suspense } from 'react';
 import { DefaultLayout } from '../_layout/DefaultLayout';
-import { LoginedHeader, getLoginedHeaderInitialProps } from '@/components/Header/Header';
+import { LoginedHeader, getLoginedHeaderInitialProps, HeaderPlaceholder } from '@/components/Header/Header';
 import { AppState } from '@/appState';
 import { getPublicTimelineInitialProps, PublicTimeline } from '@/components/Tilmeline/PublicTimeline';
 
-export const getInitialProps = (appState: AppState) => {
+export const getHomeInitialProps = (appState: AppState) => {
   return {
     ...getLoginedHeaderInitialProps(appState),
     ...getPublicTimelineInitialProps(appState),
   };
 };
 
-export const Home = ({ user, initialPosts }: ReturnType<typeof getInitialProps>) => {
+export const Home = ({ user, initialPosts }: ReturnType<typeof getHomeInitialProps>) => {
   return (
-    <DefaultLayout headerContent={<LoginedHeader user={user} />}>
-      <Suspense fallback="loading...">
-        <PublicTimeline initialPosts={initialPosts} />
-      </Suspense>
+    <DefaultLayout
+      headerContent={
+        <Suspense fallback={<HeaderPlaceholder />}>
+          <LoginedHeader user={user} />
+        </Suspense>
+      }
+    >
+      <PublicTimeline initialPosts={initialPosts} />
     </DefaultLayout>
   );
 };

@@ -112,7 +112,7 @@ declare module 'react' {
    *
    * @see https://reactjs.org/docs/concurrent-mode-reference.html#usetransition
    */
-  export function useTransition(config?: SuspenseConfig | null): [TransitionStartFunction, boolean];
+  export function unstable_useTransition(config?: TimeoutConfig | null): [TransitionStartFunction, boolean];
 
   export type MutableSourceVersion = unknown;
   export type MutableSourceGetSnapshotFn<Source, Snapshot> = (source: Source) => Snapshot;

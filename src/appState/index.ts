@@ -20,6 +20,7 @@ function getInitialState({ api, setCache }: InitialProps): AppState {
 }
 
 const AppStateContext = createContext<AppState | undefined>(undefined);
+if (process.env.NODE_ENV === 'development') AppStateContext.displayName = 'AppStateContext';
 
 export const useAppState = () => {
   const state = useContext(AppStateContext);

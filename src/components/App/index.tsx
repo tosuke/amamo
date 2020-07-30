@@ -1,16 +1,21 @@
-import React, { Suspense } from 'react';
+import React, { useMemo } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createSeaApi } from '@/infra/sea';
-import { Home, getInitialProps } from '../pages/Home';
+import { Home, getHomeInitialProps } from '../pages/Home';
 import { CacheProvider } from '@/dataSource';
 import { useCacheSet } from '@/dataSource/_cache';
 import { AppStateProvider, useAppState } from '@/appState';
-import { memoize } from '@/utils/memoize';
+import { AppRoutes, createAction, Router } from '@/router';
+import { createBrowserHistory } from 'history';
+import { getSettingsInitialProps, Settings } from '../pages/Settings';
+import { DefaultLayout } from '../pages/_layout/DefaultLayout';
+import { HeaderPlaceholder } from '../Header/Header';
 
 const AppContainer: React.FC = ({ children }) => {
   // TODO: Create API directly
   const api = createSeaApi(process.env.API_ROOT!, process.env.TOKEN!);
   const setCache = useCacheSet();
+
   return (
     <AppStateProvider api={api} setCache={setCache}>
       {children}
@@ -18,16 +23,21 @@ const AppContainer: React.FC = ({ children }) => {
   );
 };
 
-// TODO: ちゃんと実装する
-const memoizedGetInitialProps = memoize(getInitialProps);
-const Router = () => {
+const routes: AppRoutes = [
+  {
+    path: '/settings',
+    action: createAction(getSettingsInitialProps, Settings),
+  },
+  {
+    path: '/',
+    action: createAction(getHomeInitialProps, Home),
+  },
+];
+
+const AppRouter: React.FC = () => {
   const appState = useAppState();
-  const initialProps = memoizedGetInitialProps(appState);
-  return (
-    <Suspense fallback={null}>
-      <Home {...initialProps} />
-    </Suspense>
-  );
+  const history = useMemo(() => createBrowserHistory(), []);
+  return <Router context={appState} routes={routes} history={history} timeoutConfig={{ timeoutMs: 100000 }} />;
 };
 
 export const App = () => {
@@ -37,7 +47,7 @@ export const App = () => {
       <GlobalStyles />
       <CacheProvider>
         <AppContainer>
-          <Router />
+          <AppRouter />
         </AppContainer>
       </CacheProvider>
     </>

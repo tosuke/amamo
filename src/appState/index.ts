@@ -1,14 +1,10 @@
 import { createContext, useContext, useState, createElement } from 'react';
 import { SeaDataSource, createSeaDataSource } from '@/dataSource';
 import { CacheSetFn } from '@/dataSource/_cache';
-import { Loadable } from '@/utils/Loadable';
-import { SeaUser } from '@/models/SeaUser';
 import { SeaApi } from '@/infra/sea';
 
 export type AppState = {
   readonly seaDataSource: SeaDataSource;
-  // コンポーネント設計の都合上行き場がない
-  readonly seaAccount: Loadable<SeaUser>;
 };
 
 type InitialProps = Readonly<{
@@ -18,10 +14,8 @@ type InitialProps = Readonly<{
 
 function getInitialState({ api, setCache }: InitialProps): AppState {
   const seaDataSource = createSeaDataSource({ api, setCache });
-  const seaAccount = seaDataSource.getMe();
   return {
     seaDataSource,
-    seaAccount,
   };
 }
 

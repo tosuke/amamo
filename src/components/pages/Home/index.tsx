@@ -1,7 +1,14 @@
 import React from 'react';
 import { DefaultLayout } from '../_layout/DefaultLayout';
-import { LoginedHeader } from '@/components/Header/Header';
+import { LoginedHeader, getLoginedHeaderInitialProps } from '@/components/Header/Header';
+import { AppState } from '@/appState';
 
-export const Home = () => {
-  return <DefaultLayout headerContent={<LoginedHeader />} />;
+export const getInitialProps = (appState: AppState) => {
+  return {
+    ...getLoginedHeaderInitialProps(appState),
+  };
+};
+
+export const Home = ({ user }: ReturnType<typeof getInitialProps>) => {
+  return <DefaultLayout headerContent={<LoginedHeader user={user} />} />;
 };

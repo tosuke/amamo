@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createSeaApi } from '@/infra/sea';
-import { Home } from '../pages/Home';
+import { Home, getInitialProps } from '../pages/Home';
 import { CacheProvider } from '@/dataSource';
 import { useCacheSet } from '@/dataSource/_cache';
-import { AppStateProvider } from '@/appState';
+import { AppStateProvider, useAppState } from '@/appState';
 
 const AppContainer: React.FC = ({ children }) => {
   // TODO: Create API directly
@@ -17,6 +17,17 @@ const AppContainer: React.FC = ({ children }) => {
   );
 };
 
+// TODO: ちゃんと実装する
+const Router = () => {
+  const appState = useAppState();
+  const initialProps = getInitialProps(appState);
+  return (
+    <Suspense fallback={null}>
+      <Home {...initialProps} />
+    </Suspense>
+  );
+};
+
 export const App = () => {
   return (
     <>
@@ -24,9 +35,7 @@ export const App = () => {
       <GlobalStyles />
       <CacheProvider>
         <AppContainer>
-          <Suspense fallback={null}>
-            <Home />
-          </Suspense>
+          <Router />
         </AppContainer>
       </CacheProvider>
     </>

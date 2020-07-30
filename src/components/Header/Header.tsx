@@ -1,12 +1,11 @@
 import React from 'react';
-import { Loadable } from '@/utils/Loadable';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
-import { useAppState } from '@/appState';
+import { AppState } from '@/appState';
 
-export const Account: React.FC<{ user: Loadable<SeaUser> }> = ({ user }) => (
+export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   <div className="account">
-    <span>@{user.read().screenName}</span>
+    <span>@{user.screenName}</span>
     <style jsx>{`
       .account {
         font-size: 16px;
@@ -63,11 +62,17 @@ export const HeaderLayout: React.FC = ({ children }) => (
   </header>
 );
 
-export const LoginedHeader = () => {
-  const { seaAccount } = useAppState();
+export const getLoginedHeaderInitialProps = ({ seaDataSource }: AppState) => {
+  const user = seaDataSource.getMe();
+  return {
+    user,
+  } as const;
+};
+
+export const LoginedHeader = ({ user }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
   return (
     <HeaderLayout>
-      <Account user={seaAccount} />
+      <Account user={user.read()} />
       <SettingButton />
     </HeaderLayout>
   );

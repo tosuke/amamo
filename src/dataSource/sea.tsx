@@ -4,7 +4,6 @@ import { SeaApi } from '@/infra/sea';
 import dayjs from 'dayjs';
 import { memoize } from '@/utils/memoize';
 import { Loadable } from '@/utils/Loadable';
-import { createContext } from 'react';
 
 /**
  * Reads sea user from cache.
@@ -16,15 +15,17 @@ export const useCachedSeaUser = (id: SeaUserId) => useCacheValue().seaUsers[id];
 export const createSeaDataSource = ({ api, setCache }: Readonly<{ api: SeaApi; setCache: CacheSetFn }>) => {
   const updateUsers = (...users: SeaUser[]) =>
     setCache((cache) => {
-      const needUpdateUsers = users.filter((u) => {
-        const cached = cache.seaUsers[u.id];
-        return !cached || dayjs(u.updatedAt).isAfter(cached.updatedAt);
-      });
-      if (needUpdateUsers.length === 0) return cache;
-      const newUsers = needUpdateUsers.reduce((us, u) => ({ ...us, [u.id]: u }), cache.seaUsers);
+      const newUsers = users.reduce((us, u) => {
+        const old = us[u.id];
+        if (old && (dayjs(u.updatedAt).isBefore(old.updatedAt) || u.postsCount < old.postsCount)) return us;
+        return { ...us, [u.id]: u };
+      }, {} as Record<number, SeaUser | undefined>);
       return {
         ...cache,
-        seaUsers: newUsers,
+        seaUsers: {
+          ...cache.seaUsers,
+          ...newUsers,
+        },
       };
     });
   return {

@@ -3,13 +3,13 @@ import { colors } from '@/theme';
 
 export type DefaultLayoutProps = Readonly<{
   headerContent?: React.ReactNode;
-  mainContent?: React.ReactNode;
+  children?: React.ReactNode;
 }>;
 
-export const DefaultLayout = ({ headerContent, mainContent }: DefaultLayoutProps) => (
+export const DefaultLayout = ({ headerContent, children }: DefaultLayoutProps) => (
   <div className="layout">
     {headerContent}
-    <main className="container">{mainContent}</main>
+    <main className="container">{children}</main>
     <style jsx>{`
       .layout {
         padding: 0 0 40px;

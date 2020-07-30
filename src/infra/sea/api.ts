@@ -1,12 +1,85 @@
 import ky from 'ky';
+import {
+  assertIsInteger,
+  assertIsObject,
+  assertIsString,
+  assertIsISO8601DateTime,
+  assertIsNumber,
+  assertIsArray,
+} from '../_commons';
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
-import { assertIsInteger, assertIsObject, assertIsString, assertIsISO8601DateTime } from '../_commons';
+import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
 
+// File
+function assertIsSeaFileId(x: unknown, name = 'value'): asserts x is SeaFileId {
+  assertIsInteger(x, name);
+}
+
+function toSeaFileVariant(json: unknown, root = 'res'): SeaFileVariant {
+  assertIsObject(json, root);
+
+  const id = json.id;
+  assertIsInteger(id, `${root}.id`);
+
+  const score = json.score;
+  assertIsNumber(score, `${root}.score`);
+
+  const extension = json.extension;
+  assertIsString(extension, `${root}.extension`);
+
+  const type = json.type;
+  assertIsString(type, `${root}.type`);
+
+  const size = json.size;
+  assertIsNumber(size, `${root}.size`);
+
+  const url = json.url;
+  assertIsString(url, `${root}.url`);
+
+  const mime = json.mime;
+  assertIsString(mime, `${root}.mime`);
+
+  return {
+    id,
+    score,
+    extension,
+    type,
+    size,
+    url,
+    mime,
+  } as const;
+}
+
+function toSeaFile(json: unknown, root = 'res'): SeaFile {
+  assertIsObject(json, root);
+
+  const id = json.id;
+  assertIsSeaFileId(id, `${root}.id`);
+
+  const name = json.name;
+  assertIsString(name, `${root}.name`);
+
+  const type = json.type;
+  assertIsString(type, `${root}.type`);
+
+  const variantJSONs = json.variants;
+  assertIsArray(variantJSONs, `${root}.variants`);
+  const variants = variantJSONs.map((v, i) => toSeaFileVariant(v, `${root}.variants[${i}]`));
+
+  return {
+    id,
+    name,
+    type,
+    variants,
+  } as const;
+}
+
+// User
 function assertIsSeaUserId(x: unknown, name: string = 'value'): asserts x is SeaUserId {
   assertIsInteger(x, name);
 }
 
-function normalizeUserJSON(json: unknown, root = 'value') {
+function normalizeUserJSON(json: unknown, root = 'res') {
   assertIsObject(json, root);
 
   const id = json.id;
@@ -27,6 +100,8 @@ function normalizeUserJSON(json: unknown, root = 'value') {
   const updatedAt = json.updatedAt;
   assertIsISO8601DateTime(updatedAt, `${root}.updatedAt`);
 
+  const avatarFile = json.avatarFile != null ? toSeaFile(json.avatarFile, `${root}.avatarFile`) : undefined;
+
   return {
     user: {
       id,
@@ -35,6 +110,7 @@ function normalizeUserJSON(json: unknown, root = 'value') {
       postsCount,
       createdAt,
       updatedAt,
+      avatarFile,
     } as SeaUser,
   } as const;
 }

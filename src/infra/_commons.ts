@@ -1,6 +1,8 @@
 import { ISO8601DateTime } from '@/models/commons';
 import dayjs from 'dayjs';
 
+// TODO: to~~ みたいなシグネチャの関数にする or 外部ライブラリ(io-ts or transform-tsの利用)
+
 export function assertIsObject(x: unknown, name: string = 'value'): asserts x is Record<string | number, unknown> {
   if (typeof x !== 'object' || x == null) {
     throw new Error(`${name} must be a JSON object`);

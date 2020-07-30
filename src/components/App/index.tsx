@@ -1,15 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, Suspense } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createSeaApi } from '@/infra/sea';
 import { Home, getHomeInitialProps } from '../pages/Home';
 import { CacheProvider } from '@/dataSource';
 import { useCacheSet } from '@/dataSource/_cache';
-import { AppStateProvider, useAppState } from '@/appState';
-import { AppRoutes, createAction, Router } from '@/router';
+import { AppStateProvider, useAppState, AppState } from '@/appState';
+import { AppRoutes, createAction, useRouter, RouterProvider } from '@/router';
 import { createBrowserHistory } from 'history';
 import { getSettingsInitialProps, Settings } from '../pages/Settings';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
-import { HeaderPlaceholder } from '../Header/Header';
+import { HeaderPlaceholder, LoginedHeader, HeaderLayout } from '../Header/Header';
+import { memoize } from '@/utils/memoize';
 
 const AppContainer: React.FC = ({ children }) => {
   // TODO: Create API directly
@@ -34,10 +35,30 @@ const routes: AppRoutes = [
   },
 ];
 
+const getInitialAccount = memoize(({ seaDataSource }: AppState) => seaDataSource.getMe());
 const AppRouter: React.FC = () => {
   const appState = useAppState();
   const history = useMemo(() => createBrowserHistory(), []);
-  return <Router context={appState} routes={routes} history={history} timeoutConfig={{ timeoutMs: 100000 }} />;
+  const account = useMemo(() => getInitialAccount(appState), [appState]);
+  const { providerProps, renderPage } = useRouter({
+    context: appState,
+    routes,
+    history,
+    timeoutConfig: { timeoutMs: 3000 },
+  });
+  return (
+    <RouterProvider value={providerProps}>
+      <DefaultLayout
+        headerContent={
+          <Suspense fallback={<HeaderLayout />}>
+            <LoginedHeader user={account} />
+          </Suspense>
+        }
+      >
+        <Suspense fallback={null}>{renderPage()}</Suspense>
+      </DefaultLayout>
+    </RouterProvider>
+  );
 };
 
 export const App = () => {

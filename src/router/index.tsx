@@ -55,7 +55,9 @@ if (process.env.NODE_ENV !== 'production') {
   RouterContext.displayName = 'RouterContext';
 }
 
-export type RouterProps = {
+export const RouterProvider = RouterContext.Provider;
+
+export type useRouterProps = {
   readonly context: AppRouterContext;
   readonly history: History;
   readonly routes: AppRoutes;
@@ -89,7 +91,7 @@ const getPage = (
 
 const getInitialPage = memoize(getPage);
 const getRouter = memoize((routes: AppRoutes) => new UniversalRouterSync(routes));
-export const Router = ({ context, history, routes, timeoutConfig, fallback = null }: RouterProps) => {
+export const useRouter = ({ context, history, routes, timeoutConfig, fallback = null }: useRouterProps) => {
   const historySource = useMemo(() => createMutableSource(history, () => history.location), [history]);
   const router = useMemo(() => getRouter(routes), [routes]);
 
@@ -127,13 +129,18 @@ export const Router = ({ context, history, routes, timeoutConfig, fallback = nul
     [history, updatePage]
   );
 
-  return (
-    <RouterContext.Provider value={{ historySource, isPending, push }}>
-      <Suspense fallback={fallback}>
-        <page.Component {...page.props} />
-      </Suspense>
-    </RouterContext.Provider>
-  );
+  const providerProps: RouterContextType = {
+    historySource,
+    isPending,
+    push,
+  };
+
+  const renderPage = () => React.createElement(page.Component, page.props);
+
+  return {
+    providerProps,
+    renderPage,
+  } as const;
 };
 
 const useRouterContext = () => {

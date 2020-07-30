@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { AppState } from '@/appState';

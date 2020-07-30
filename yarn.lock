@@ -907,6 +907,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@linkage-community/bottlemail@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@linkage-community/bottlemail/-/bottlemail-2.1.0.tgz#f944dcf1b94c098409e2d0c49ed6f41fd4a07adb"
+  integrity sha512-1f9JkWk4s7g8SwRnT9HPSRUXe6bM/INg8YSG4n9N3/eJPt9+dEYWi2tRM184DtAxAQq/iXTXbwjwYXjnX1c/1Q==
+
 "@pmmmwh/react-refresh-webpack-plugin@^0.3.3":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.3.3.tgz#40a3d674f42a011b7f30a9609aa8fb68ec3c39c9"

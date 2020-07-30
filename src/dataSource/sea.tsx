@@ -1,9 +1,8 @@
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { useCacheValue, CacheSetFn } from './_cache';
 import { SeaApi } from '@/infra/sea';
-import dayjs from 'dayjs';
-import { memoize } from '@/utils/memoize';
 import { Loadable } from '@/utils/Loadable';
+import { SeaPost, SeaPostId } from '@/models/SeaPost';
 
 /**
  * Reads sea user from cache.
@@ -13,29 +12,38 @@ import { Loadable } from '@/utils/Loadable';
 export const useCachedSeaUser = (id: SeaUserId) => useCacheValue().seaUsers[id];
 
 export const createSeaDataSource = ({ api, setCache }: Readonly<{ api: SeaApi; setCache: CacheSetFn }>) => {
-  const updateUsers = (...users: SeaUser[]) =>
+  const updateUsers = (users: Readonly<Record<number, SeaUser | undefined>>) =>
     setCache((cache) => {
-      const newUsers = users.reduce((us, u) => {
-        const old = us[u.id];
-        if (old && (dayjs(u.updatedAt).isBefore(old.updatedAt) || u.postsCount < old.postsCount)) return us;
-        return { ...us, [u.id]: u };
-      }, {} as Record<number, SeaUser | undefined>);
       return {
         ...cache,
         seaUsers: {
           ...cache.seaUsers,
-          ...newUsers,
+          ...users,
         },
       };
     });
+  const updatePosts = (...posts: SeaPost[]) =>
+    setCache((cache) => {
+      const newPosts = posts.reduce((ps, p) => ({ ...ps, [p.id]: p }), cache.seaPosts);
+      return {
+        ...cache,
+        seaPosts: newPosts,
+      };
+    });
   return {
-    getMe: memoize(() =>
+    getMe: () =>
       Loadable.from(async () => {
         const { user } = await api.fetchMe();
-        updateUsers(user);
+        updateUsers({ [user.id]: user });
         return user;
-      })
-    ),
+      }),
+    fetchPublicTimelineLatestPosts: (count: number, sinceId?: SeaPostId) =>
+      Loadable.from(async () => {
+        const { users, posts } = await api.fetchPublicTimelineLatestPosts(count, sinceId);
+        updateUsers(users);
+        updatePosts(...posts);
+        return posts;
+      }),
   } as const;
 };
 

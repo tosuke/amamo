@@ -5,6 +5,7 @@ import { Home, getInitialProps } from '../pages/Home';
 import { CacheProvider } from '@/dataSource';
 import { useCacheSet } from '@/dataSource/_cache';
 import { AppStateProvider, useAppState } from '@/appState';
+import { memoize } from '@/utils/memoize';
 
 const AppContainer: React.FC = ({ children }) => {
   // TODO: Create API directly
@@ -18,9 +19,10 @@ const AppContainer: React.FC = ({ children }) => {
 };
 
 // TODO: ちゃんと実装する
+const memoizedGetInitialProps = memoize(getInitialProps);
 const Router = () => {
   const appState = useAppState();
-  const initialProps = getInitialProps(appState);
+  const initialProps = memoizedGetInitialProps(appState);
   return (
     <Suspense fallback={null}>
       <Home {...initialProps} />

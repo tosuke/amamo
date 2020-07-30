@@ -12,6 +12,7 @@
     "build": "rm -rf dist/* && NODE_ENV=production webpack --mode production"
   },
   "dependencies": {
+    "@linkage-community/bottlemail": "^2.1.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.30",
     "dotenv-webpack": "^2.0.0",

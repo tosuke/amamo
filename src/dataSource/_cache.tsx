@@ -1,13 +1,15 @@
 import React, { createContext, useState, useContext } from 'react';
 import { SeaUser } from '@/models/SeaUser';
+import { SeaPost } from '@/models/SeaPost';
 
 type CacheState = Readonly<{
   seaUsers: Readonly<Record<number, SeaUser | undefined>>;
+  seaPosts: Readonly<Record<number, SeaPost | undefined>>;
 }>;
 
 export type CacheSetFn = React.Dispatch<React.SetStateAction<CacheState>>;
 
-const defaultCacheState: CacheState = { seaUsers: {} };
+const defaultCacheState: CacheState = { seaUsers: {}, seaPosts: {} };
 
 const CacheStateContext = createContext<CacheState>(defaultCacheState);
 const CacheSetContext = createContext<CacheSetFn>(() => {}); // noop

@@ -21,6 +21,7 @@
     "lodash-es": "^4.17.15",
     "react": "^0.0.0-experimental-4c8c98ab9",
     "react-dom": "^0.0.0-experimental-4c8c98ab9",
+    "react-router-config": "^5.1.1",
     "sanitize.css": "^11.0.1",
     "styled-jsx": "^3.3.0",
     "universal-router": "^9.0.1"

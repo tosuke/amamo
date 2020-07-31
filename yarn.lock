@@ -874,6 +874,13 @@
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-transform-typescript" "^7.10.4"
 
+"@babel/runtime@^7.1.2":
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.0.tgz#f10245877042a815e07f7e693faff0ae9d3a2aac"
+  integrity sha512-qArkXsjJq7H+T86WrIFV0Fnu/tNOkZ4cgXmjkzAu3b/58D5mFIO8JH/y77t7C9q0OdDRdh9s7Ue5GasYssxtXw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
   version "7.10.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.5.tgz#303d8bd440ecd5a491eae6117fd3367698674c5c"
@@ -5403,6 +5410,13 @@ react-refresh@^0.0.0-experimental-4c8c98ab9:
   version "0.0.0-experimental-4c8c98ab9"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.0.0-experimental-4c8c98ab9.tgz#e7d8e50de14c254228f793933f09a71c554bf4ba"
   integrity sha512-/n60TzSLx+oqHCdWE7VwR5acobUYTSX20oJ6DPY/kN2rRWTsdPbS1PIJM5erbffi8skLqZM7bTtva58YTJzWpg==
+
+react-router-config@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/react-router-config/-/react-router-config-5.1.1.tgz#0f4263d1a80c6b2dc7b9c1902c9526478194a988"
+  integrity sha512-DuanZjaD8mQp1ppHjgnnUnyOlqYXZVjnov/JzFhjLEwd3Z4dYjMSnqrEzzGThH47vpCOqPPwJM2FtthLeJ8Pbg==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
 
 react@^0.0.0-experimental-4c8c98ab9:
   version "0.0.0-experimental-4c8c98ab9"

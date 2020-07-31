@@ -1,11 +1,11 @@
 import React, { useMemo, Suspense, useState, useEffect } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { Home, getHomeInitialProps } from '../pages/Home';
-import { AppRoutes, createAction, useRouter, RouterProvider } from '@/middlewares/router';
+import { AppRoutes, createAction, useRouter, RouterProvider } from '@/middlewares/router_old';
 import { createBrowserHistory } from 'history';
 import { getSettingsInitialProps, Settings } from '../pages/Settings';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
-import { LoginedHeader, HeaderLayout, getLoginedHeaderInitialProps } from '../Header/Header';
+import { LoginedHeader, HeaderPlaceholder, getLoginedHeaderInitialProps } from '@/components/Header';
 import { memoize } from '@/utils/memoize';
 import { AppContext, createAppContext } from '@/app/context';
 import { CacheProvider } from '@/middlewares/cache';
@@ -32,19 +32,17 @@ const AppContent: React.FC<{ appContext: AppContext }> = ({ appContext }) => {
     timeoutConfig: { timeoutMs: 2000 },
   });
   return (
-    <CacheProvider value={appContext.cache}>
-      <RouterProvider value={providerProps}>
-        <DefaultLayout
-          headerContent={
-            <Suspense fallback={<HeaderLayout />}>
-              <LoginedHeader accountRef={account} />
-            </Suspense>
-          }
-        >
-          <Suspense fallback={'loading...'}>{renderPage()}</Suspense>
-        </DefaultLayout>
-      </RouterProvider>
-    </CacheProvider>
+    <RouterProvider value={providerProps}>
+      <DefaultLayout
+        headerContent={
+          <Suspense fallback={<HeaderPlaceholder />}>
+            <LoginedHeader accountRef={account} />
+          </Suspense>
+        }
+      >
+        <Suspense fallback={'loading...'}>{renderPage()}</Suspense>
+      </DefaultLayout>
+    </RouterProvider>
   );
 };
 
@@ -57,10 +55,10 @@ export const App = () => {
   const content = appContext ? <AppContent appContext={appContext} /> : null;
 
   return (
-    <>
+    <CacheProvider value={appContext?.cache}>
       <ColorTheme mode="auto" />
       <GlobalStyles />
       {content}
-    </>
+    </CacheProvider>
   );
 };

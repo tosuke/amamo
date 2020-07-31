@@ -1,1 +1,1 @@
-export { LoginedHeader, AuthHeader } from './Header';
+export { LoginedHeader, AuthHeader, getLoginedHeaderInitialProps, HeaderPlaceholder } from './Header';

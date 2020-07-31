@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppState } from '@/appState';
+import { AppContext } from '@/app/context';
 
-export const getSettingsInitialProps = (_appState: AppState) => {
+export const getSettingsInitialProps = (_appContext: AppContext) => {
   return {};
 };
 

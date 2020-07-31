@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppState } from '@/appState';
 import { getPublicTimelineInitialProps, PublicTimeline } from '@/components/Tilmeline/PublicTimeline';
+import { AppContext } from '@/app/context';
 
-export const getHomeInitialProps = (appState: AppState) => {
+export const getHomeInitialProps = (appContext: AppContext) => {
   return {
-    ...getPublicTimelineInitialProps(appState),
+    ...getPublicTimelineInitialProps(appContext),
   };
 };
 

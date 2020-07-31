@@ -10,7 +10,11 @@ import {
 } from '../_commons';
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
-import { SeaPostId, SeaPost } from '@/models/SeaPost';
+import { SeaPostId, SeaPost, SeaPostJSON } from '@/models/SeaPost';
+import { cache } from '@/cache';
+
+const getUserKey = (u: SeaUser) => `entities/seaUsers/${u.id}`;
+const getPostKey = (p: SeaPost) => `entities/seaPosts/${p.id}`;
 
 // File
 function assertIsSeaFileId(x: unknown, name = 'value'): asserts x is SeaFileId {
@@ -81,7 +85,7 @@ function assertIsSeaUserId(x: unknown, name: string = 'value'): asserts x is Sea
   assertIsInteger(x, name);
 }
 
-function normalizeUserJSON(json: unknown, root = 'res') {
+function toUserRef(json: unknown, root = 'res') {
   assertIsObject(json, root);
 
   const id = json.id;
@@ -104,17 +108,16 @@ function normalizeUserJSON(json: unknown, root = 'res') {
 
   const avatarFile = json.avatarFile != null ? toSeaFile(json.avatarFile, `${root}.avatarFile`) : undefined;
 
-  return {
-    user: {
-      id,
-      name,
-      screenName,
-      postsCount,
-      createdAt,
-      updatedAt,
-      avatarFile,
-    } as SeaUser,
-  } as const;
+  const user = {
+    id,
+    name,
+    screenName,
+    postsCount,
+    createdAt,
+    updatedAt,
+    avatarFile,
+  } as SeaUser;
+  return cache.write(getUserKey, user);
 }
 
 // Post
@@ -122,7 +125,7 @@ function assertIsSeaPostid(x: unknown, name = 'value'): asserts x is SeaPostId {
   assertIsInteger(x, name);
 }
 
-function normalizePostJSON(json: unknown, root = 'res') {
+function toPostRef(json: unknown, root = 'res') {
   assertIsObject(json, `${root}`);
 
   const id = json.id;
@@ -132,7 +135,7 @@ function normalizePostJSON(json: unknown, root = 'res') {
   assertIsString(text, `${root}.text`);
   const textNodes = parse(text);
 
-  const { user: author } = normalizeUserJSON(json.user, `${root}.user`);
+  const author = toUserRef(json.user, `${root}.user`);
 
   const createdAt = json.createdAt;
   assertIsISO8601DateTime(createdAt, `${root}.createdAt`);
@@ -157,7 +160,7 @@ function normalizePostJSON(json: unknown, root = 'res') {
     id,
     text,
     textNodes,
-    author: author.id,
+    author,
     createdAt,
     updatedAt,
     files,
@@ -167,22 +170,14 @@ function normalizePostJSON(json: unknown, root = 'res') {
     },
   };
 
-  return {
-    post,
-    user: author,
-  } as const;
+  return cache.write(getPostKey, post);
 }
 
-function normalizePostListJSON(json: unknown, root = 'res') {
+function toPostList(json: unknown, root = 'res') {
   assertIsArray(json, root);
-  const results = json.map((p, i) => normalizePostJSON(p, `${root}[${i}]`));
-  const posts = results.map((r) => r.post);
-  const users = results.reduce((us, { user }) => ({ ...us, [user.id]: user }), {} as Readonly<Record<number, SeaUser>>);
+  const postRefs = json.map((p, i) => toPostRef(p, `${root}[${i}]`));
 
-  return {
-    posts,
-    users,
-  } as const;
+  return postRefs;
 }
 
 export const createSeaApi = (baseUrl: string, token: string) => {
@@ -195,13 +190,13 @@ export const createSeaApi = (baseUrl: string, token: string) => {
   return Object.freeze({
     async fetchMe() {
       const json = await http.get('v1/account').json();
-      return normalizeUserJSON(json);
+      return toUserRef(json);
     },
     async fetchPublicTimelineLatestPosts(count: number, sinceId?: SeaPostId) {
       const searchParams = new URLSearchParams({ count: `${count}` });
       if (sinceId) searchParams.append('sinceId', `${sinceId}`);
       const json = await http.get('v1/timelines/public', { searchParams }).json();
-      return normalizePostListJSON(json);
+      return toPostList(json);
     },
   });
 };

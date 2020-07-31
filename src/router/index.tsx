@@ -1,6 +1,5 @@
 import UniversalRouterSync, { Routes, Route, RouteParams } from 'universal-router/sync';
 import { History, Location } from 'history';
-import { AppState } from '@/appState';
 import React, {
   useMemo,
   useCallback,
@@ -20,6 +19,7 @@ import React, {
   useRef,
 } from 'react';
 import { memoize } from '@/utils/memoize';
+import { AppContext } from '@/app/context';
 
 // Hackey type
 type PageProps = {
@@ -30,7 +30,7 @@ type Page = Readonly<{
   Component: React.ComponentType<PageProps>;
 }>;
 
-export type AppRouterContext = AppState;
+export type AppRouterContext = AppContext;
 export type AppRoutes = Routes<Page, AppRouterContext>;
 
 export const createAction = <P extends any>(

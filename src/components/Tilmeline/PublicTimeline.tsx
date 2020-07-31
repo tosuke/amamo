@@ -1,19 +1,28 @@
 import React from 'react';
-import { AppState } from '@/appState';
 import { TimelineContainer, TimelineItem } from './presenters';
+import { AppContext } from '@/app/context';
+import { useRefValue, Reference } from '@/cache';
+import { SeaPost } from '@/models/SeaPost';
 
-export const getPublicTimelineInitialProps = ({ seaDataSource }: AppState) => {
+const PostItem: React.FC<{ postRef: Reference<SeaPost> }> = ({ postRef }) => {
+  const post = useRefValue(postRef);
+  return <>{post.text}</>;
+};
+
+export const getPublicTimelineInitialProps = ({ api, cache }: AppContext) => {
   return {
-    initialPosts: seaDataSource.fetchPublicTimelineLatestPosts(30),
+    initialPosts: cache.query('api/PublicTimeline_initialPosts', () => api.fetchPublicTimelineLatestPosts(30)),
   };
 };
 
 export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const posts = initialPosts.read();
+  const posts = useRefValue(initialPosts);
   return (
     <TimelineContainer>
       {posts.map((p) => (
-        <TimelineItem key={p.id}>{p.text}</TimelineItem>
+        <TimelineItem key={p.key}>
+          <PostItem postRef={p} />
+        </TimelineItem>
       ))}
     </TimelineContainer>
   );

@@ -38,8 +38,8 @@ export class Loadable<T> implements PromiseLike<T> {
     return new Loadable({ state: 'rejected', error });
   }
 
-  static from<T>(fn: () => PromiseLike<T>): Loadable<T> {
-    return new Loadable({ state: 'pending', promise: Promise.resolve(fn()) });
+  static from<T>(fn: () => T | PromiseLike<T>): Loadable<T> {
+    return Loadable.resolve(fn());
   }
 
   private static foreverLoadable: Loadable<never> | undefined;
@@ -65,6 +65,10 @@ export class Loadable<T> implements PromiseLike<T> {
       }
     }
     return Loadable.resolve(Promise.race(promises).then(() => {}));
+  }
+
+  public get(): T | undefined {
+    return this.state.state === 'fulfilled' ? this.state.value : undefined;
   }
 
   /**

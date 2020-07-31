@@ -3,6 +3,7 @@ import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { AppState } from '@/appState';
 import { Link } from '@/router';
+import { useCachedSeaUser } from '@/dataSource';
 
 export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   <div className="account">
@@ -64,16 +65,17 @@ export const HeaderLayout: React.FC = ({ children }) => (
 );
 
 export const getLoginedHeaderInitialProps = ({ seaDataSource }: AppState) => {
-  const user = seaDataSource.getMe();
+  const accountLoadable = seaDataSource.getMe();
   return {
-    user,
+    accountLoadable,
   } as const;
 };
 
-export const LoginedHeader = ({ user }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
+export const LoginedHeader = ({ accountLoadable }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
+  const account = useCachedSeaUser(accountLoadable.read().id) ?? accountLoadable.read();
   return (
     <HeaderLayout>
-      <Account user={user.read()} />
+      <Account user={account} />
       <SettingButton />
     </HeaderLayout>
   );

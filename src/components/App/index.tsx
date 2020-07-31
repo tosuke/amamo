@@ -9,7 +9,7 @@ import { AppRoutes, createAction, useRouter, RouterProvider } from '@/router';
 import { createBrowserHistory } from 'history';
 import { getSettingsInitialProps, Settings } from '../pages/Settings';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
-import { HeaderPlaceholder, LoginedHeader, HeaderLayout } from '../Header/Header';
+import { LoginedHeader, HeaderLayout } from '../Header/Header';
 import { memoize } from '@/utils/memoize';
 
 const AppContainer: React.FC = ({ children }) => {
@@ -51,7 +51,7 @@ const AppRouter: React.FC = () => {
       <DefaultLayout
         headerContent={
           <Suspense fallback={<HeaderLayout />}>
-            <LoginedHeader user={account} />
+            <LoginedHeader accountLoadable={account} />
           </Suspense>
         }
       >

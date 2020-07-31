@@ -8,6 +8,6 @@ export const getHomeInitialProps = (appContext: AppContext) => {
   };
 };
 
-export const Home = ({ initialPosts }: ReturnType<typeof getHomeInitialProps>) => {
+export const Home = ({ prepared: { initialPosts } }: { prepared: ReturnType<typeof getHomeInitialProps> }) => {
   return <PublicTimeline initialPosts={initialPosts} />;
 };

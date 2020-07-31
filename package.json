@@ -21,10 +21,10 @@
     "lodash-es": "^4.17.15",
     "react": "^0.0.0-experimental-4c8c98ab9",
     "react-dom": "^0.0.0-experimental-4c8c98ab9",
+    "react-router": "^5.2.0",
     "react-router-config": "^5.1.1",
     "sanitize.css": "^11.0.1",
-    "styled-jsx": "^3.3.0",
-    "universal-router": "^9.0.1"
+    "styled-jsx": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -37,6 +37,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.3.3",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-config": "^5.0.1",
     "@types/styled-jsx": "^2.2.8",
     "@types/webpack": "^4.41.21",
     "@types/webpack-dev-server": "^3.11.0",

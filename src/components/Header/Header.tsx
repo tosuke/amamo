@@ -3,7 +3,8 @@ import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { Link } from '@/router';
 import { AppContext } from '@/app/context';
-import { useRefValue } from '@/cache';
+import { useRefValue, Reference } from '@/cache';
+import { Loadable } from '@/utils/Loadable';
 
 export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   <div className="account">
@@ -65,14 +66,17 @@ export const HeaderLayout: React.FC = ({ children }) => (
 );
 
 export const getLoginedHeaderInitialProps = ({ cache, api }: AppContext) => {
-  const accountRef = cache.query('api/LoginedHeader_account', () => api.fetchMe());
+  const accountRef = cache.query(
+    'LoginedHeader_account',
+    (prev?: Loadable<Reference<SeaUser>>) => prev?.get() ?? api.fetchMe()
+  );
   return {
     accountRef,
   } as const;
 };
 
 export const LoginedHeader = ({ accountRef }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
-  const account = useRefValue(useRefValue(accountRef));
+  const account = useRefValue(accountRef.read());
   return (
     <HeaderLayout>
       <Account user={account} />

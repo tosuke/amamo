@@ -11,12 +11,12 @@ const PostItem: React.FC<{ postRef: Reference<SeaPost> }> = ({ postRef }) => {
 
 export const getPublicTimelineInitialProps = ({ api, cache }: AppContext) => {
   return {
-    initialPosts: cache.query('api/PublicTimeline_initialPosts', () => api.fetchPublicTimelineLatestPosts(30)),
+    initialPosts: cache.query('PublicTimeline_initialPosts', () => api.fetchPublicTimelineLatestPosts(30)),
   };
 };
 
 export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const posts = useRefValue(initialPosts);
+  const posts = initialPosts.read();
   return (
     <TimelineContainer>
       {posts.map((p) => (

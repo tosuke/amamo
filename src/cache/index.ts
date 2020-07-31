@@ -51,13 +51,11 @@ export class Cache {
     return new Reference(key);
   }
 
-  query<T>(key: string, fetcher: (prev?: Loadable<T>) => Promise<T> | T): Reference<T> {
+  query<T>(key: string, fetcher: (prev?: Loadable<T>) => Promise<T> | T): Loadable<T> {
     const prev = this.storage.get(key) as Loadable<T> | undefined;
-    this.storage.set(
-      key,
-      Loadable.from(() => fetcher(prev))
-    );
-    return new Reference(key);
+    const lodable = Loadable.from(() => fetcher(prev));
+    this.storage.set(key, lodable);
+    return lodable;
   }
 }
 

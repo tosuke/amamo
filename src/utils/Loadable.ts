@@ -42,14 +42,6 @@ export class Loadable<T> implements PromiseLike<T> {
     return Loadable.resolve(fn());
   }
 
-  private static foreverLoadable: Loadable<never> | undefined;
-  static forever<T = never>(): Loadable<T> {
-    if (Loadable.foreverLoadable) return Loadable.foreverLoadable;
-    return (Loadable.foreverLoadable = Loadable.resolve(
-      new Promise<never>(() => {})
-    ));
-  }
-
   static waitAny(...loadables: Loadable<unknown>[]): Loadable<void> {
     const promises: Promise<unknown>[] = [];
     for (const loadable of loadables) {

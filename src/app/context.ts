@@ -22,5 +22,3 @@ export function createAppContext(): AppContext {
     cache,
   };
 }
-
-export const appContext = createAppContext();

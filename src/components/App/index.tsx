@@ -1,4 +1,4 @@
-import React, { useMemo, Suspense } from 'react';
+import React, { useMemo, Suspense, useState, useEffect } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { Home, getHomeInitialProps } from '../pages/Home';
 import { AppRoutes, createAction, useRouter, RouterProvider } from '@/middlewares/router';
@@ -7,7 +7,7 @@ import { getSettingsInitialProps, Settings } from '../pages/Settings';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { LoginedHeader, HeaderLayout, getLoginedHeaderInitialProps } from '../Header/Header';
 import { memoize } from '@/utils/memoize';
-import { appContext } from '@/app/context';
+import { AppContext, createAppContext } from '@/app/context';
 import { CacheProvider } from '@/middlewares/cache';
 
 const routes: AppRoutes = [
@@ -21,10 +21,10 @@ const routes: AppRoutes = [
   },
 ];
 
-const getInitialAccount = memoize(() => getLoginedHeaderInitialProps(appContext).accountRef);
-const AppRouter: React.FC = () => {
+const getInitialAccount = memoize((appContext: AppContext) => getLoginedHeaderInitialProps(appContext).accountRef);
+const AppContent: React.FC<{ appContext: AppContext }> = ({ appContext }) => {
   const history = useMemo(() => createBrowserHistory(), []);
-  const account = useMemo(() => getInitialAccount(), []);
+  const account = useMemo(() => getInitialAccount(appContext), [appContext]);
   const { providerProps, renderPage } = useRouter({
     context: appContext,
     routes,
@@ -49,11 +49,18 @@ const AppRouter: React.FC = () => {
 };
 
 export const App = () => {
+  const [appContext, setAppContext] = useState<AppContext>();
+  useEffect(() => {
+    setAppContext(createAppContext());
+  }, []);
+
+  const content = appContext ? <AppContent appContext={appContext} /> : null;
+
   return (
     <>
       <ColorTheme mode="auto" />
       <GlobalStyles />
-      <AppRouter />
+      {content}
     </>
   );
 };

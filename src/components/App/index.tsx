@@ -1,14 +1,14 @@
 import React, { useMemo, Suspense } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { Home, getHomeInitialProps } from '../pages/Home';
-import { AppRoutes, createAction, useRouter, RouterProvider } from '@/router';
+import { AppRoutes, createAction, useRouter, RouterProvider } from '@/middlewares/router';
 import { createBrowserHistory } from 'history';
 import { getSettingsInitialProps, Settings } from '../pages/Settings';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { LoginedHeader, HeaderLayout, getLoginedHeaderInitialProps } from '../Header/Header';
 import { memoize } from '@/utils/memoize';
 import { appContext } from '@/app/context';
-import { CacheProvider } from '@/cache';
+import { CacheProvider } from '@/middlewares/cache';
 
 const routes: AppRoutes = [
   {

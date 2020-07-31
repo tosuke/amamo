@@ -1,9 +1,9 @@
 import React from 'react';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
-import { Link } from '@/router';
+import { Link } from '@/middlewares/router';
 import { AppContext } from '@/app/context';
-import { useRefValue, Reference } from '@/cache';
+import { useRefValue, Reference } from '@/middlewares/cache';
 import { Loadable } from '@/utils/Loadable';
 
 export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (

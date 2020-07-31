@@ -11,7 +11,7 @@ import {
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
 import { SeaPostId, SeaPost } from '@/models/SeaPost';
-import { Cache } from '@/cache';
+import { Cache } from '@/middlewares/cache';
 
 const getUserKey = (u: SeaUser) => `entities/seaUsers/${u.id}`;
 const getPostKey = (p: SeaPost) => `entities/seaPosts/${p.id}`;

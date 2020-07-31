@@ -3,7 +3,7 @@ import type { NodeType } from '@linkage-community/bottlemail';
 import { SeaUser } from './SeaUser';
 import { ISO8601DateTime } from './commons';
 import { SeaFile } from './SeaFile';
-import { Reference } from '@/cache';
+import { Reference } from '@/middlewares/cache';
 
 export type SeaPostId = Opaque<number, 'SeaPostId'>;
 export const seaPostId = (id: number) => id as SeaPostId;

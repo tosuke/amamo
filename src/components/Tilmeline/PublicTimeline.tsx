@@ -1,7 +1,7 @@
 import React from 'react';
 import { TimelineContainer, TimelineItem } from './presenters';
 import { AppContext } from '@/app/context';
-import { useRefValue, Reference } from '@/cache';
+import { useRefValue, Reference } from '@/middlewares/cache';
 import { SeaPost } from '@/models/SeaPost';
 
 const PostItem: React.FC<{ postRef: Reference<SeaPost> }> = ({ postRef }) => {

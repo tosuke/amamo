@@ -78,7 +78,6 @@ const getPage = (
   router: UniversalRouterSync<Page, AppRouterContext>
 ): PageWithKey => {
   const location = history.location;
-  console.log('location');
   try {
     const result = router.resolve({ pathname: location.pathname, ...context });
     // FIXME: notFoundPageが密結合

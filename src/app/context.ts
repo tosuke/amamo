@@ -1,6 +1,6 @@
 import { SeaApi, createSeaApi } from '@/infra/sea';
-import { Cache } from '@/cache';
-import { SimpleCache } from '@/cache/simpleCache';
+import { Cache } from '@/middlewares/cache';
+import { SimpleCache } from '@/middlewares/cache/simpleCache';
 
 /**
  * データ取得を駆動するためのオブジェクト

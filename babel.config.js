@@ -11,7 +11,7 @@ module.exports = (api) => {
     presets.push([
       '@babel/preset-env',
       {
-        targets: '>2%',
+        targets: '> 2% in JP, not IE 11',
         useBuiltIns: 'usage',
         corejs: 3,
       },

@@ -7,10 +7,8 @@ import { getSettingsInitialProps, Settings } from '../pages/Settings';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { LoginedHeader, HeaderLayout, getLoginedHeaderInitialProps } from '../Header/Header';
 import { memoize } from '@/utils/memoize';
-import { createAppContext } from '@/app/context';
+import { appContext } from '@/app/context';
 import { CacheProvider } from '@/cache';
-
-const appContext = createAppContext();
 
 const routes: AppRoutes = [
   {
@@ -31,7 +29,7 @@ const AppRouter: React.FC = () => {
     context: appContext,
     routes,
     history,
-    timeoutConfig: { timeoutMs: 3000 },
+    timeoutConfig: { timeoutMs: 2000 },
   });
   return (
     <CacheProvider value={appContext.cache}>
@@ -43,7 +41,7 @@ const AppRouter: React.FC = () => {
             </Suspense>
           }
         >
-          <Suspense fallback={null}>{renderPage()}</Suspense>
+          <Suspense fallback={'loading...'}>{renderPage()}</Suspense>
         </DefaultLayout>
       </RouterProvider>
     </CacheProvider>

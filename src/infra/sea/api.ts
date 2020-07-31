@@ -10,8 +10,8 @@ import {
 } from '../_commons';
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
-import { SeaPostId, SeaPost, SeaPostJSON } from '@/models/SeaPost';
-import { cache } from '@/cache';
+import { SeaPostId, SeaPost } from '@/models/SeaPost';
+import { Cache } from '@/cache';
 
 const getUserKey = (u: SeaUser) => `entities/seaUsers/${u.id}`;
 const getPostKey = (p: SeaPost) => `entities/seaPosts/${p.id}`;
@@ -85,7 +85,7 @@ function assertIsSeaUserId(x: unknown, name: string = 'value'): asserts x is Sea
   assertIsInteger(x, name);
 }
 
-function toUserRef(json: unknown, root = 'res') {
+function toUserRef(cache: Cache, json: unknown, root = 'res') {
   assertIsObject(json, root);
 
   const id = json.id;
@@ -121,21 +121,17 @@ function toUserRef(json: unknown, root = 'res') {
 }
 
 // Post
-function assertIsSeaPostid(x: unknown, name = 'value'): asserts x is SeaPostId {
-  assertIsInteger(x, name);
-}
-
-function toPostRef(json: unknown, root = 'res') {
+function toPostRef(cache: Cache, json: unknown, root = 'res') {
   assertIsObject(json, `${root}`);
 
   const id = json.id;
-  assertIsSeaPostid(id, `${root}.id`);
+  assertIsInteger(id, `${root}.id`);
 
   const text = json.text;
   assertIsString(text, `${root}.text`);
   const textNodes = parse(text);
 
-  const author = toUserRef(json.user, `${root}.user`);
+  const author = toUserRef(cache, json.user, `${root}.user`);
 
   const createdAt = json.createdAt;
   assertIsISO8601DateTime(createdAt, `${root}.createdAt`);
@@ -173,14 +169,14 @@ function toPostRef(json: unknown, root = 'res') {
   return cache.write(getPostKey, post);
 }
 
-function toPostList(json: unknown, root = 'res') {
+function toPostList(cache: Cache, json: unknown, root = 'res') {
   assertIsArray(json, root);
-  const postRefs = json.map((p, i) => toPostRef(p, `${root}[${i}]`));
+  const postRefs = json.map((p, i) => toPostRef(cache, p, `${root}[${i}]`));
 
   return postRefs;
 }
 
-export const createSeaApi = (baseUrl: string, token: string) => {
+export const createSeaApi = ({ cache, baseUrl, token }: Readonly<{ cache: Cache; baseUrl: string; token: string }>) => {
   const http = ky.create({
     prefixUrl: baseUrl,
     headers: {
@@ -190,13 +186,13 @@ export const createSeaApi = (baseUrl: string, token: string) => {
   return Object.freeze({
     async fetchMe() {
       const json = await http.get('v1/account').json();
-      return toUserRef(json);
+      return toUserRef(cache, json);
     },
     async fetchPublicTimelineLatestPosts(count: number, sinceId?: SeaPostId) {
       const searchParams = new URLSearchParams({ count: `${count}` });
       if (sinceId) searchParams.append('sinceId', `${sinceId}`);
       const json = await http.get('v1/timelines/public', { searchParams }).json();
-      return toPostList(json);
+      return toPostList(cache, json);
     },
   });
 };

@@ -8,7 +8,6 @@ import {
   useCallback,
   MutableSourceSubscribeFn,
 } from 'react';
-import { SimpleCache } from './simpleCache';
 
 // FIXME: "Reference"は React の Ref と被っているので、よりよい名前を探す
 export class Reference<T> {
@@ -75,5 +74,3 @@ export const useRefValue = <T>(ref: Reference<T>): T => {
   );
   return loadable.read();
 };
-
-export const cache = new Cache(new SimpleCache());

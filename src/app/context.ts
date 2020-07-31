@@ -1,5 +1,6 @@
 import { SeaApi, createSeaApi } from '@/infra/sea';
-import { Cache, cache } from '@/cache';
+import { Cache } from '@/cache';
+import { SimpleCache } from '@/cache/simpleCache';
 
 /**
  * データ取得を駆動するためのオブジェクト
@@ -10,9 +11,16 @@ export type AppContext = {
 };
 
 export function createAppContext(): AppContext {
-  const api = createSeaApi(process.env.API_ROOT!, process.env.TOKEN!);
+  const cache = new Cache(new SimpleCache());
+  const api = createSeaApi({
+    cache,
+    baseUrl: process.env.API_ROOT!,
+    token: process.env.TOKEN!,
+  });
   return {
     api,
     cache,
   };
 }
+
+export const appContext = createAppContext();

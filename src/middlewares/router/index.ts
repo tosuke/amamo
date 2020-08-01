@@ -1,3 +1,4 @@
+export { createRoutes } from './routeBuilder';
 export * from './createRouter';
 export type { Router } from './RouterContext';
 export { RouterProvider } from './RouterContext';

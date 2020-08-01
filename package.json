@@ -19,10 +19,9 @@
     "history": "^5.0.0",
     "ky": "^0.23.0",
     "lodash-es": "^4.17.15",
+    "path-to-regexp": "^6.1.0",
     "react": "^0.0.0-experimental-4c8c98ab9",
     "react-dom": "^0.0.0-experimental-4c8c98ab9",
-    "react-router": "^5.2.0",
-    "react-router-config": "^5.1.1",
     "sanitize.css": "^11.0.1",
     "styled-jsx": "^3.3.0"
   },

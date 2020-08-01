@@ -7,6 +7,8 @@ import { Settings } from '../pages/Settings';
 import { AppContext, createAppContext } from '@/app/context';
 import { CacheProvider } from '@/middlewares/cache';
 import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
+import { DefaultLayout } from '../pages/_layout/DefaultLayout';
+import { HeaderPlaceholder } from '../Header';
 
 const routes = createRoutes((builder) =>
   builder.addRoute('/', { prepare: getLoginedRootInitialProps, component: LoginedRoot }, (child) =>
@@ -18,7 +20,7 @@ const routes = createRoutes((builder) =>
 
 const AppContent: React.FC = () => {
   const { node } = useRouter();
-  return <Suspense fallback={'loading...'}>{node}</Suspense>;
+  return <Suspense fallback={<DefaultLayout headerContent={<HeaderPlaceholder />} />}>{node}</Suspense>;
 };
 
 export const App = () => {

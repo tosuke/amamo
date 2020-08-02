@@ -10,8 +10,9 @@ export type AppContext = {
   readonly cache: Cache;
 };
 
+let cache: Cache | undefined;
 export function createAppContext(): AppContext {
-  const cache = new Cache(new SimpleCache());
+  cache = cache ?? new Cache(new SimpleCache());
   const api = createSeaApi({
     cache,
     baseUrl: process.env.API_ROOT!,

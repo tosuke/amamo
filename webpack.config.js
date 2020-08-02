@@ -33,7 +33,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[name].[contenthash].js',
+    filename: dev ? '[name].[hash].js' : '[name].[contenthash].js',
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -44,7 +44,6 @@ module.exports = {
   plugins: [
     ...(dev ? [new ReactRefreshPlugin({ overlay: true })] : []),
     ...(process.env.BUNDLE_ANALYZE === 'true' ? [new BundleAnalyzerPlugin()] : []),
-    new webpack.ProgressPlugin(),
     new DotenvPlugin({ safe: true, systemvars: true }),
     new CSSExtractPlugin({
       filename: '[name].[hash].css',

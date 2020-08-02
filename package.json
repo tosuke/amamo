@@ -9,7 +9,8 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --hot --mode development",
-    "build": "rm -rf dist/* && NODE_ENV=production webpack --mode production",
+    "build": "rm -rf dist/* && NODE_ENV=production webpack --mode production --progress",
+    "build:ci": "NODE_ENV=production webpack --mode production",
     "bundle-analyze": "BUNDLE_ANALYZE=true yarn run build"
   },
   "dependencies": {

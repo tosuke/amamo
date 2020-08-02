@@ -24,18 +24,18 @@ export async function handleAuthCallback(state: string, code: string) {
   try {
     const savedState = window.localStorage.getItem(AUTH_STATE);
     if (savedState == null || savedState !== state) throw new Error('invalid state');
-    const result = await ky
-      .post('token', {
-        prefixUrl: process.env.AUTH_ROOT,
-        body: new URLSearchParams({
-          client_id: process.env.CLIENT_ID!,
-          client_secret: process.env.CLIENT_SECRET!,
-          code,
-          grant_type: 'authorization_code',
-          state,
-        }),
-      })
-      .json();
+
+    // FIXME: kyを使うとiOS Safariで壊れる
+    const result = await fetch(process.env.AUTH_ROOT + '/token', {
+      method: 'POST',
+      body: new URLSearchParams({
+        client_id: process.env.CLIENT_ID!,
+        client_secret: process.env.CLIENT_SECRET!,
+        code,
+        grant_type: 'authorization_code',
+        state,
+      }),
+    }).then((r) => r.json());
     assertIsObject(result);
     if (result.token_type !== 'Bearer') throw new Error('invalid token_type');
     const token = result.access_token;

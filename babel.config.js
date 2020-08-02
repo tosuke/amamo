@@ -13,6 +13,7 @@ module.exports = (api) => {
       {
         targets: '> 2% in JP, not IE 11',
         useBuiltIns: 'usage',
+        bugfixes: true,
         corejs: 3,
       },
     ]);

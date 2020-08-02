@@ -5441,6 +5441,14 @@ react-refresh@^0.0.0-experimental-4c8c98ab9:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.0.0-experimental-4c8c98ab9.tgz#e7d8e50de14c254228f793933f09a71c554bf4ba"
   integrity sha512-/n60TzSLx+oqHCdWE7VwR5acobUYTSX20oJ6DPY/kN2rRWTsdPbS1PIJM5erbffi8skLqZM7bTtva58YTJzWpg==
 
+react-virtuoso@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-0.18.0.tgz#9a5ac94e68c9e71c4beb3036d93e6e36ea75f4ca"
+  integrity sha512-da0rTp3ERMUXzRPw0jC7yoqwqlKb+kM9pH4WX1sIEQjJ+Td9QJTx8S3zjJlR5p7oFy8piILui+fzmrLO2jsGQA==
+  dependencies:
+    resize-observer-polyfill "^1.5.1"
+    tslib "^1.11.1"
+
 react@^0.0.0-experimental-4c8c98ab9:
   version "0.0.0-experimental-4c8c98ab9"
   resolved "https://registry.yarnpkg.com/react/-/react-0.0.0-experimental-4c8c98ab9.tgz#b25742c4a9fa2b7da117738c05b29960b660ee97"
@@ -5596,6 +5604,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -6366,7 +6379,7 @@ tryer@^1.0.1:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-tslib@^1.10.0, tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.11.1, tslib@^1.9.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==

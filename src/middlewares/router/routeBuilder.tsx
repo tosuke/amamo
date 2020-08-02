@@ -50,9 +50,7 @@ export class Route<Props = any> {
   }
 
   match(path: string): MatchedRoute[] {
-    console.log(path);
     const result = this.pathRegexp.exec(path);
-    console.log(result);
     if (result == null) return [];
     const [matchedPath, ...values] = result;
     if (this.options.exact && matchedPath !== path) return [];
@@ -66,7 +64,6 @@ export class Route<Props = any> {
 
     const child = this.chidren.reduce((prev, child) => {
       const childResult = child.match(path);
-      console.log(child, childResult);
       return childResult.length > prev.length ? childResult : prev;
     }, [] as MatchedRoute[]);
 

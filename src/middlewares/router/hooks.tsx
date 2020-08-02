@@ -1,7 +1,7 @@
 import React, { useContext, unstable_useTransition as useTransition, TimeoutConfig, useState, useEffect } from 'react';
 import { RouterContext } from './RouterContext';
 
-const SUSPENSE_CONFIG: TimeoutConfig = { timeoutMs: 500 };
+const SUSPENSE_CONFIG: TimeoutConfig = { timeoutMs: 2000 };
 
 export function useRouter() {
   const router = useContext(RouterContext)!;

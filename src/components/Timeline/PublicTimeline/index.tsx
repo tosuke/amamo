@@ -1,13 +1,7 @@
 import React from 'react';
 import { TimelineContainer, TimelineItem } from '../presenters';
-import { useRefValue, Reference } from '@/middlewares/cache';
-import { SeaPost } from '@/models/SeaPost';
 import type { getPublicTimelineInitialProps } from './getInitialProps';
-
-const PostItem: React.FC<{ postRef: Reference<SeaPost> }> = ({ postRef }) => {
-  const post = useRefValue(postRef);
-  return <>{post.text}</>;
-};
+import { SeaPostItem } from '@/components/Post/SeaPostItem';
 
 export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTimelineInitialProps>) => {
   const posts = initialPosts.read();
@@ -15,7 +9,7 @@ export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTime
     <TimelineContainer>
       {posts.map((p) => (
         <TimelineItem key={p.key}>
-          <PostItem postRef={p} />
+          <SeaPostItem postRef={p} />
         </TimelineItem>
       ))}
     </TimelineContainer>

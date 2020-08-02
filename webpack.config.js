@@ -33,7 +33,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].[contenthash].js',
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],

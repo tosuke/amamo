@@ -1,7 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createRouter, useRouter, RouterProvider, Router, createRoutes } from '@/middlewares/router';
-import { createBrowserHistory } from 'history';
 import { AppContext, createAppContext } from '@/app/context';
 import { CacheProvider } from '@/middlewares/cache';
 import { getHomeInitialProps } from '../pages/Home/getInitialProps';
@@ -10,19 +9,28 @@ import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { HeaderPlaceholder } from '../Header';
 
 const routes = createRoutes((builder) =>
-  builder.addRoute('/', { prepare: getLoginedRootInitialProps, component: LoginedRoot }, (child) =>
-    child
-      .addRoute('/', {
-        exact: true,
-        prepare: getHomeInitialProps,
-        component: React.lazy(() => import(/* webpackChunkName: "home" */ '../pages/Home')),
-      })
-      .addRoute('/settings', {
-        exact: true,
-        prepare: () => {},
-        component: React.lazy(() => import(/* webpackChunkName: "settings" */ '../pages/Settings')),
-      })
-  )
+  builder
+    .addRoute('/login', {
+      prepare: () => {},
+      component: React.lazy(() => import(/* webpackChunkName: "login" */ '../pages/Login')),
+    })
+    .addRoute('/callback', {
+      prepare: () => {},
+      component: React.lazy(() => import(/* webpackChunkName: "auth_callback" */ '../pages/AuthCallback')),
+    })
+    .addRoute('/', { prepare: getLoginedRootInitialProps, component: LoginedRoot }, (child) =>
+      child
+        .addRoute('/', {
+          exact: true,
+          prepare: getHomeInitialProps,
+          component: React.lazy(() => import(/* webpackChunkName: "home" */ '../pages/Home')),
+        })
+        .addRoute('/settings', {
+          exact: true,
+          prepare: () => {},
+          component: React.lazy(() => import(/* webpackChunkName: "settings" */ '../pages/Settings')),
+        })
+    )
 );
 
 const AppContent: React.FC = () => {
@@ -35,9 +43,8 @@ export const App = () => {
   const [router, setRouter] = useState<Router>();
   useEffect(() => {
     const appContext = createAppContext();
-    const history = createBrowserHistory();
     setAppContext(appContext);
-    setRouter(createRouter(appContext, routes, history));
+    setRouter(createRouter(appContext, routes, appContext.history));
   }, []);
 
   const content = appContext != null && router != null ? <AppContent /> : null;

@@ -2,7 +2,7 @@ import React from 'react';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { Link } from '@/middlewares/router';
-import { AppContext } from '@/app/context';
+import { LoginedAppContext } from '@/app/context';
 import { useRefValue, Reference } from '@/middlewares/cache';
 import { Loadable } from '@/utils/Loadable';
 
@@ -65,7 +65,7 @@ export const HeaderLayout: React.FC = ({ children }) => (
   </header>
 );
 
-export const getLoginedHeaderInitialProps = ({ cache, api }: AppContext) => {
+export const getLoginedHeaderInitialProps = ({ cache, api }: LoginedAppContext) => {
   const accountRef = cache.query(
     'LoginedHeader_account',
     (prev?: Loadable<Reference<SeaUser>>) => prev?.get() ?? api.fetchMe()

@@ -46,3 +46,15 @@
     --color-auto-background: var(--color-dark-background);
   }
 }
+
+/* default color scheme */
+:root {
+  --color-text-raw: var(--color-auto-text-raw);
+  --color-text: var(--color-auto-text);
+  --color-caption: var(--color-auto-caption);
+  --color-border: var(--color-auto-border);
+  --color-accent: var(--color-auto-accent);
+  --color-alert: var(--color-auto-alert);
+  --color-foreground: var(--color-auto-foreground);
+  --color-background: var(--color-auto-background);
+}

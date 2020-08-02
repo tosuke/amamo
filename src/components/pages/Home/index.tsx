@@ -1,13 +1,9 @@
 import React from 'react';
-import { getPublicTimelineInitialProps, PublicTimeline } from '@/components/Tilmeline/PublicTimeline';
-import { AppContext } from '@/app/context';
+import { PublicTimeline } from '@/components/Timeline/PublicTimeline';
+import type { getHomeInitialProps } from './getInitialProps';
 
-export const getHomeInitialProps = (appContext: AppContext) => {
-  return {
-    ...getPublicTimelineInitialProps(appContext),
-  };
-};
-
-export const Home = ({ prepared: { initialPosts } }: { prepared: ReturnType<typeof getHomeInitialProps> }) => {
+const Home = ({ prepared: { initialPosts } }: { prepared: ReturnType<typeof getHomeInitialProps> }) => {
   return <PublicTimeline initialPosts={initialPosts} />;
 };
+
+export default Home;

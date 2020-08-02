@@ -1,11 +1,10 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
-import { Home, getHomeInitialProps } from '../pages/Home';
 import { createRouter, useRouter, RouterProvider, Router, createRoutes } from '@/middlewares/router';
 import { createBrowserHistory } from 'history';
-import { Settings } from '../pages/Settings';
 import { AppContext, createAppContext } from '@/app/context';
 import { CacheProvider } from '@/middlewares/cache';
+import { getHomeInitialProps } from '../pages/Home/getInitialProps';
 import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { HeaderPlaceholder } from '../Header';
@@ -13,8 +12,16 @@ import { HeaderPlaceholder } from '../Header';
 const routes = createRoutes((builder) =>
   builder.addRoute('/', { prepare: getLoginedRootInitialProps, component: LoginedRoot }, (child) =>
     child
-      .addRoute('/', { exact: true, prepare: getHomeInitialProps, component: Home })
-      .addRoute('/settings', { exact: true, prepare: () => {}, component: Settings })
+      .addRoute('/', {
+        exact: true,
+        prepare: getHomeInitialProps,
+        component: React.lazy(() => import(/* webpackChunkName: "home" */ '../pages/Home')),
+      })
+      .addRoute('/settings', {
+        exact: true,
+        prepare: () => {},
+        component: React.lazy(() => import(/* webpackChunkName: "settings" */ '../pages/Settings')),
+      })
   )
 );
 

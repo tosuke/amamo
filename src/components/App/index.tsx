@@ -23,12 +23,14 @@ const routes = createRoutes((builder) =>
         .addRoute('/', {
           exact: true,
           prepare: getHomeInitialProps,
-          component: React.lazy(() => import(/* webpackChunkName: "home" */ '../pages/Home')),
+          component: React.lazy(() => import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages/Home')),
         })
         .addRoute('/settings', {
           exact: true,
           prepare: () => {},
-          component: React.lazy(() => import(/* webpackChunkName: "settings" */ '../pages/Settings')),
+          component: React.lazy(() =>
+            import(/* webpackChunkName: "settings", webpackPrefetch: true*/ '../pages/Settings')
+          ),
         })
     )
 );

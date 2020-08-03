@@ -43,7 +43,15 @@ const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['
   }, [scrollTo]);
 
   return (
-    <div ref={containerRef} style={style} className={className} tabIndex={0}>
+    <div
+      ref={containerRef}
+      style={{
+        ...style,
+        overflow: 'visible',
+      }}
+      className={className}
+      tabIndex={0}
+    >
       {React.Children.map(children, (child, index) => {
         if (index === 0) {
           const c: React.DetailedReactHTMLElement<any, HTMLElement> = child as any;
@@ -71,7 +79,7 @@ const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>>
       style={{
         height: totalHeight,
         // re-render hack
-        minHeight: 1,
+        minHeight: Math.max(1, totalHeight),
         ...props.style,
       }}
       totalListHeightChanged={totalListHeightChanged}

@@ -4,6 +4,7 @@ import { TimelineContainer, TimelineItem } from '../presenters';
 import type { getPublicTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
 
+// See: https://github.com/petyosi/react-virtuoso/issues/40
 const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['ScrollContainer']> = ({
   className,
   style,

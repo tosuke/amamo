@@ -11,7 +11,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const dev = process.env.NODE_ENV !== 'production';
 
-const TOTAL_PAGES = 2;
+const TOTAL_PAGES = 4;
 
 /**
  * @type{ import('webpack').Configuration }
@@ -46,7 +46,7 @@ module.exports = {
     ...(process.env.BUNDLE_ANALYZE === 'true' ? [new BundleAnalyzerPlugin()] : []),
     new DotenvPlugin({ safe: true, systemvars: true }),
     new CSSExtractPlugin({
-      filename: '[name].[hash].css',
+      filename: dev ? '[name].[hash].css' : '[name].[contenthash].css',
     }),
     new HTMLPlugin({
       template: path.join(__dirname, 'src/index.html'),
@@ -69,6 +69,7 @@ module.exports = {
           // React
           test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
           priority: 40,
+          enforce: true,
         },
         lib: {
           test(module) {

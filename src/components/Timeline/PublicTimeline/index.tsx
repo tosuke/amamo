@@ -94,6 +94,7 @@ export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTime
     <TimelineContainer>
       <WindowVirtuoso
         totalCount={posts.length}
+        defaultItemHeight={90}
         computeItemKey={(index) => posts[index].key}
         item={(index) => (
           <TimelineItem>

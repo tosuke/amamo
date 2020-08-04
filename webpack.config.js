@@ -50,6 +50,7 @@ module.exports = {
     }),
     new HTMLPlugin({
       template: path.join(__dirname, 'src/index.html'),
+      scriptLoading: 'defer',
     }),
   ],
   optimization: {

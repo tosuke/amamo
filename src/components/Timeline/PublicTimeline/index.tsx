@@ -3,6 +3,7 @@ import { Virtuoso } from 'react-virtuoso';
 import { TimelineContainer, TimelineItem } from '../presenters';
 import type { getPublicTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
+import { useCache } from '@/middlewares/cache';
 
 // See: https://github.com/petyosi/react-virtuoso/issues/40
 const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['ScrollContainer']> = ({
@@ -88,8 +89,18 @@ const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>>
   );
 };
 
-export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const posts = initialPosts.read();
+export const PublicTimeline = ({ postsPager }: ReturnType<typeof getPublicTimelineInitialProps>) => {
+  const [posts, setPosts] = useState(postsPager.initialPosts.read());
+  const [loadingNext, setLoadingNext] = useState(false);
+  const loadNext = useCallback(async () => {
+    if (loadingNext) return;
+    try {
+      setLoadingNext(true);
+      setPosts((await postsPager.fetchAfter(posts, 30)) ?? posts);
+    } finally {
+      setLoadingNext(false);
+    }
+  }, [loadingNext, posts, postsPager]);
   return (
     <TimelineContainer>
       <WindowVirtuoso
@@ -101,6 +112,7 @@ export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTime
             <SeaPostItem postRef={posts[index]} />
           </TimelineItem>
         )}
+        endReached={loadNext}
       />
     </TimelineContainer>
   );

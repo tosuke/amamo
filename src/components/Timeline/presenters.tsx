@@ -1,5 +1,6 @@
 import React from 'react';
 import { colors } from '@/theme';
+import css from 'styled-jsx/css';
 
 export const TimelineContainer: React.FC = ({ children }) => (
   <ul className="timeline">
@@ -16,22 +17,16 @@ export const TimelineContainer: React.FC = ({ children }) => (
 
 export const TimelineItem: React.FC = ({ children }) => <li>{children}</li>;
 
-export const ReadMoreButton: React.FC<{ isLoading: boolean; readMore: () => void }> = ({ isLoading, readMore }) => (
-  <button
-    className="readmore_button"
-    disabled={isLoading}
-    onClick={(e) => {
-      e.preventDefault();
-      readMore();
-    }}
-  >
-    {isLoading ? 'LOADING...' : 'READ MORE'}
-    <style jsx>{`
-      .readmore_button {
-        width: 100%;
-        padding: 12px 24px;
-        border-top: 1px solid ${colors.border};
-      }
-    `}</style>
-  </button>
+const timelineFooterItemStyle = css`
+  .timeline-footer {
+    width: 100%;
+    padding: 12px 24px;
+    border-top: 1px solid ${colors.border};
+  }
+`;
+export const TimelineFooterItem: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
+  <TimelineItem>
+    <style jsx>{timelineFooterItemStyle}</style>
+    <div>{isLoading ? 'LOADING...' : 'END REACHED'}</div>
+  </TimelineItem>
 );

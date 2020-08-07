@@ -194,6 +194,10 @@ export const createSeaApi = ({ cache, baseUrl, token }: Readonly<{ cache: Cache;
       const json = await http.get('v1/timelines/public', { searchParams }).json();
       return toPostList(cache, json);
     },
+    async fetchPublicTimelinePostsAfter(id: number, count: number) {
+      const json = await http.get('v1/timelines/public', { searchParams: { maxId: id, count } }).json();
+      return toPostList(cache, json);
+    },
   });
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-import { TimelineContainer, TimelineItem } from '../presenters';
+import { TimelineContainer, TimelineItem, TimelineFooterItem } from '../presenters';
 import type { getPublicTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
 
@@ -88,8 +88,18 @@ const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>>
   );
 };
 
-export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const posts = initialPosts.read();
+export const PublicTimeline = ({ postsPager }: ReturnType<typeof getPublicTimelineInitialProps>) => {
+  const [posts, setPosts] = useState(postsPager.initialData.read());
+  const [loadingNext, setLoadingNext] = useState(false);
+  const loadNext = useCallback(async () => {
+    if (loadingNext) return;
+    try {
+      setLoadingNext(true);
+      setPosts((await postsPager.fetchAfter(posts, 30)) ?? posts);
+    } finally {
+      setLoadingNext(false);
+    }
+  }, [loadingNext, posts, postsPager]);
   return (
     <TimelineContainer>
       <WindowVirtuoso
@@ -101,6 +111,8 @@ export const PublicTimeline = ({ initialPosts }: ReturnType<typeof getPublicTime
             <SeaPostItem postRef={posts[index]} />
           </TimelineItem>
         )}
+        endReached={loadNext}
+        footer={() => <TimelineFooterItem isLoading={loadingNext} />}
       />
     </TimelineContainer>
   );

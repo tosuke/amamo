@@ -1,9 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-import { TimelineContainer, TimelineItem } from '../presenters';
+import { TimelineContainer, TimelineItem, TimelineFooterItem } from '../presenters';
 import type { getPublicTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
-import { useCache } from '@/middlewares/cache';
 
 // See: https://github.com/petyosi/react-virtuoso/issues/40
 const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['ScrollContainer']> = ({
@@ -90,7 +89,7 @@ const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>>
 };
 
 export const PublicTimeline = ({ postsPager }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const [posts, setPosts] = useState(postsPager.initialPosts.read());
+  const [posts, setPosts] = useState(postsPager.initialData.read());
   const [loadingNext, setLoadingNext] = useState(false);
   const loadNext = useCallback(async () => {
     if (loadingNext) return;
@@ -113,6 +112,7 @@ export const PublicTimeline = ({ postsPager }: ReturnType<typeof getPublicTimeli
           </TimelineItem>
         )}
         endReached={loadNext}
+        footer={() => <TimelineFooterItem isLoading={loadingNext} />}
       />
     </TimelineContainer>
   );

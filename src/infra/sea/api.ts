@@ -12,6 +12,7 @@ import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
 import { SeaPostId, SeaPost } from '@/models/SeaPost';
 import { Cache } from '@/middlewares/cache';
+import { createContext, useContext } from 'react';
 
 const getUserKey = (u: SeaUser) => `entities/seaUsers/${u.id}`;
 const getPostKey = (p: SeaPost) => `entities/seaPosts/${p.id}`;
@@ -198,7 +199,18 @@ export const createSeaApi = ({ cache, baseUrl, token }: Readonly<{ cache: Cache;
       const json = await http.get('v1/timelines/public', { searchParams: { maxId: id, count } }).json();
       return toPostList(cache, json);
     },
+    async post(payload: Readonly<{ text: string; fileIds?: SeaFileId[]; inReplyToId?: SeaPostId }>) {
+      const json = await http.post('v1/posts', { json: payload }).json();
+      return toPostRef(cache, json);
+    },
   });
 };
 
 export type SeaApi = ReturnType<typeof createSeaApi>;
+
+const SeaApiContext = createContext<SeaApi | undefined>(undefined);
+SeaApiContext.displayName = 'SeaApiContext';
+
+export const SeaApiProvider = SeaApiContext.Provider;
+
+export const useSeaApi = () => useContext(SeaApiContext)!;

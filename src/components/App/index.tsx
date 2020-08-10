@@ -7,6 +7,7 @@ import { getHomeInitialProps } from '../pages/Home/getInitialProps';
 import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { HeaderPlaceholder } from '../Header';
+import { SeaApiProvider } from '@/infra/sea';
 
 const routes = createRoutes((builder) =>
   builder
@@ -52,12 +53,14 @@ export const App = () => {
   const content = appContext != null && router != null ? <AppContent /> : null;
 
   return (
-    <CacheProvider value={appContext?.cache}>
-      <RouterProvider value={router}>
-        <ColorTheme mode="auto" />
-        <GlobalStyles />
-        {content}
-      </RouterProvider>
-    </CacheProvider>
+    <SeaApiProvider value={appContext?.api}>
+      <CacheProvider value={appContext?.cache}>
+        <RouterProvider value={router}>
+          <ColorTheme mode="auto" />
+          <GlobalStyles />
+          {content}
+        </RouterProvider>
+      </CacheProvider>
+    </SeaApiProvider>
   );
 };

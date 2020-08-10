@@ -1,8 +1,10 @@
-import { LoginedAppContext } from '@/app/context';
+import { AppContext } from '@/app/context';
 import { Reference } from '@/middlewares/cache';
 import { SeaPost } from '@/models/SeaPost';
+import { getSeaApi } from '@/features/SeaAuth';
 
-export const getPublicTimelineInitialProps = ({ api, cache }: LoginedAppContext) => {
+export const getPublicTimelineInitialProps = ({ cache, store }: AppContext) => {
+  const api = getSeaApi(store);
   const pager = {
     initialData: cache.query('PublicTimeline_initialPosts', () => api.fetchPublicTimelineLatestPosts(30)),
     fetchAfter: async (prev: readonly Reference<SeaPost>[], count: number) => {

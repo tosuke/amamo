@@ -8,6 +8,7 @@ import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { HeaderPlaceholder } from '../Header';
 import { SeaApiProvider } from '@/infra/sea';
+import { useStore } from '@/middlewares/store';
 
 const routes = createRoutes((builder) =>
   builder
@@ -42,13 +43,14 @@ const AppContent: React.FC = () => {
 };
 
 export const App = () => {
+  const store = useStore();
   const [appContext, setAppContext] = useState<AppContext>();
   const [router, setRouter] = useState<Router>();
   useEffect(() => {
-    const appContext = createAppContext();
+    const appContext = createAppContext(store);
     setAppContext(appContext);
     setRouter(createRouter(appContext, routes, appContext.history));
-  }, []);
+  }, [store]);
 
   const content = appContext != null && router != null ? <AppContent /> : null;
 

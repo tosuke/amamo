@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
-import { AppContext, isLogined } from '@/app/context';
+import { AppContext } from '@/app/context';
 import { DefaultLayout } from './_layout/DefaultLayout';
 import { LoginedHeader, getLoginedHeaderInitialProps } from '../Header';
 import { RedirectToLogin } from './_commons/RedirectToLogin';
+import { getIsLogin } from '@/features/SeaAuth';
 
 export const getLoginedRootInitialProps = (ctx: AppContext) => {
-  if (isLogined(ctx)) {
+  if (getIsLogin(ctx.store)) {
     return {
       ...getLoginedHeaderInitialProps(ctx),
     };

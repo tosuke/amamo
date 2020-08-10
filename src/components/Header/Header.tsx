@@ -2,9 +2,10 @@ import React from 'react';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { Link } from '@/middlewares/router';
-import { LoginedAppContext } from '@/app/context';
+import { AppContext } from '@/app/context';
 import { useRefValue, Reference } from '@/middlewares/cache';
 import { Loadable } from '@/utils/Loadable';
+import { getSeaApi } from '@/features/SeaAuth';
 
 export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   <div className="account">
@@ -65,7 +66,8 @@ export const HeaderLayout: React.FC = ({ children }) => (
   </header>
 );
 
-export const getLoginedHeaderInitialProps = ({ cache, api }: LoginedAppContext) => {
+export const getLoginedHeaderInitialProps = ({ cache, store }: AppContext) => {
+  const api = getSeaApi(store);
   const accountRef = cache.query(
     'LoginedHeader_account',
     (prev?: Loadable<Reference<SeaUser>>) => prev?.get() ?? api.fetchMe()

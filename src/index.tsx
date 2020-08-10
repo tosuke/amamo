@@ -8,5 +8,12 @@ import './theme.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from '@/components/App';
+import { Store, StoreProivider } from '@/middlewares/store';
 
-ReactDOM.unstable_createRoot(document.getElementById('app')!).render(<App />);
+const store = new Store();
+
+ReactDOM.unstable_createRoot(document.getElementById('app')!).render(
+  <StoreProivider store={store}>
+    <App />
+  </StoreProivider>
+);

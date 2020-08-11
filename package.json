@@ -24,6 +24,7 @@
     "nanoid": "^3.1.12",
     "path-to-regexp": "^6.1.0",
     "pictograph": "^2.3.0",
+    "quick-lru": "^5.1.1",
     "rc-progress": "^3.0.0",
     "react": "^0.0.0-experimental-4c8c98ab9",
     "react-dom": "^0.0.0-experimental-4c8c98ab9",

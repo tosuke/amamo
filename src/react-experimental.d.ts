@@ -137,6 +137,6 @@ declare module 'react' {
   export function useMutableSource<Source, Snapshot>(
     source: MutableSource<Source>,
     getSnapshot: MutableSourceGetSnapshotFn<Source, Snapshot>,
-    subscribe: MutableSourceSubscribeFn<Source, Snapshot>
+    subscribe: MutableSourceSubscribeFn<Source>
   ): Snapshot;
 }

@@ -1,18 +1,17 @@
-import { Opaque, Merge } from 'type-fest';
+import { Opaque } from 'type-fest';
 import type { NodeType } from '@linkage-community/bottlemail';
-import { SeaUser } from './SeaUser';
+import { SeaUserId } from './SeaUser';
 import { ISO8601DateTime } from './commons';
 import { SeaFile } from './SeaFile';
-import { Reference } from '@/middlewares/cache';
 
 export type SeaPostId = Opaque<number, 'SeaPostId'>;
 export const seaPostId = (id: number) => id as SeaPostId;
 
 export type SeaPost = {
-  readonly id: number;
+  readonly id: SeaPostId;
   readonly text: string;
   readonly textNodes: readonly NodeType[];
-  readonly author: Reference<SeaUser>;
+  readonly author: SeaUserId;
   readonly createdAt: ISO8601DateTime;
   readonly updatedAt: ISO8601DateTime;
   readonly files: readonly SeaFile[];
@@ -21,5 +20,3 @@ export type SeaPost = {
     readonly isBot: boolean;
   };
 };
-
-export type SeaPostJSON = Merge<SeaPost, { readonly author: SeaUser }>;

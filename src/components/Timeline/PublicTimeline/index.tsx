@@ -1,8 +1,9 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-import { TimelineContainer, TimelineItem, TimelineFooterItem } from '../presenters';
+import { TimelineContainer, TimelineItem } from '../presenters';
 import type { getPublicTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
+import { usePager } from './logic';
 
 // See: https://github.com/petyosi/react-virtuoso/issues/40
 const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['ScrollContainer']> = ({
@@ -89,30 +90,19 @@ const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>>
 };
 
 export const PublicTimeline = ({ postsPager }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const [posts, setPosts] = useState(postsPager.initialData.read());
-  const [loadingNext, setLoadingNext] = useState(false);
-  const loadNext = useCallback(async () => {
-    if (loadingNext) return;
-    try {
-      setLoadingNext(true);
-      setPosts((await postsPager.fetchAfter(posts, 30)) ?? posts);
-    } finally {
-      setLoadingNext(false);
-    }
-  }, [loadingNext, posts, postsPager]);
+  const { posts, users, loadNext } = usePager(postsPager);
   return (
     <TimelineContainer>
       <WindowVirtuoso
         totalCount={posts.length}
         defaultItemHeight={90}
-        computeItemKey={(index) => posts[index].key}
-        item={(index) => (
+        computeItemKey={(i) => posts[i].id}
+        item={(i) => (
           <TimelineItem>
-            <SeaPostItem postRef={posts[index]} />
+            <SeaPostItem post={posts[i]} author={users[posts[i].author]} />
           </TimelineItem>
         )}
-        endReached={loadNext}
-        footer={() => <TimelineFooterItem isLoading={loadingNext} />}
+        endReached={() => loadNext(30)}
       />
     </TimelineContainer>
   );

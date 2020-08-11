@@ -2,7 +2,6 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createRouter, useRouter, RouterProvider, Router, createRoutes } from '@/middlewares/router';
 import { AppContext, createAppContext } from '@/app/context';
-import { CacheProvider } from '@/middlewares/cache';
 import { getHomeInitialProps } from '../pages/Home/getInitialProps';
 import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
@@ -54,13 +53,11 @@ export const App = () => {
 
   return (
     <SeaApiProvider value={appContext?.api}>
-      <CacheProvider value={appContext?.cache}>
-        <RouterProvider value={router}>
-          <ColorTheme mode="auto" />
-          <GlobalStyles />
-          {content}
-        </RouterProvider>
-      </CacheProvider>
+      <RouterProvider value={router}>
+        <ColorTheme mode="auto" />
+        <GlobalStyles />
+        {content}
+      </RouterProvider>
     </SeaApiProvider>
   );
 };

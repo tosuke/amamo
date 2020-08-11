@@ -18,7 +18,7 @@ export const LoginedRoot: React.FC<Readonly<{ prepared: ReturnType<typeof getLog
 }) => {
   if (prepared == null) return <RedirectToLogin />;
   return (
-    <DefaultLayout headerContent={<LoginedHeader accountRef={prepared.accountRef} />}>
+    <DefaultLayout headerContent={<LoginedHeader accountLoadable={prepared.accountLoadable} />}>
       <Suspense fallback="Loading...">{children}</Suspense>
     </DefaultLayout>
   );

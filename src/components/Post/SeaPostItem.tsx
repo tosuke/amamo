@@ -2,7 +2,7 @@ import React from 'react';
 import { NodeType } from '@linkage-community/bottlemail';
 import * as pictograph from 'pictograph';
 import { SeaPost } from '@/models/SeaPost';
-import { filterThumbnailVariants, SeaFileVariant } from '@/models/SeaFile';
+import { filterThumbnailVariants, SeaFileVariant, SeaFile } from '@/models/SeaFile';
 import {
   IconAvatar,
   TextAvatar,
@@ -13,6 +13,10 @@ import {
   PostFooterBadge,
   PostItemLayout,
   CaptionText,
+  PostFileList,
+  PostNothingItem,
+  PostImageItem,
+  PostVideoItem,
 } from './presenters';
 import { RelativeTime } from './RelativeTime';
 import { SeaUser } from '@/models/SeaUser';
@@ -48,6 +52,34 @@ const SeaPostBodyText: React.FC<{ readonly postBody: readonly NodeType[] }> = ({
   );
 };
 
+const SeaFileThumbnails: React.FC<{ files: readonly SeaFile[] }> = ({ files }) => (
+  <PostFileList>
+    {files.map((file) => {
+      if (file.variants.length === 0) return <PostNothingItem key={file.id} />;
+      switch (file.type) {
+        case 'image':
+          return (
+            <PostImageItem
+              key={file.id}
+              title={file.name}
+              sources={<SeaFileVariants variants={filterThumbnailVariants(file)} />}
+            />
+          );
+        case 'video':
+          return (
+            <PostVideoItem
+              key={file.id}
+              title={file.name}
+              sources={<SeaFileVariants variants={filterThumbnailVariants(file)} />}
+            />
+          );
+        default:
+          return null;
+      }
+    })}
+  </PostFileList>
+);
+
 export type SeaPostItemProps = {
   readonly post: SeaPost;
   readonly author: SeaUser;
@@ -76,6 +108,7 @@ export const SeaPostItem = React.memo<SeaPostItemProps>(function SeaPostItem({ p
       bodyContent={
         <>
           <SeaPostBodyText postBody={post.textNodes} />
+          {post.files.length > 0 && <SeaFileThumbnails files={post.files} />}
           <PostFooter>
             via {post.via.name}
             {post.via.isBot && <PostFooterBadge>Bot</PostFooterBadge>}

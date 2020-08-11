@@ -117,6 +117,82 @@ export const PostFooterBadge: React.FC = ({ children }) => (
   </span>
 );
 
+const postFileListStyle = css`
+  .files {
+    display: flex;
+    overflow-x: auto;
+    margin: 4px 0;
+  }
+`;
+export const PostFileList: React.FC = ({ children }) => (
+  <div className="files">
+    <style jsx>{postFileListStyle}</style>
+    {children}
+  </div>
+);
+
+const postFileStyles = css`
+  .file {
+    padding-right: 4px;
+    position: relative;
+  }
+
+  .file img {
+    width: 144px;
+    height: 144px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .cover {
+    display: flex;
+    position: absolute;
+    pointer-events: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .cover span {
+    font-size: 2em;
+    position: absolute;
+    opacity: 0.8;
+    color: ${colors.caption};
+    background-color: ${colors.background};
+    border-radius: 4px;
+  }
+`;
+
+export const PostNothingItem: React.FC = () => (
+  <div className="file">
+    <style jsx>{postFileStyles}</style>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
+    <div className="cover">😢</div>
+  </div>
+);
+
+export const PostImageItem: React.FC<{ title: string; sources: React.ReactNode }> = ({ title, sources }) => (
+  <div className="file">
+    <style jsx>{postFileStyles}</style>
+    <picture>
+      {sources}
+      <img title={title} />
+    </picture>
+  </div>
+);
+
+export const PostVideoItem: React.FC<{ title: string; sources: React.ReactNode }> = ({ title, sources }) => (
+  <div className="file">
+    <style jsx>{postFileStyles}</style>
+    <picture>
+      {sources}
+      <img title={title} />
+    </picture>
+  </div>
+);
+
 const postItemLayoutStyles = css`
   .post {
     display: grid;

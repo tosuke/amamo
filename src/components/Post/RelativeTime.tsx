@@ -34,7 +34,7 @@ export const RelativeTime: React.FC<RelativeTimeProps> = ({ time, timeProvider }
     }, 1000);
     return () => window.clearInterval(handle);
   }, [dt, timeProvider]);
-  return <>{relativeTime}</>;
+  return <div title={dayjs(time).format('YYYY-MM-DD hh:mm')}>{relativeTime}</div>;
 };
 RelativeTime.defaultProps = {
   timeProvider: dayjs,

@@ -11,11 +11,7 @@ import {
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
 import { SeaPostId, SeaPost } from '@/models/SeaPost';
-import { Cache } from '@/middlewares/cache';
 import { createContext, useContext } from 'react';
-
-const getUserKey = (u: SeaUser) => `entities/seaUsers/${u.id}`;
-const getPostKey = (p: SeaPost) => `entities/seaPosts/${p.id}`;
 
 // File
 function assertIsSeaFileId(x: unknown, name = 'value'): asserts x is SeaFileId {
@@ -85,8 +81,7 @@ function toSeaFile(json: unknown, root = 'res'): SeaFile {
 function assertIsSeaUserId(x: unknown, name: string = 'value'): asserts x is SeaUserId {
   assertIsInteger(x, name);
 }
-
-function toUserRef(cache: Cache, json: unknown, root = 'res') {
+function toUser(json: unknown, root = 'res') {
   assertIsObject(json, root);
 
   const id = json.id;
@@ -118,21 +113,24 @@ function toUserRef(cache: Cache, json: unknown, root = 'res') {
     updatedAt,
     avatarFile,
   } as SeaUser;
-  return cache.write(getUserKey, user);
+  return user;
 }
 
 // Post
-function toPostRef(cache: Cache, json: unknown, root = 'res') {
+function assertIsSeaPostId(x: unknown, name: string = 'value'): asserts x is SeaPostId {
+  assertIsInteger(x, name);
+}
+function normalizePost(json: unknown, root = 'res') {
   assertIsObject(json, `${root}`);
 
   const id = json.id;
-  assertIsInteger(id, `${root}.id`);
+  assertIsSeaPostId(id, `${root}.id`);
 
   const text = json.text;
   assertIsString(text, `${root}.text`);
   const textNodes = parse(text);
 
-  const author = toUserRef(cache, json.user, `${root}.user`);
+  const author = toUser(json.user, `${root}.user`);
 
   const createdAt = json.createdAt;
   assertIsISO8601DateTime(createdAt, `${root}.createdAt`);
@@ -157,7 +155,7 @@ function toPostRef(cache: Cache, json: unknown, root = 'res') {
     id,
     text,
     textNodes,
-    author,
+    author: author.id,
     createdAt,
     updatedAt,
     files,
@@ -167,17 +165,28 @@ function toPostRef(cache: Cache, json: unknown, root = 'res') {
     },
   };
 
-  return cache.write(getPostKey, post);
+  return {
+    post,
+    user: author,
+  };
 }
 
-function toPostList(cache: Cache, json: unknown, root = 'res') {
+function normalizePostList(json: unknown, root = 'res') {
   assertIsArray(json, root);
-  const postRefs = json.map((p, i) => toPostRef(cache, p, `${root}[${i}]`));
-
-  return postRefs;
+  const posts: SeaPost[] = [];
+  const users = new Map<SeaUserId, SeaUser>();
+  json.forEach((entry, idx) => {
+    const { post, user } = normalizePost(entry, `${root}[${idx}]`);
+    posts.push(post);
+    users.set(user.id, user);
+  });
+  return {
+    posts,
+    users: [...users.values()],
+  } as const;
 }
 
-export const createSeaApi = ({ cache, baseUrl, token }: Readonly<{ cache: Cache; baseUrl: string; token: string }>) => {
+export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; token: string }>) => {
   const http = ky.create({
     prefixUrl: baseUrl,
     headers: {
@@ -185,23 +194,32 @@ export const createSeaApi = ({ cache, baseUrl, token }: Readonly<{ cache: Cache;
     },
   });
   return Object.freeze({
-    async fetchMe() {
+    async fetchAccount() {
       const json = await http.get('v1/account').json();
-      return toUserRef(cache, json);
+      return toUser(json);
     },
-    async fetchPublicTimelineLatestPosts(count: number, sinceId?: SeaPostId) {
-      const searchParams = new URLSearchParams({ count: `${count}` });
-      if (sinceId) searchParams.append('sinceId', `${sinceId}`);
-      const json = await http.get('v1/timelines/public', { searchParams }).json();
-      return toPostList(cache, json);
+    async fetchPublicTimeline(payload: Readonly<{ count?: number; since?: SeaPostId; after?: SeaPostId }>) {
+      const params = new URLSearchParams();
+      if (payload.count) params.append('count', `${payload.count}`);
+      if (payload.since) params.append('sinceId', `${payload.since}`);
+      if (payload.after) params.append('maxId', `${payload.after}`);
+      const json = await http.get('v1/timelines/public', { searchParams: params }).json();
+      return normalizePostList(json);
     },
-    async fetchPublicTimelinePostsAfter(id: number, count: number) {
-      const json = await http.get('v1/timelines/public', { searchParams: { maxId: id, count } }).json();
-      return toPostList(cache, json);
+    async fetchPost(id: SeaPostId) {
+      try {
+        const json = await http.get(`v1/posts/${id}`).json();
+        return normalizePost(json);
+      } catch (e) {
+        if (e instanceof ky.HTTPError && e.response.status === 404) {
+          return undefined;
+        }
+        throw e;
+      }
     },
     async post(payload: Readonly<{ text: string; fileIds?: SeaFileId[]; inReplyToId?: SeaPostId }>) {
       const json = await http.post('v1/posts', { json: payload }).json();
-      return toPostRef(cache, json);
+      return normalizePost(json);
     },
   });
 };

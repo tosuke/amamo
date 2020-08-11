@@ -1,12 +1,11 @@
 import React, { Suspense } from 'react';
-import { AppContext } from '@/app/context';
+import { AppContext, isLogined } from '@/app/context';
 import { DefaultLayout } from './_layout/DefaultLayout';
 import { LoginedHeader, getLoginedHeaderInitialProps } from '../Header';
 import { RedirectToLogin } from './_commons/RedirectToLogin';
-import { getIsLogin } from '@/features/SeaAuth';
 
 export const getLoginedRootInitialProps = (ctx: AppContext) => {
-  if (getIsLogin(ctx.store)) {
+  if (isLogined(ctx)) {
     return {
       ...getLoginedHeaderInitialProps(ctx),
     };
@@ -19,7 +18,7 @@ export const LoginedRoot: React.FC<Readonly<{ prepared: ReturnType<typeof getLog
 }) => {
   if (prepared == null) return <RedirectToLogin />;
   return (
-    <DefaultLayout headerContent={<LoginedHeader accountRef={prepared.accountRef} />}>
+    <DefaultLayout headerContent={<LoginedHeader accountLoadable={prepared.accountLoadable} />}>
       <Suspense fallback="Loading...">{children}</Suspense>
     </DefaultLayout>
   );

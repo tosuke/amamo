@@ -1,7 +1,6 @@
 import React from 'react';
 import { NodeType } from '@linkage-community/bottlemail';
 import * as pictograph from 'pictograph';
-import { Reference, useRefValue } from '@/middlewares/cache';
 import { SeaPost } from '@/models/SeaPost';
 import { filterThumbnailVariants, SeaFileVariant } from '@/models/SeaFile';
 import {
@@ -16,6 +15,7 @@ import {
   CaptionText,
 } from './presenters';
 import { RelativeTime } from './RelativeTime';
+import { SeaUser } from '@/models/SeaUser';
 
 const SeaFileVariants: React.FC<{ readonly variants: readonly SeaFileVariant[] }> = ({ variants }) => (
   <>
@@ -49,13 +49,11 @@ const SeaPostBodyText: React.FC<{ readonly postBody: readonly NodeType[] }> = ({
 };
 
 export type SeaPostItemProps = {
-  readonly postRef: Reference<SeaPost>;
+  readonly post: SeaPost;
+  readonly author: SeaUser;
 };
 
-export const SeaPostItem: React.FC<SeaPostItemProps> = ({ postRef }) => {
-  const post = useRefValue(postRef);
-  const author = useRefValue(post.author);
-
+export const SeaPostItem = React.memo<SeaPostItemProps>(function SeaPostItem({ post, author }) {
   return (
     <PostItemLayout
       authorAvatarContent={
@@ -86,4 +84,4 @@ export const SeaPostItem: React.FC<SeaPostItemProps> = ({ postRef }) => {
       }
     />
   );
-};
+});

@@ -8,16 +8,5 @@ import './theme.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from '@/components/App';
-import { Store, StoreProivider } from '@/middlewares/store';
-import { SeaApiProvider } from '@/features/SeaAuth';
-import { cache } from './app/context';
 
-const store = new Store();
-
-ReactDOM.unstable_createRoot(document.getElementById('app')!).render(
-  <StoreProivider store={store}>
-    <SeaApiProvider cache={cache}>
-      <App />
-    </SeaApiProvider>
-  </StoreProivider>
-);
+ReactDOM.unstable_createRoot(document.getElementById('app')!).render(<App />);

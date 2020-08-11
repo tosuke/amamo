@@ -1,25 +1,25 @@
 import { SeaApi, createSeaApi, getAccessToken } from '@/infra/sea';
-import { Cache } from '@/middlewares/cache';
-import { SimpleCache } from '@/middlewares/cache/simpleCache';
 import { History, createBrowserHistory } from 'history';
-import { Store } from '@/middlewares/store';
+import { SetRequired } from 'type-fest';
 
 /**
  * データ取得を駆動するためのオブジェクト
  */
 export type AppContext = {
   readonly api?: SeaApi;
-  readonly cache: Cache;
+  // readonly cache: Cache;
   readonly history: History;
-  readonly store: Store;
 };
 
-export const cache = new Cache(new SimpleCache());
-export function createAppContext(store: Store): AppContext {
+export type LoginedAppContext = SetRequired<AppContext, 'api'>;
+export function isLogined(ctx: AppContext): ctx is LoginedAppContext {
+  return ctx.api != null;
+}
+
+export function createAppContext(): AppContext {
   const token = getAccessToken();
   const api = token
     ? createSeaApi({
-        cache,
         baseUrl: process.env.API_ROOT!,
         token,
       })
@@ -27,8 +27,6 @@ export function createAppContext(store: Store): AppContext {
   const history = createBrowserHistory();
   return {
     api,
-    cache,
     history,
-    store,
   };
 }

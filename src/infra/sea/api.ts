@@ -1,4 +1,5 @@
 import ky from 'ky';
+import QuickLRU from 'quick-lru';
 import parse from '@linkage-community/bottlemail';
 import {
   assertIsInteger,
@@ -193,10 +194,14 @@ export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; tok
       Authorization: `Bearer ${token}`,
     },
   });
+  const userCache = new QuickLRU<SeaUserId, SeaUser>({ maxSize: 100 });
+  const postCache = new QuickLRU<SeaPostId, SeaPost>({ maxSize: 3000 });
   return Object.freeze({
     async fetchAccount() {
       const json = await http.get('v1/account').json();
-      return toUser(json);
+      const user = toUser(json);
+      userCache.set(user.id, user);
+      return user;
     },
     async fetchPublicTimeline(payload: Readonly<{ count?: number; since?: SeaPostId; after?: SeaPostId }>) {
       const params = new URLSearchParams();
@@ -204,12 +209,28 @@ export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; tok
       if (payload.since) params.append('sinceId', `${payload.since}`);
       if (payload.after) params.append('maxId', `${payload.after}`);
       const json = await http.get('v1/timelines/public', { searchParams: params }).json();
-      return normalizePostList(json);
+      const data = normalizePostList(json);
+      data.posts.forEach((post) => postCache.set(post.id, post));
+      data.users.forEach((user) => userCache.set(user.id, user));
+      return data;
     },
     async fetchPost(id: SeaPostId) {
+      const post = postCache.get(id);
+      if (post) {
+        const user = userCache.get(post.author);
+        if (user) {
+          return {
+            post,
+            user,
+          };
+        }
+      }
       try {
         const json = await http.get(`v1/posts/${id}`).json();
-        return normalizePost(json);
+        const data = normalizePost(json);
+        userCache.set(data.user.id, data.user);
+        postCache.set(data.post.id, data.post);
+        return data;
       } catch (e) {
         if (e instanceof ky.HTTPError && e.response.status === 404) {
           return undefined;
@@ -219,7 +240,10 @@ export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; tok
     },
     async post(payload: Readonly<{ text: string; fileIds?: SeaFileId[]; inReplyToId?: SeaPostId }>) {
       const json = await http.post('v1/posts', { json: payload }).json();
-      return normalizePost(json);
+      const data = normalizePost(json);
+      userCache.set(data.user.id, data.user);
+      postCache.set(data.post.id, data.post);
+      return data;
     },
   });
 };

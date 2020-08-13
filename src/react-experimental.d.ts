@@ -123,7 +123,7 @@ declare module 'react' {
     readonly _source: Source;
   }
 
-  export function createMutableSource<Source>(
+  export function unstable_createMutableSource<Source>(
     source: Source,
     getVersion: MutableSourceGetVersionFn
   ): MutableSource<Source>;
@@ -134,7 +134,7 @@ declare module 'react' {
    * @param getSnapshot selector function
    * @param subscribe
    */
-  export function useMutableSource<Source, Snapshot>(
+  export function unstable_useMutableSource<Source, Snapshot>(
     source: MutableSource<Source>,
     getSnapshot: MutableSourceGetSnapshotFn<Source, Snapshot>,
     subscribe: MutableSourceSubscribeFn<Source>

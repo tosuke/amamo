@@ -1,12 +1,12 @@
 import { History, Location } from 'history';
 import { AppContext } from '@/app/context';
-import { createMutableSource } from 'react';
+import { unstable_createMutableSource } from 'react';
 import { memoize } from '@/utils/memoize';
 import { Route, PreparedRoute, MatchedRoute } from './routeBuilder';
 import { Router } from './RouterContext';
 
 export function createRouter(appContext: AppContext, routes: Route[], history: History): Router {
-  const historySource = createMutableSource(history, () => history.location);
+  const historySource = unstable_createMutableSource(history, () => history.location);
 
   const getEntries = memoize((location: Location) => {
     const path = location.pathname;

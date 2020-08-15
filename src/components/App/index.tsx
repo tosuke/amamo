@@ -7,6 +7,7 @@ import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
 import { HeaderPlaceholder } from '../Header';
 import { SeaApiProvider } from '@/infra/sea';
+import { getSearchInitialProps } from '../pages/Search/getInitialProps';
 
 const routes = createRoutes((builder) =>
   builder
@@ -24,6 +25,13 @@ const routes = createRoutes((builder) =>
           exact: true,
           prepare: getHomeInitialProps,
           component: React.lazy(() => import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages/Home')),
+        })
+        .addRoute('/search', {
+          exact: true,
+          prepare: getSearchInitialProps,
+          component: React.lazy(() =>
+            import(/* webpackChunkName: "search", webpackPrefetch: true */ '../pages/Search')
+          ),
         })
         .addRoute('/settings', {
           exact: true,

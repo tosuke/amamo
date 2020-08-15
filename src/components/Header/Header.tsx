@@ -1,4 +1,5 @@
 import React from 'react';
+import css from 'styled-jsx/css';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { Link } from '@/middlewares/router';
@@ -16,26 +17,54 @@ export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   </div>
 );
 
+const iconButtonStyles = css`
+  .button {
+    width: ${sizes.minTappable};
+    height: ${sizes.minTappable};
+    font-size: 20px;
+    line-height: ${sizes.minTappable};
+    text-align: center;
+  }
+  .button :global(a) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: ${colors.accent};
+  }
+`;
+
 export const SettingButton = () => (
-  <div className="setting">
+  <div className="button">
+    <style jsx>{iconButtonStyles}</style>
     <Link href="/settings">
       <i className="uil uil-cog" />
     </Link>
-    <style jsx>{`
-      .setting {
-        width: ${sizes.minTappable};
-        height: ${sizes.minTappable};
-        font-size: 20px;
-        line-height: ${sizes.minTappable};
-        text-align: center;
-      }
-      .setting a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        color: ${colors.accent};
-      }
-    `}</style>
+  </div>
+);
+
+export const SearchButton = () => (
+  <div className="button">
+    <style jsx>{iconButtonStyles}</style>
+    <Link href="/search">
+      <i className="uil uil-search" />
+    </Link>
+  </div>
+);
+
+const buttonGroupStyles = css`
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .button-group > :global(*) {
+    margin-left: 8px;
+  }
+`;
+const ButtonGroup: React.FC = ({ children }) => (
+  <div className="button-group">
+    <style jsx>{buttonGroupStyles}</style>
+    {children}
   </div>
 );
 
@@ -75,7 +104,10 @@ export const LoginedHeader = ({ accountLoadable }: ReturnType<typeof getLoginedH
   return (
     <HeaderLayout>
       <Account user={account} />
-      <SettingButton />
+      <ButtonGroup>
+        <SearchButton />
+        <SettingButton />
+      </ButtonGroup>
     </HeaderLayout>
   );
 };

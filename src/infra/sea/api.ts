@@ -203,11 +203,14 @@ export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; tok
       userCache.set(user.id, user);
       return user;
     },
-    async fetchPublicTimeline(payload: Readonly<{ count?: number; since?: SeaPostId; after?: SeaPostId }>) {
+    async fetchPublicTimeline(
+      payload: Readonly<{ count?: number; since?: SeaPostId; after?: SeaPostId; search?: string }>
+    ) {
       const params = new URLSearchParams();
       if (payload.count) params.append('count', `${payload.count}`);
       if (payload.since) params.append('sinceId', `${payload.since}`);
       if (payload.after) params.append('maxId', `${payload.after}`);
+      if (payload.search) params.append('search', payload.search);
       const json = await http.get('v1/timelines/public', { searchParams: params }).json();
       const data = normalizePostList(json);
       data.posts.forEach((post) => postCache.set(post.id, post));

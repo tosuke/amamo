@@ -1,9 +1,5 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-import { TimelineContainer, TimelineItem } from '../presenters';
-import type { getPublicTimelineInitialProps } from './getInitialProps';
-import { SeaPostItem } from '@/components/Post/SeaPostItem';
-import { usePager } from './logic';
 
 // See: https://github.com/petyosi/react-virtuoso/issues/40
 const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['ScrollContainer']> = ({
@@ -69,11 +65,16 @@ const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['
   );
 };
 
-const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>> = (props) => {
+export const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>> = (props) => {
+  const { totalListHeightChanged } = props;
   const [totalHeight, setTotalHeight] = useState(0);
-  const totalListHeightChanged = useCallback((h: number) => {
-    setTotalHeight(h);
-  }, []);
+  const handleTotalListHeightChanged = useCallback(
+    (h: number) => {
+      setTotalHeight(h);
+      totalListHeightChanged?.(h);
+    },
+    [totalListHeightChanged]
+  );
   return (
     <Virtuoso
       ScrollContainer={WindowScrollContainer}
@@ -83,27 +84,8 @@ const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Virtuoso>>
         minHeight: Math.max(1, totalHeight),
         ...props.style,
       }}
-      totalListHeightChanged={totalListHeightChanged}
+      totalListHeightChanged={handleTotalListHeightChanged}
       {...props}
     />
-  );
-};
-
-export const PublicTimeline = ({ postsPager }: ReturnType<typeof getPublicTimelineInitialProps>) => {
-  const { posts, users, loadNext } = usePager(postsPager);
-  return (
-    <TimelineContainer>
-      <WindowVirtuoso
-        totalCount={posts.length}
-        defaultItemHeight={90}
-        computeItemKey={(i) => posts[i].id}
-        item={(i) => (
-          <TimelineItem>
-            <SeaPostItem post={posts[i]} author={users[posts[i].author]} />
-          </TimelineItem>
-        )}
-        endReached={() => loadNext(30)}
-      />
-    </TimelineContainer>
   );
 };

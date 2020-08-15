@@ -1,4 +1,3 @@
-import { LoginedAppContext } from '@/app/context';
 import { SeaPost, SeaPostId } from '@/models/SeaPost';
 import { SeaUser } from '@/models/SeaUser';
 import { SeaApi } from '@/infra/sea';
@@ -17,9 +16,11 @@ type Pager = Readonly<{
   fetchAfter: (after: SeaPostId, count: number) => Promise<Page>;
 }>;
 
-export const createPager = (ctx: LoginedAppContext): Pager => {
+export const createPager = (api: SeaApi, query?: string): Pager => {
   const fetchPublicTimeline = async (payload: Parameters<SeaApi['fetchPublicTimeline']>[0]) => {
-    const { posts, users: userList } = await ctx.api.fetchPublicTimeline(payload);
+    const { posts, users: userList } = await api.fetchPublicTimeline(
+      query != null ? { ...payload, search: query } : payload
+    );
     const users = userList.reduce((pre, u) => ({ ...pre, [u.id]: u }), {} as Record<number, SeaUser>);
     return {
       posts,
@@ -47,7 +48,13 @@ export const createPager = (ctx: LoginedAppContext): Pager => {
 };
 
 export const usePager = (pager: Pager) => {
+  const [prevPager, setPrevPager] = useState(pager);
   const [data, setData] = useState(pager.initialData.read());
+  if (prevPager !== pager) {
+    setPrevPager(pager);
+    setData(pager.initialData.read());
+  }
+
   const [loadingNext, setLoadingNext] = useState(false);
   const loadNext = async (count: number) => {
     if (loadingNext || !data.hasNext) return;

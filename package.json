@@ -29,7 +29,7 @@
     "react": "^0.0.0-experimental-94c0244ba",
     "react-dom": "^0.0.0-experimental-94c0244ba",
     "react-textarea-autosize": "^8.2.0",
-    "react-virtuoso": "^0.18.0",
+    "react-virtuoso": "^0.20.0",
     "sanitize.css": "^11.0.1",
     "styled-jsx": "^3.3.0"
   },
@@ -42,6 +42,7 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.3.3",
+    "@types/lodash-es": "^4.17.3",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-config": "^5.0.1",

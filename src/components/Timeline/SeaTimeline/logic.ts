@@ -51,8 +51,8 @@ export const usePager = (pager: Pager) => {
   const [prevPager, setPrevPager] = useState(pager);
   const [data, setData] = useState(pager.initialData.read());
   if (prevPager !== pager) {
-    setPrevPager(pager);
     setData(pager.initialData.read());
+    setPrevPager(pager);
   }
 
   const [loadingNext, setLoadingNext] = useState(false);

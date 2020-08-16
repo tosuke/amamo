@@ -23,13 +23,14 @@ const SearchPlaceholder: React.FC = ({ children }) => (
   </div>
 );
 
+const SUSPENSE_CONFIG: React.TimeoutConfig = { timeoutMs: 1500 };
 const SearchContent: React.FC<NonNullable<ReturnType<typeof getSearchInitialProps>>> = ({
   initialPager,
   initialQuery,
 }) => {
   const api = useSeaApi();
   const history = useHistory();
-  const [startTransition, pending] = useTransition({ timeoutMs: 1500 });
+  const [startTransition, pending] = useTransition(SUSPENSE_CONFIG);
   const [query, setQuery] = useState(initialQuery);
   const [pager, setPager] = useState(initialPager);
   const handleQueryChange = useMemo(() => {
@@ -44,7 +45,7 @@ const SearchContent: React.FC<NonNullable<ReturnType<typeof getSearchInitialProp
       setQuery(newQuery);
       updatePager(newQuery);
     };
-  }, [api]);
+  }, [api, startTransition]);
 
   useEffect(
     () =>

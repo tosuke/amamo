@@ -12,7 +12,6 @@ import {
   PostFooter,
   PostFooterBadge,
   PostItemLayout,
-  CaptionText,
   PostFileList,
   PostNothingItem,
   PostImageItem,
@@ -20,6 +19,7 @@ import {
 } from './presenters';
 import { RelativeTime } from './RelativeTime';
 import { SeaUser } from '@/models/SeaUser';
+import { colors } from '@/theme';
 
 const SeaFileVariants: React.FC<{ readonly variants: readonly SeaFileVariant[] }> = ({ variants }) => (
   <>
@@ -86,6 +86,7 @@ export type SeaPostItemProps = {
 };
 
 export const SeaPostItem = React.memo<SeaPostItemProps>(function SeaPostItem({ post, author }) {
+  const linkToPost = new URL(`posts/${post.id}`, process.env.SEA_URL).href;
   return (
     <PostItemLayout
       authorAvatarContent={
@@ -101,9 +102,14 @@ export const SeaPostItem = React.memo<SeaPostItemProps>(function SeaPostItem({ p
       authorDisplayName={author.name}
       authorScreenName={author.screenName}
       headerRightContent={
-        <CaptionText>
+        <a className="time" href={linkToPost} rel="noopener noreferrer" target="_target">
+          <style jsx>{`
+            .time {
+              color: ${colors.caption};
+            }
+          `}</style>
           <RelativeTime time={post.createdAt} />
-        </CaptionText>
+        </a>
       }
       bodyContent={
         <>

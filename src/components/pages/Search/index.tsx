@@ -58,6 +58,7 @@ const SearchContent: React.FC<NonNullable<ReturnType<typeof getSearchInitialProp
     [history, handleQueryChange]
   );
 
+  // Workaround for https://github.com/ReactTraining/history/issues/814
   useEffect(
     () => () => {
       history.replace({

@@ -2,6 +2,53 @@ import dayjs, { Dayjs } from 'dayjs';
 import { ISO8601DateTime } from '@/models/commons';
 import React, { useState, useMemo, useEffect } from 'react';
 
+type RequestIdleCallbackHandle = any;
+type RequestIdleCallbackOptions = {
+  timeout: number;
+};
+type RequestIdleCallbackDeadline = {
+  readonly didTimeout: boolean;
+  timeRemaining: () => number;
+};
+
+declare global {
+  interface Window {
+    requestIdleCallback: (
+      callback: (deadline: RequestIdleCallbackDeadline) => void,
+      opts?: RequestIdleCallbackOptions
+    ) => RequestIdleCallbackHandle;
+    cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void;
+  }
+}
+
+class SharedInterval {
+  private listeners = new Set<() => void>();
+  private timerHandle: number | undefined;
+  constructor(private intervalMs: number) {}
+
+  subscribe(listener: () => void) {
+    if (this.timerHandle == null) {
+      this.timerHandle = window.setInterval(() => {
+        this.listeners.forEach((f) => f());
+      }, this.intervalMs);
+    }
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+      if (this.listeners.size === 0) {
+        window.requestIdleCallback(() => {
+          if (this.listeners.size === 0) {
+            window.clearInterval(this.timerHandle);
+            this.timerHandle = undefined;
+          }
+        });
+      }
+    };
+  }
+}
+
+const relativeTimeInterval = new SharedInterval(1000);
+
 function calcRelativeTime(dt: Dayjs, now: Dayjs) {
   const months = now.diff(dt, 'month');
   if (months > 0) return dt.format('YYYY-MM-DD');
@@ -25,17 +72,16 @@ export type RelativeTimeProps = {
   readonly time: ISO8601DateTime;
   readonly timeProvider?: () => Dayjs;
 };
-export const RelativeTime: React.FC<RelativeTimeProps> = ({ time, timeProvider }) => {
+export const RelativeTime: React.FC<RelativeTimeProps> = ({ time, timeProvider = dayjs }) => {
   const dt = useMemo(() => dayjs(time), [time]);
-  const [relativeTime, setRelativeTime] = useState(() => calcRelativeTime(dt, timeProvider!()));
-  useEffect(() => {
-    const handle = window.setInterval(() => {
-      setRelativeTime(calcRelativeTime(dt, timeProvider!()));
-    }, 1000);
-    return () => window.clearInterval(handle);
-  }, [dt, timeProvider]);
-  return <div title={dayjs(time).format('YYYY-MM-DD hh:mm')}>{relativeTime}</div>;
-};
-RelativeTime.defaultProps = {
-  timeProvider: dayjs,
+  const absoluteTime = useMemo(() => dt.format('YYYY-MM-DD HH:mm'), [dt]);
+  const [relativeTime, setRelativeTime] = useState(() => calcRelativeTime(dt, timeProvider()));
+  useEffect(
+    () =>
+      relativeTimeInterval.subscribe(() => {
+        setRelativeTime(calcRelativeTime(dt, timeProvider()));
+      }),
+    [dt, timeProvider]
+  );
+  return <div title={absoluteTime}>{relativeTime}</div>;
 };

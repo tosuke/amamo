@@ -93,7 +93,7 @@ declare module 'react' {
    *
    * @see https://reactjs.org/docs/concurrent-mode-reference.html#usedeferredvalue
    */
-  export function useDeferredValue<T>(value: T, config?: TimeoutConfig | null): T;
+  export function unstable_useDeferredValue<T>(value: T, config?: TimeoutConfig | null): T;
 
   /**
    * Allows components to avoid undesirable loading states by waiting for content to load

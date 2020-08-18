@@ -14,7 +14,7 @@
     "bundle-analyze": "BUNDLE_ANALYZE=true yarn run build"
   },
   "dependencies": {
-    "@linkage-community/bottlemail": "^2.1.0",
+    "@linkage-community/bottlemail": "^3.0.0",
     "clsx": "^1.1.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.33",

@@ -24,6 +24,9 @@ module.exports = {
         test: /\.tsx?$/,
         use: {
           loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         },
       },
       {

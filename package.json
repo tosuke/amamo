@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.1",
     "@types/lodash-es": "^4.17.3",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",

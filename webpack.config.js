@@ -1,6 +1,5 @@
 const path = require('path');
 const crypto = require('crypto');
-const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 const CSSExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -24,6 +23,9 @@ module.exports = {
         test: /\.tsx?$/,
         use: {
           loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         },
       },
       {
@@ -33,7 +35,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: dev ? '[name].[hash].js' : '[name].[contenthash].js',
+    filename: '[name].[contenthash].js',
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -46,7 +48,7 @@ module.exports = {
     ...(process.env.BUNDLE_ANALYZE === 'true' ? [new BundleAnalyzerPlugin()] : []),
     new DotenvPlugin({ safe: true, systemvars: true }),
     new CSSExtractPlugin({
-      filename: dev ? '[name].[hash].css' : '[name].[contenthash].css',
+      filename: '[name].[contenthash].css',
     }),
     new HTMLPlugin({
       template: path.join(__dirname, 'src/index.html'),
@@ -59,11 +61,12 @@ module.exports = {
     // from https://glitch.com/edit/#!/webpack-granular-split-chunks?path=webpack.config.js
     splitChunks: {
       chunks: 'all',
-      maxInitialRequests: 25,
+      maxInitialRequests: 30,
+      maxAsyncRequests: 30,
       minSize: 20000,
       cacheGroups: {
         default: false,
-        vendors: false,
+        defaultVendors: false,
         framework: {
           name: 'framework',
           chunks: 'all',

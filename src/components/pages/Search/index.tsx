@@ -49,7 +49,10 @@ const SearchContent: React.FC<NonNullable<ReturnType<typeof getSearchInitialProp
 
   useEffect(
     () =>
-      history.listen(({ action, location: { search } }) => {
+      history.listen(({ action, location: { search, pathname } }) => {
+        if (pathname !== '/search') {
+          return;
+        }
         const query = new URLSearchParams(search).get('q') ?? '';
         if (action === 'POP') {
           handleQueryChange(query);

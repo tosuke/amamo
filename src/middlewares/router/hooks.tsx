@@ -11,12 +11,12 @@ import React, {
 import { History, Location } from 'history';
 import { RouterContext } from './RouterContext';
 
-const SUSPENSE_CONFIG: TimeoutConfig = { timeoutMs: 2000 };
+const DEFAULT_SUSPENSE_CONFIG: TimeoutConfig = { timeoutMs: 3000 };
 
-export function useRouter() {
+export function useRouter(suspenseConfig: TimeoutConfig = DEFAULT_SUSPENSE_CONFIG) {
   const router = useContext(RouterContext)!;
 
-  const [startTransition, isPending] = useTransition(SUSPENSE_CONFIG);
+  const [startTransition, isPending] = useTransition(suspenseConfig);
   const [routes, setRoutes] = useState(router.get());
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import css from 'styled-jsx/css';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
@@ -7,9 +7,9 @@ import { LoginedAppContext } from '@/app/context';
 import { Loadable } from '@/utils/Loadable';
 import clsx from 'clsx';
 
-export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
+export const Account: React.FC<{ user: Loadable<SeaUser> }> = ({ user }) => (
   <div className="account">
-    <span>@{user.screenName}</span>
+    <span>@{user.read().screenName}</span>
     <style jsx>{`
       .account {
         font-size: 16px;
@@ -113,11 +113,12 @@ export const getLoginedHeaderInitialProps = ({ api }: LoginedAppContext) => {
 };
 
 export const LoginedHeader = ({ accountLoadable }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
-  const account = accountLoadable.read();
   const { pathname } = useLocation();
   return (
     <HeaderLayout>
-      <Account user={account} />
+      <Suspense fallback={<div aria-hidden />}>
+        <Account user={accountLoadable} />
+      </Suspense>
       <ButtonGroup>
         <LinkIconButton href="/" active={pathname === '/'} iconName="home-alt" description="ホーム" />
         <LinkIconButton href="/search" active={pathname === '/search'} iconName="search" description="検索" />

@@ -2,9 +2,10 @@ import React from 'react';
 import css from 'styled-jsx/css';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
-import { Link } from '@/middlewares/router';
+import { Link, useLocation } from '@/middlewares/router';
 import { LoginedAppContext } from '@/app/context';
 import { Loadable } from '@/utils/Loadable';
+import clsx from 'clsx';
 
 export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
   <div className="account">
@@ -21,35 +22,47 @@ const iconButtonStyles = css`
   .button {
     width: ${sizes.minTappable};
     height: ${sizes.minTappable};
-    font-size: 20px;
+    font-size: calc(${sizes.minTappable} / 2);
     line-height: ${sizes.minTappable};
     text-align: center;
+    color: rgba(${colors.textRaw}, 0.7);
+    padding-bottom: 2px;
+  }
+  .button:hover {
+    color: ${colors.text};
+  }
+  .button.active {
+    color: ${colors.accent};
+    border-bottom: 2px solid ${colors.accent};
   }
   .button :global(a) {
     display: block;
     width: 100%;
     height: 100%;
-    color: ${colors.accent};
+    color: inherit;
   }
 `;
 
-export const SettingButton = () => (
-  <div className="button">
-    <style jsx>{iconButtonStyles}</style>
-    <Link href="/settings">
-      <i className="uil uil-cog" />
-    </Link>
-  </div>
-);
-
-export const SearchButton = () => (
-  <div className="button">
-    <style jsx>{iconButtonStyles}</style>
-    <Link href="/search">
-      <i className="uil uil-search" />
-    </Link>
-  </div>
-);
+const LinkIconButton: React.FC<{ href: string; iconName: string; active?: boolean; description?: string }> = ({
+  href,
+  iconName,
+  active,
+  description,
+}) => {
+  const icon = <i className={clsx('uil', `uil-${iconName}`)} />;
+  return (
+    <div className={clsx('button', active && 'active')} title={description}>
+      <style jsx>{iconButtonStyles}</style>
+      {active ? (
+        <button>{icon}</button>
+      ) : (
+        <Link aria-label={description} href={href}>
+          {icon}
+        </Link>
+      )}
+    </div>
+  );
+};
 
 const buttonGroupStyles = css`
   .button-group {
@@ -101,12 +114,14 @@ export const getLoginedHeaderInitialProps = ({ api }: LoginedAppContext) => {
 
 export const LoginedHeader = ({ accountLoadable }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
   const account = accountLoadable.read();
+  const { pathname } = useLocation();
   return (
     <HeaderLayout>
       <Account user={account} />
       <ButtonGroup>
-        <SearchButton />
-        <SettingButton />
+        <LinkIconButton href="/" active={pathname === '/'} iconName="home-alt" description="ホーム" />
+        <LinkIconButton href="/search" active={pathname === '/search'} iconName="search" description="検索" />
+        <LinkIconButton href="/settings" active={pathname === '/settings'} iconName="cog" description="設定" />
       </ButtonGroup>
     </HeaderLayout>
   );

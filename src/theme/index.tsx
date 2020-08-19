@@ -12,7 +12,7 @@ export const colors = Object.freeze({
 });
 
 export const sizes = Object.freeze({
-  minTappable: 'var(--size-minimal-tappable)',
+  minTappable: 'var(--size-minimum-tappable)',
 });
 
 export type ColorThemeProps = {

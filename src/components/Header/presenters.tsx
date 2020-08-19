@@ -1,10 +1,9 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import css from 'styled-jsx/css';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
-import { Link, useLocation } from '@/middlewares/router';
-import { LoginedAppContext } from '@/app/context';
-import { Loadable } from '@/utils/Loadable';
+import { Link } from '@/middlewares/router';
+import type { Loadable } from '@/utils/Loadable';
 import clsx from 'clsx';
 
 export const Account: React.FC<{ user: Loadable<SeaUser> }> = ({ user }) => (
@@ -43,7 +42,7 @@ const iconButtonStyles = css`
   }
 `;
 
-const LinkIconButton: React.FC<{ href: string; iconName: string; active?: boolean; description?: string }> = ({
+export const LinkIconButton: React.FC<{ href: string; iconName: string; active?: boolean; description?: string }> = ({
   href,
   iconName,
   active,
@@ -74,7 +73,7 @@ const buttonGroupStyles = css`
     margin-left: 8px;
   }
 `;
-const ButtonGroup: React.FC = ({ children }) => (
+export const ButtonGroup: React.FC = ({ children }) => (
   <div className="button-group">
     <style jsx>{buttonGroupStyles}</style>
     {children}
@@ -106,28 +105,4 @@ export const HeaderLayout: React.FC = ({ children }) => (
   </header>
 );
 
-export const getLoginedHeaderInitialProps = ({ api }: LoginedAppContext) => {
-  return {
-    accountLoadable: Loadable.resolve(api.fetchAccount()),
-  } as const;
-};
-
-export const LoginedHeader = ({ accountLoadable }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
-  const { pathname } = useLocation();
-  return (
-    <HeaderLayout>
-      <Suspense fallback={<div aria-hidden />}>
-        <Account user={accountLoadable} />
-      </Suspense>
-      <ButtonGroup>
-        <LinkIconButton href="/" active={pathname === '/'} iconName="home-alt" description="ホーム" />
-        <LinkIconButton href="/search" active={pathname === '/search'} iconName="search" description="検索" />
-        <LinkIconButton href="/settings" active={pathname === '/settings'} iconName="cog" description="設定" />
-      </ButtonGroup>
-    </HeaderLayout>
-  );
-};
-
 export const HeaderPlaceholder = () => <HeaderLayout></HeaderLayout>;
-
-export const AuthHeader = () => <HeaderLayout />;

@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import ky from 'ky';
 import { nanoid } from 'nanoid';
 import { assertIsObject } from '../_commons';
 

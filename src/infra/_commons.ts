@@ -1,6 +1,3 @@
-import { ISO8601DateTime } from '@/models/commons';
-import dayjs from 'dayjs';
-
 // TODO: to~~ みたいなシグネチャの関数にする or 外部ライブラリ(io-ts or transform-tsの利用)
 
 export function assertIsObject(x: unknown, name: string = 'value'): asserts x is Record<string | number, unknown> {
@@ -33,13 +30,5 @@ export function assertIsInteger(x: unknown, name: string = 'value'): asserts x i
 export function assertIsString(x: unknown, name: string = 'value'): asserts x is string {
   if (typeof x !== 'string') {
     throw new Error(`${name} must be a string`);
-  }
-}
-
-export function assertIsISO8601DateTime(x: unknown, name: string = 'value'): asserts x is ISO8601DateTime {
-  assertIsString(x, name);
-  // FIXME: More strict ISO8601 validation with a simple code
-  if (!dayjs(x).isValid()) {
-    throw new Error(`${name} must be a valid date string`);
   }
 }

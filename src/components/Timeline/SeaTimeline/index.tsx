@@ -1,11 +1,17 @@
 import React from 'react';
+import { LoginedAppContext } from '@/app/context';
 import { WindowVirtuoso } from '../WindowVirtuoso';
 import { TimelineContainer, TimelineItem, TimelineFooterItem } from '../presenters';
-import type { getSeaTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
-import { usePager } from './logic';
+import { usePager, createPager } from './logic';
 import { SeaPost } from '@/models/SeaPost';
 import { SeaUser } from '@/models/SeaUser';
+
+export const getSeaTimelineInitialProps = (ctx: LoginedAppContext, query?: string) => {
+  return {
+    postsPager: createPager(ctx.api, query),
+  };
+};
 
 type TimelineProps = Readonly<{
   posts: readonly SeaPost[];

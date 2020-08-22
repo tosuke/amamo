@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { AppContext, isLogined } from '@/app/context';
 import { RedirectToLogin } from '../_commons/RedirectToLogin';
 import { SeaPostForm } from '@/components/PostForm/SeaPostForm';
@@ -16,10 +17,14 @@ export const getInitialProps = (ctx: AppContext) => {
 
 const Home = ({ prepared }: { prepared: Loadable<ReturnType<typeof getInitialProps>> }) => {
   const preparedData = prepared.read();
-  const { postStream } = usePublicTimelineStream();
+  const { postStream, connectionState, unreadCount } = usePublicTimelineStream();
   if (preparedData == null) return <RedirectToLogin />;
+  const title = `${connectionState === 'connecting' ? '☁️' : '⚡️'} ${unreadCount ? `(${unreadCount}) ` : ''}Amamo`;
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <SeaPostForm />
       <SeaTimeline postsPager={preparedData.postsPager} postStream={postStream} />
     </>

@@ -8,6 +8,7 @@ SeaApiContext.displayName = 'SeaApiContext';
 
 export const SeaApiProvider = SeaApiContext.Provider;
 
+export const useTrySeaApi = () => useContext(SeaApiContext);
 export const useSeaApi = () => useContext(SeaApiContext)!;
 
 export const createSeaApi: typeof originalCreateSeaApi = (...args) => {
@@ -22,9 +23,14 @@ export const createSeaApi: typeof originalCreateSeaApi = (...args) => {
     fetchPublicTimeline(...args) {
       return api.then((a) => a.fetchPublicTimeline(...args));
     },
+    connectPublicTimeline(...args) {
+      return api.then((a) => a.connectPublicTimeline(...args));
+    },
     post(...args) {
       return api.then((a) => a.post(...args));
     },
   };
   return proxy;
 };
+
+export type { SeaApi } from './api';

@@ -7,6 +7,7 @@ import { HeaderPlaceholder } from '../Header/Placeholder';
 import { SeaApiProvider } from '@/infra/sea';
 import { Loadable } from '@/utils/Loadable';
 import NavigationProgress from '@/components/NavigationProgress';
+import { SeaPublicTimelineStreamProvider } from '@/features/SeaPosts';
 
 const loadLoginedRoot = () => import(/* webpackChunkName: "logined", webpackPrefetch: true */ '../pages/LoginedRoot');
 const loadHome = () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages/Home');
@@ -77,11 +78,13 @@ export const App = () => {
 
   return (
     <SeaApiProvider value={appContext?.api}>
-      <RouterProvider value={router}>
-        <ColorTheme mode="auto" />
-        <GlobalStyles />
-        {content}
-      </RouterProvider>
+      <SeaPublicTimelineStreamProvider>
+        <RouterProvider value={router}>
+          <ColorTheme mode="auto" />
+          <GlobalStyles />
+          {content}
+        </RouterProvider>
+      </SeaPublicTimelineStreamProvider>
     </SeaApiProvider>
   );
 };

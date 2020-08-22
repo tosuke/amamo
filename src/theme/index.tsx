@@ -46,6 +46,7 @@ export const GlobalStyles = () => (
       background-color: ${colors.background};
       color: ${colors.text};
       line-height: 1.15;
+      overflow-y: scroll;
     }
     a {
       color: ${colors.accent};

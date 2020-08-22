@@ -27,7 +27,7 @@
     "quick-lru": "^5.1.1",
     "rc-progress": "^3.0.0",
     "react": "^0.0.0-experimental-94c0244ba",
-    "react-dom": "^0.0.0-experimental-94c0244ba",
+    "react-dom": "^0.14.1",
     "react-helmet": "^6.1.0",
     "react-textarea-autosize": "^8.2.0",
     "react-virtuoso": "^0.20.0",

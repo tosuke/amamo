@@ -2368,10 +2368,10 @@ css-loader@^4.2.1:
     schema-utils "^2.7.0"
     semver "^7.3.2"
 
-css-minimizer-webpack-plugin@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-1.1.1.tgz#b3540a280a080588d1749dda85e0449372b8af02"
-  integrity sha512-x6TUYLXeg3PotX9l6zbna/61S8YNYrCVDlav72ORHu5hKfbSEQ6HIGpQpYBNvbc9KjT7KaWRQpHSXvWxmctcgQ==
+css-minimizer-webpack-plugin@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-1.1.2.tgz#1e317d0bc56cfda57b55265445711e4d5b2165f8"
+  integrity sha512-rmCNMJKMdir/UBuZjQWI0OsjAOBbVnUAUj5mqS1om1bNwmf1xrGgxJZA8UhIZrJo9vgrdQa/uSh3LvduDXDh9A==
   dependencies:
     cacache "^15.0.5"
     cssnano "^4.1.10"

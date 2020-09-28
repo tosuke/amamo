@@ -17,7 +17,7 @@
     "@linkage-community/bottlemail": "^3.0.0",
     "clsx": "^1.1.1",
     "core-js": "^3.6.5",
-    "dayjs": "^1.8.34",
+    "dayjs": "^1.9.0",
     "history": "^5.0.0",
     "ky": "^0.23.0",
     "lodash-es": "^4.17.15",

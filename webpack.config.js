@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const HTMLPlugin = require('html-webpack-plugin');
 const CSSExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const CSSMinimizePlugin = require('css-minimizer-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const DotenvPlugin = require('dotenv-webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -41,6 +41,7 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      classnames: 'clsx',
     },
   },
   plugins: [
@@ -56,7 +57,7 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimizer: [new TerserPlugin(), new OptimizeCSSPlugin()],
+    minimizer: [new TerserPlugin(), new CSSMinimizePlugin()],
     // Granular Chunks
     // from https://glitch.com/edit/#!/webpack-granular-split-chunks?path=webpack.config.js
     splitChunks: {

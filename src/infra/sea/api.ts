@@ -1,18 +1,21 @@
 import ky from 'ky';
+import dayjs from 'dayjs';
 import QuickLRU from 'quick-lru';
 import parse from '@linkage-community/bottlemail';
-import {
-  assertIsInteger,
-  assertIsObject,
-  assertIsString,
-  assertIsISO8601DateTime,
-  assertIsNumber,
-  assertIsArray,
-} from '../_commons';
+import { assertIsInteger, assertIsObject, assertIsString, assertIsNumber, assertIsArray } from '../_commons';
+import { eventemit } from '@/utils/eventemit';
+import { ISO8601DateTime } from '@/models/commons';
 import { SeaUserId, SeaUser } from '@/models/SeaUser';
 import { SeaFileId, SeaFile, SeaFileVariant } from '@/models/SeaFile';
 import { SeaPostId, SeaPost } from '@/models/SeaPost';
-import { createContext, useContext } from 'react';
+
+export function assertIsISO8601DateTime(x: unknown, name: string = 'value'): asserts x is ISO8601DateTime {
+  assertIsString(x, name);
+  // FIXME: More strict ISO8601 validation with a simple code
+  if (!dayjs(x).isValid()) {
+    throw new Error(`${name} must be a valid date string`);
+  }
+}
 
 // File
 function assertIsSeaFileId(x: unknown, name = 'value'): asserts x is SeaFileId {
@@ -187,7 +190,11 @@ function normalizePostList(json: unknown, root = 'res') {
   } as const;
 }
 
-export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; token: string }>) => {
+export const createSeaApi = ({
+  baseUrl,
+  websocketUrl,
+  token,
+}: Readonly<{ baseUrl: string; websocketUrl: string; token: string }>) => {
   const http = ky.create({
     prefixUrl: baseUrl,
     headers: {
@@ -216,6 +223,61 @@ export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; tok
       data.posts.forEach((post) => postCache.set(post.id, post));
       data.users.forEach((user) => userCache.set(user.id, user));
       return data;
+    },
+    async connectPublicTimeline() {
+      const ws = new WebSocket(websocketUrl);
+      await new Promise((res, rej) => {
+        try {
+          const onOpen = () => {
+            ws.removeEventListener('open', onOpen);
+            ws.send(
+              JSON.stringify({
+                type: 'connect',
+                stream: 'v1/timelines/public',
+                token,
+              })
+            );
+            res();
+          };
+          const onError = (ev: Event) => {
+            ws.removeEventListener('error', onError);
+            rej(ev);
+          };
+          ws.addEventListener('open', onOpen);
+          ws.addEventListener('error', onError);
+        } catch (e) {
+          rej(e);
+        }
+      });
+
+      const close = () => ws.close();
+      const [emitMessage, onMessage] = eventemit<Readonly<{ post: SeaPost; author: SeaUser }>>();
+      const [emitClose, onClose] = eventemit<void>();
+      ws.addEventListener('message', (ev) => {
+        const data: unknown = JSON.parse(ev.data);
+        assertIsObject(data);
+        if (data.type === 'message') {
+          const { post, user } = normalizePost(data.content);
+          postCache.set(post.id, post);
+          userCache.set(user.id, user);
+          emitMessage({ post, author: user });
+        }
+      });
+
+      const handle = window.setInterval(() => {
+        ws.send(JSON.stringify({ type: 'ping' }));
+      }, 30 * 1000);
+      ws.addEventListener('close', (ev) => {
+        ev.reason;
+        window.clearInterval(handle);
+        emitClose();
+      });
+
+      return {
+        close,
+        onMessage,
+        onClose,
+      } as const;
     },
     async fetchPost(id: SeaPostId) {
       const post = postCache.get(id);
@@ -252,10 +314,3 @@ export const createSeaApi = ({ baseUrl, token }: Readonly<{ baseUrl: string; tok
 };
 
 export type SeaApi = ReturnType<typeof createSeaApi>;
-
-const SeaApiContext = createContext<SeaApi | undefined>(undefined);
-SeaApiContext.displayName = 'SeaApiContext';
-
-export const SeaApiProvider = SeaApiContext.Provider;
-
-export const useSeaApi = () => useContext(SeaApiContext)!;

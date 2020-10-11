@@ -2,12 +2,16 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createRouter, useRouter, RouterProvider, Router, createRoutes } from '@/middlewares/router';
 import { AppContext, createAppContext } from '@/app/context';
-import { getHomeInitialProps } from '../pages/Home/getInitialProps';
-import { getLoginedRootInitialProps, LoginedRoot } from '../pages/LoginedRoot';
 import { DefaultLayout } from '../pages/_layout/DefaultLayout';
-import { HeaderPlaceholder } from '../Header';
+import { HeaderPlaceholder } from '../Header/Placeholder';
 import { SeaApiProvider } from '@/infra/sea';
-import { getSearchInitialProps } from '../pages/Search/getInitialProps';
+import { Loadable } from '@/utils/Loadable';
+import NavigationProgress from '@/components/NavigationProgress';
+import { SeaPublicTimelineStreamProvider } from '@/features/SeaPosts';
+
+const loadLoginedRoot = () => import(/* webpackChunkName: "logined", webpackPrefetch: true */ '../pages/LoginedRoot');
+const loadHome = () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages/Home');
+const loadSearch = () => import(/* webpackChunkName: "search", webpackPrefetch: true */ '../pages/Search');
 
 const routes = createRoutes((builder) =>
   builder
@@ -19,33 +23,46 @@ const routes = createRoutes((builder) =>
       prepare: () => {},
       component: React.lazy(() => import(/* webpackChunkName: "auth_callback" */ '../pages/AuthCallback')),
     })
-    .addRoute('/', { prepare: getLoginedRootInitialProps, component: LoginedRoot }, (child) =>
-      child
-        .addRoute('/', {
-          exact: true,
-          prepare: getHomeInitialProps,
-          component: React.lazy(() => import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages/Home')),
-        })
-        .addRoute('/search', {
-          exact: true,
-          prepare: getSearchInitialProps,
-          component: React.lazy(() =>
-            import(/* webpackChunkName: "search", webpackPrefetch: true */ '../pages/Search')
-          ),
-        })
-        .addRoute('/settings', {
-          exact: true,
-          prepare: () => {},
-          component: React.lazy(() =>
-            import(/* webpackChunkName: "settings", webpackPrefetch: true*/ '../pages/Settings')
-          ),
-        })
+    .addRoute(
+      '/',
+      {
+        prepare: (ctx) => Loadable.resolve(loadLoginedRoot().then((mod) => mod.getLoginedRootInitialProps(ctx))),
+        component: React.lazy(loadLoginedRoot),
+      },
+      (child) =>
+        child
+          .addRoute('/', {
+            exact: true,
+            prepare: (ctx) => Loadable.resolve(loadHome().then((mod) => mod.getInitialProps(ctx))),
+            component: React.lazy(loadHome),
+          })
+          .addRoute('/search', {
+            exact: true,
+            prepare: (ctx) => Loadable.resolve(loadSearch().then((mod) => mod.getInitialProps(ctx))),
+            component: React.lazy(loadSearch),
+          })
+          .addRoute('/settings', {
+            exact: true,
+            prepare: () => {},
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "settings", webpackPrefetch: true*/ '../pages/Settings')
+            ),
+          })
     )
 );
 
+const NAVIGATION_SUSPENSE_CONFIG: React.TimeoutConfig = { timeoutMs: 3000 };
+
 const AppContent: React.FC = () => {
-  const { node } = useRouter();
-  return <Suspense fallback={<DefaultLayout headerContent={<HeaderPlaceholder />} />}>{node}</Suspense>;
+  const { node, isPending } = useRouter(NAVIGATION_SUSPENSE_CONFIG);
+  return (
+    <>
+      <Suspense fallback={null}>
+        <NavigationProgress isPending={isPending} timeoutMs={NAVIGATION_SUSPENSE_CONFIG.timeoutMs} />
+      </Suspense>
+      <Suspense fallback={<DefaultLayout headerContent={<HeaderPlaceholder />} />}>{node}</Suspense>
+    </>
+  );
 };
 
 export const App = () => {
@@ -61,11 +78,13 @@ export const App = () => {
 
   return (
     <SeaApiProvider value={appContext?.api}>
-      <RouterProvider value={router}>
-        <ColorTheme mode="auto" />
-        <GlobalStyles />
-        {content}
-      </RouterProvider>
+      <SeaPublicTimelineStreamProvider>
+        <RouterProvider value={router}>
+          <ColorTheme mode="auto" />
+          <GlobalStyles />
+          {content}
+        </RouterProvider>
+      </SeaPublicTimelineStreamProvider>
     </SeaApiProvider>
   );
 };

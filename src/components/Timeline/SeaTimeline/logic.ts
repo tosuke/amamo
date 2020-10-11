@@ -2,7 +2,7 @@ import { SeaPost, SeaPostId } from '@/models/SeaPost';
 import { SeaUser } from '@/models/SeaUser';
 import { SeaApi } from '@/infra/sea';
 import { Loadable } from '@/utils/Loadable';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 type Page = Readonly<{
   posts: readonly SeaPost[];
@@ -71,9 +71,19 @@ export const usePager = (pager: Pager) => {
       setLoadingNext(false);
     }
   };
+
+  const pushPost = useCallback((post: SeaPost, author: SeaUser) => {
+    setData((prev) => ({
+      ...prev,
+      users: { ...prev.users, [author.id]: author },
+      posts: [post, ...prev.posts],
+    }));
+  }, []);
+
   return {
     ...data,
     loadingNext,
     loadNext,
+    pushPost,
   };
 };

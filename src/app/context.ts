@@ -21,6 +21,7 @@ export function createAppContext(): AppContext {
   const api = token
     ? createSeaApi({
         baseUrl: process.env.API_ROOT!,
+        websocketUrl: process.env.WS_ROOT!,
         token,
       })
     : undefined;

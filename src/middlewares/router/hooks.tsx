@@ -1,12 +1,22 @@
-import React, { useContext, unstable_useTransition as useTransition, TimeoutConfig, useState, useEffect } from 'react';
+import React, {
+  useContext,
+  unstable_useTransition as useTransition,
+  TimeoutConfig,
+  useState,
+  useEffect,
+  unstable_useMutableSource as useMutableSource,
+  MutableSourceSubscribeFn,
+  MutableSourceGetSnapshotFn,
+} from 'react';
+import { History, Location } from 'history';
 import { RouterContext } from './RouterContext';
 
-const SUSPENSE_CONFIG: TimeoutConfig = { timeoutMs: 2000 };
+const DEFAULT_SUSPENSE_CONFIG: TimeoutConfig = { timeoutMs: 3000 };
 
-export function useRouter() {
+export function useRouter(suspenseConfig: TimeoutConfig = DEFAULT_SUSPENSE_CONFIG) {
   const router = useContext(RouterContext)!;
 
-  const [startTransition, isPending] = useTransition(SUSPENSE_CONFIG);
+  const [startTransition, isPending] = useTransition(suspenseConfig);
   const [routes, setRoutes] = useState(router.get());
 
   useEffect(() => {
@@ -31,4 +41,11 @@ export function useRouter() {
 
 export function useHistory() {
   return useContext(RouterContext)!.history;
+}
+
+const getSnapshot: MutableSourceGetSnapshotFn<History, Location> = (history) => history.location;
+const subscribe: MutableSourceSubscribeFn<History> = (history, callback) => history.listen(callback);
+export function useLocation() {
+  const { historySource } = useContext(RouterContext)!;
+  return useMutableSource(historySource, getSnapshot, subscribe);
 }

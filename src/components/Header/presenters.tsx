@@ -3,12 +3,12 @@ import css from 'styled-jsx/css';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';
 import { Link } from '@/middlewares/router';
-import { LoginedAppContext } from '@/app/context';
-import { Loadable } from '@/utils/Loadable';
+import type { Loadable } from '@/utils/Loadable';
+import clsx from 'clsx';
 
-export const Account: React.FC<{ user: SeaUser }> = ({ user }) => (
+export const Account: React.FC<{ user: Loadable<SeaUser> }> = ({ user }) => (
   <div className="account">
-    <span>@{user.screenName}</span>
+    <span>@{user.read().screenName}</span>
     <style jsx>{`
       .account {
         font-size: 16px;
@@ -21,35 +21,47 @@ const iconButtonStyles = css`
   .button {
     width: ${sizes.minTappable};
     height: ${sizes.minTappable};
-    font-size: 20px;
+    font-size: calc(${sizes.minTappable} / 2);
     line-height: ${sizes.minTappable};
     text-align: center;
+    color: rgba(${colors.textRaw}, 0.7);
+    padding-bottom: 2px;
+  }
+  .button:hover {
+    color: ${colors.text};
+  }
+  .button.active {
+    color: ${colors.accent};
+    border-bottom: 2px solid ${colors.accent};
   }
   .button :global(a) {
     display: block;
     width: 100%;
     height: 100%;
-    color: ${colors.accent};
+    color: inherit;
   }
 `;
 
-export const SettingButton = () => (
-  <div className="button">
-    <style jsx>{iconButtonStyles}</style>
-    <Link href="/settings">
-      <i className="uil uil-cog" />
-    </Link>
-  </div>
-);
-
-export const SearchButton = () => (
-  <div className="button">
-    <style jsx>{iconButtonStyles}</style>
-    <Link href="/search">
-      <i className="uil uil-search" />
-    </Link>
-  </div>
-);
+export const LinkIconButton: React.FC<{ href: string; iconName: string; active?: boolean; description?: string }> = ({
+  href,
+  iconName,
+  active,
+  description,
+}) => {
+  const icon = <i className={clsx('uil', `uil-${iconName}`)} />;
+  return (
+    <div className={clsx('button', active && 'active')} title={description}>
+      <style jsx>{iconButtonStyles}</style>
+      {active ? (
+        <button>{icon}</button>
+      ) : (
+        <Link aria-label={description} href={href}>
+          {icon}
+        </Link>
+      )}
+    </div>
+  );
+};
 
 const buttonGroupStyles = css`
   .button-group {
@@ -61,7 +73,7 @@ const buttonGroupStyles = css`
     margin-left: 8px;
   }
 `;
-const ButtonGroup: React.FC = ({ children }) => (
+export const ButtonGroup: React.FC = ({ children }) => (
   <div className="button-group">
     <style jsx>{buttonGroupStyles}</style>
     {children}
@@ -93,25 +105,4 @@ export const HeaderLayout: React.FC = ({ children }) => (
   </header>
 );
 
-export const getLoginedHeaderInitialProps = ({ api }: LoginedAppContext) => {
-  return {
-    accountLoadable: Loadable.resolve(api.fetchAccount()),
-  } as const;
-};
-
-export const LoginedHeader = ({ accountLoadable }: ReturnType<typeof getLoginedHeaderInitialProps>) => {
-  const account = accountLoadable.read();
-  return (
-    <HeaderLayout>
-      <Account user={account} />
-      <ButtonGroup>
-        <SearchButton />
-        <SettingButton />
-      </ButtonGroup>
-    </HeaderLayout>
-  );
-};
-
 export const HeaderPlaceholder = () => <HeaderLayout></HeaderLayout>;
-
-export const AuthHeader = () => <HeaderLayout />;

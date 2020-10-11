@@ -1,7 +1,7 @@
 import React from 'react';
 import css from 'styled-jsx/css';
 import { DefaultLayout } from '../_layout/DefaultLayout';
-import { HeaderPlaceholder } from '@/components/Header';
+import { HeaderPlaceholder } from '@/components/Header/Placeholder';
 import { useAuthorizeUrl } from '@/infra/sea';
 
 const loginPageStyles = css`

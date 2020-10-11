@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { LoginedAppContext } from '@/app/context';
 import { WindowVirtuoso } from '../WindowVirtuoso';
 import { TimelineContainer, TimelineItem, TimelineFooterItem } from '../presenters';
-import type { getSeaTimelineInitialProps } from './getInitialProps';
 import { SeaPostItem } from '@/components/Post/SeaPostItem';
-import { usePager } from './logic';
+import { usePager, createPager } from './logic';
 import { SeaPost } from '@/models/SeaPost';
 import { SeaUser } from '@/models/SeaUser';
+import { Emitter } from '@/utils/eventemit';
+
+export const getSeaTimelineInitialProps = (ctx: LoginedAppContext, query?: string) => {
+  return {
+    postsPager: createPager(ctx.api, query),
+  };
+};
 
 type TimelineProps = Readonly<{
   posts: readonly SeaPost[];
@@ -32,8 +39,19 @@ const Timeline = ({ posts, users, loadingNext, hasNext, endReached }: TimelinePr
   />
 );
 
-export const SeaTimeline = ({ postsPager }: ReturnType<typeof getSeaTimelineInitialProps>) => {
-  const { posts, users, loadNext, loadingNext, hasNext } = usePager(postsPager);
+type SeaTimelineProps = ReturnType<typeof getSeaTimelineInitialProps> & {
+  postStream?: Emitter<Readonly<{ post: SeaPost; author: SeaUser }>>;
+};
+
+export const SeaTimeline = ({ postsPager, postStream }: SeaTimelineProps) => {
+  const { posts, users, loadNext, loadingNext, hasNext, pushPost } = usePager(postsPager);
+  useEffect(
+    () =>
+      postStream?.subscribe(({ post, author }) => {
+        pushPost(post, author);
+      }),
+    [postStream, pushPost]
+  );
   return (
     <Timeline posts={posts} users={users} endReached={() => loadNext(30)} loadingNext={loadingNext} hasNext={hasNext} />
   );

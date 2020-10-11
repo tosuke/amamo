@@ -12,7 +12,7 @@ export const colors = Object.freeze({
 });
 
 export const sizes = Object.freeze({
-  minTappable: 'var(--size-minimal-tappable)',
+  minTappable: 'var(--size-minimum-tappable)',
 });
 
 export type ColorThemeProps = {
@@ -46,6 +46,7 @@ export const GlobalStyles = () => (
       background-color: ${colors.background};
       color: ${colors.text};
       line-height: 1.15;
+      overflow-y: scroll;
     }
     a {
       color: ${colors.accent};

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from '@/middlewares/router';
 import { DefaultLayout } from './_layout/DefaultLayout';
-import { HeaderPlaceholder } from '../Header';
+import { HeaderPlaceholder } from '../Header/Placeholder';
 import { handleAuthCallback } from '@/infra/sea';
 
 const AuthCallback = () => {

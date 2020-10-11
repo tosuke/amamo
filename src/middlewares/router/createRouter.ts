@@ -5,7 +5,7 @@ import { Route, PreparedRoute, MatchedRoute } from './routeBuilder';
 import { Router } from './RouterContext';
 
 export function createRouter(appContext: AppContext, routes: Route[], history: History): Router {
-  const historySource = unstable_createMutableSource(history, () => history.location);
+  const historySource = unstable_createMutableSource(history, () => history.location.key);
 
   let prevPath: string | undefined;
   let prevResult: PreparedRoute[] | undefined;

@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "webpack serve --watch --hot --mode development",
     "build": "rm -rf dist/* && NODE_ENV=production webpack --mode production --progress",
-    "build:ci": "NODE_ENV=production webpack --prod",
+    "build:ci": "NODE_ENV=production webpack --mode production",
     "bundle-analyze": "BUNDLE_ANALYZE=true yarn run build"
   },
   "dependencies": {

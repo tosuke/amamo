@@ -25,6 +25,13 @@ module.exports = {
   },
   module: {
     rules: [
+      // https://github.com/webpack/webpack/issues/11467
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
       {
         test: /\.tsx?$/,
         use: {

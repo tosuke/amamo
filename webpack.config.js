@@ -17,15 +17,18 @@ const TOTAL_PAGES = 4;
  */
 module.exports = {
   entry: path.join(__dirname, 'src/index.tsx'),
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename],
+    },
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: {
           loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
         },
       },
       {

@@ -25,7 +25,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.6, @babel/core@npm:^7.11.6":
+"@babel/core@npm:7.11.6, @babel/core@npm:^7.1.6":
   version: 7.11.6
   resolution: "@babel/core@npm:7.11.6"
   dependencies:
@@ -366,7 +366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-class-properties@npm:^7.1.0, @babel/plugin-proposal-class-properties@npm:^7.10.4":
+"@babel/plugin-proposal-class-properties@npm:7.10.4, @babel/plugin-proposal-class-properties@npm:^7.1.0, @babel/plugin-proposal-class-properties@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-class-properties@npm:7.10.4"
   dependencies:
@@ -1155,7 +1155,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.1.6, @babel/preset-env@npm:^7.11.5":
+"@babel/preset-env@npm:7.11.5, @babel/preset-env@npm:^7.1.6":
   version: 7.11.5
   resolution: "@babel/preset-env@npm:7.11.5"
   dependencies:
@@ -1260,7 +1260,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.10.4":
+"@babel/preset-react@npm:7.10.4":
   version: 7.10.4
   resolution: "@babel/preset-react@npm:7.10.4"
   dependencies:
@@ -1277,7 +1277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.1.0, @babel/preset-typescript@npm:^7.10.4":
+"@babel/preset-typescript@npm:7.10.4, @babel/preset-typescript@npm:^7.1.0":
   version: 7.10.4
   resolution: "@babel/preset-typescript@npm:7.10.4"
   dependencies:
@@ -1363,7 +1363,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@linkage-community/bottlemail@npm:^3.0.0":
+"@linkage-community/bottlemail@npm:3.0.0":
   version: 3.0.0
   resolution: "@linkage-community/bottlemail@npm:3.0.0"
   checksum: 6a1136941fa073f95e32294765ccc9f15329b9d9aefe005ae812dc02aac2397dbe6a5cde7303f9041abfdd08639b274aba9e23523d84511468553292fdea23be
@@ -1396,7 +1396,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pmmmwh/react-refresh-webpack-plugin@npm:^0.4.2":
+"@pmmmwh/react-refresh-webpack-plugin@npm:0.4.2":
   version: 0.4.2
   resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.4.2"
   dependencies:
@@ -1541,7 +1541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash-es@npm:^4.17.3":
+"@types/lodash-es@npm:4.17.3":
   version: 4.17.3
   resolution: "@types/lodash-es@npm:4.17.3"
   dependencies:
@@ -1564,7 +1564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^14.11.8":
+"@types/node@npm:*, @types/node@npm:14.11.8":
   version: 14.11.8
   resolution: "@types/node@npm:14.11.8"
   checksum: 5139c07ba76d791b4930fa02ec746656dacf78b43c431d56a7514a8285962d0511bf356bee870968a541033c14967b58f7b2a58c48ac81646ce4eb28d2ff433d
@@ -1592,7 +1592,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^16.9.8":
+"@types/react-dom@npm:16.9.8":
   version: 16.9.8
   resolution: "@types/react-dom@npm:16.9.8"
   dependencies:
@@ -1601,7 +1601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:^6.1.0":
+"@types/react-helmet@npm:6.1.0":
   version: 6.1.0
   resolution: "@types/react-helmet@npm:6.1.0"
   dependencies:
@@ -1610,7 +1610,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-config@npm:^5.0.1":
+"@types/react-router-config@npm:5.0.1":
   version: 5.0.1
   resolution: "@types/react-router-config@npm:5.0.1"
   dependencies:
@@ -1631,7 +1631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^16.9.49":
+"@types/react@npm:*, @types/react@npm:16.9.52":
   version: 16.9.52
   resolution: "@types/react@npm:16.9.52"
   dependencies:
@@ -1657,7 +1657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/styled-jsx@npm:^2.2.8":
+"@types/styled-jsx@npm:2.2.8":
   version: 2.2.8
   resolution: "@types/styled-jsx@npm:2.2.8"
   dependencies:
@@ -1931,7 +1931,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webpack-cli/serve@npm:^1.0.1":
+"@webpack-cli/serve@npm:1.0.1, @webpack-cli/serve@npm:^1.0.1":
   version: 1.0.1
   resolution: "@webpack-cli/serve@npm:1.0.1"
   peerDependencies:
@@ -2103,54 +2103,54 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "amamo@workspace:."
   dependencies:
-    "@babel/core": ^7.11.6
-    "@babel/plugin-proposal-class-properties": ^7.10.4
-    "@babel/preset-env": ^7.11.5
-    "@babel/preset-react": ^7.10.4
-    "@babel/preset-typescript": ^7.10.4
-    "@linkage-community/bottlemail": ^3.0.0
-    "@pmmmwh/react-refresh-webpack-plugin": ^0.4.2
-    "@types/lodash-es": ^4.17.3
-    "@types/node": ^14.11.8
-    "@types/react": ^16.9.49
-    "@types/react-dom": ^16.9.8
-    "@types/react-helmet": ^6.1.0
-    "@types/react-router-config": ^5.0.1
-    "@types/styled-jsx": ^2.2.8
-    "@webpack-cli/serve": ^1.0.1
-    babel-loader: ^8.1.0
-    clsx: ^1.1.1
-    core-js: ^3.6.5
-    css-loader: ^4.3.0
-    css-minimizer-webpack-plugin: ^1.1.5
-    dayjs: ^1.8.34
-    dotenv-safe: ^8.2.0
-    dotenv-webpack: ^3.0.0
-    history: ^5.0.0
-    html-webpack-plugin: ^4.5.0
-    ky: ^0.23.0
-    lodash-es: ^4.17.15
-    mini-css-extract-plugin: ^1.0.0
-    nanoid: ^3.1.12
-    path-to-regexp: ^6.1.0
-    pictograph: ^2.3.0
-    quick-lru: ^5.1.1
-    rc-progress: ^3.1.0
+    "@babel/core": 7.11.6
+    "@babel/plugin-proposal-class-properties": 7.10.4
+    "@babel/preset-env": 7.11.5
+    "@babel/preset-react": 7.10.4
+    "@babel/preset-typescript": 7.10.4
+    "@linkage-community/bottlemail": 3.0.0
+    "@pmmmwh/react-refresh-webpack-plugin": 0.4.2
+    "@types/lodash-es": 4.17.3
+    "@types/node": 14.11.8
+    "@types/react": 16.9.52
+    "@types/react-dom": 16.9.8
+    "@types/react-helmet": 6.1.0
+    "@types/react-router-config": 5.0.1
+    "@types/styled-jsx": 2.2.8
+    "@webpack-cli/serve": 1.0.1
+    babel-loader: 8.1.0
+    clsx: 1.1.1
+    core-js: 3.6.5
+    css-loader: 4.3.0
+    css-minimizer-webpack-plugin: 1.1.5
+    dayjs: 1.9.1
+    dotenv-safe: 8.2.0
+    dotenv-webpack: 3.0.0
+    history: 5.0.0
+    html-webpack-plugin: 4.5.0
+    ky: 0.23.0
+    lodash-es: 4.17.15
+    mini-css-extract-plugin: 1.0.0
+    nanoid: 3.1.12
+    path-to-regexp: 6.2.0
+    pictograph: 2.3.0
+    quick-lru: 5.1.1
+    rc-progress: 3.1.0
     react: experimental
     react-dom: experimental
-    react-helmet: ^6.1.0
+    react-helmet: 6.1.0
     react-refresh: experimental
-    react-textarea-autosize: ^8.2.0
-    react-virtuoso: ^0.20.0
-    sanitize.css: ^12.0.1
-    styled-jsx: ^3.3.0
-    terser-webpack-plugin: ^4.2.3
-    type-fest: ^0.16.0
-    typescript: ^4.1.0-beta
-    webpack: ^5.0.0
-    webpack-bundle-analyzer: ^3.9.0
-    webpack-cli: ^4.0.0
-    webpack-dev-server: ^3.11.0
+    react-textarea-autosize: 8.2.0
+    react-virtuoso: 0.20.0
+    sanitize.css: 12.0.1
+    styled-jsx: 3.3.0
+    terser-webpack-plugin: 4.2.3
+    type-fest: 0.16.0
+    typescript: 4.1.0-dev.20201011
+    webpack: 5.0.0
+    webpack-bundle-analyzer: 3.9.0
+    webpack-cli: 4.0.0
+    webpack-dev-server: 3.11.0
   languageName: unknown
   linkType: soft
 
@@ -2470,7 +2470,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^8.1.0":
+"babel-loader@npm:8.1.0":
   version: 8.1.0
   resolution: "babel-loader@npm:8.1.0"
   dependencies:
@@ -3060,7 +3060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.1":
+"clsx@npm:1.1.1":
   version: 1.1.1
   resolution: "clsx@npm:1.1.1"
   checksum: d8ae10ac0546da19fe8c9516886f6582a64a382cf4d09ea7d36d5287cafbdab1192ab249adc2cdf0310e0b0aeac4f4142cf7c738c98d9cb68c19ba24b6f673d5
@@ -3325,7 +3325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.6.5":
+"core-js@npm:3.6.5":
   version: 3.6.5
   resolution: "core-js@npm:3.6.5"
   checksum: 9283348dd5be2f1d07feaf90e2336b3f00a2316e3d3c6d4f789c9a67bdd4d7b08ce1c88dca4e591340130056c6b412b0b74fae039f8e259206f1073f542e4e85
@@ -3401,7 +3401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^4.3.0":
+"css-loader@npm:4.3.0":
   version: 4.3.0
   resolution: "css-loader@npm:4.3.0"
   dependencies:
@@ -3423,7 +3423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-minimizer-webpack-plugin@npm:^1.1.5":
+"css-minimizer-webpack-plugin@npm:1.1.5":
   version: 1.1.5
   resolution: "css-minimizer-webpack-plugin@npm:1.1.5"
   dependencies:
@@ -3635,7 +3635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.34":
+"dayjs@npm:1.9.1":
   version: 1.9.1
   resolution: "dayjs@npm:1.9.1"
   checksum: c1043abb528f43878f3fa88ea6f890be8539f734b41a21cd939da8fb431472428188badb5518f18313fb332701ccc0663c0494caa158e4dac3f6f6f6a24c4849
@@ -3985,7 +3985,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-safe@npm:^8.2.0":
+"dotenv-safe@npm:8.2.0":
   version: 8.2.0
   resolution: "dotenv-safe@npm:8.2.0"
   dependencies:
@@ -3994,7 +3994,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-webpack@npm:^3.0.0":
+"dotenv-webpack@npm:3.0.0":
   version: 3.0.0
   resolution: "dotenv-webpack@npm:3.0.0"
   dependencies:
@@ -5229,7 +5229,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"history@npm:^5.0.0":
+"history@npm:5.0.0":
   version: 5.0.0
   resolution: "history@npm:5.0.0"
   dependencies:
@@ -5318,7 +5318,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:^4.5.0":
+"html-webpack-plugin@npm:4.5.0":
   version: 4.5.0
   resolution: "html-webpack-plugin@npm:4.5.0"
   dependencies:
@@ -6319,7 +6319,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ky@npm:^0.23.0":
+"ky@npm:0.23.0":
   version: 0.23.0
   resolution: "ky@npm:0.23.0"
   checksum: d86960b91a5a793c29631bc3b12403c60b99a1cc92fae154bd2dc10df110e0e6c4b637108f1649987e60a3f3c0ce9e6478bb7f6bac663f0963b728b913db7af3
@@ -6417,7 +6417,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.15":
+"lodash-es@npm:4.17.15":
   version: 4.17.15
   resolution: "lodash-es@npm:4.17.15"
   checksum: ee2871b76deefd1754527e659a8c8b688f2e427e67b30709296878e18ad9cb54b4f0fc16a7161298156b4e0ebc2a37dfe501a3ea8725f195763f9de8a7ba6da6
@@ -6742,7 +6742,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mini-css-extract-plugin@npm:^1.0.0":
+"mini-css-extract-plugin@npm:1.0.0":
   version: 1.0.0
   resolution: "mini-css-extract-plugin@npm:1.0.0"
   dependencies:
@@ -6931,7 +6931,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.12":
+"nanoid@npm:3.1.12":
   version: 3.1.12
   resolution: "nanoid@npm:3.1.12"
   bin:
@@ -7610,7 +7610,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:^6.1.0":
+"path-to-regexp@npm:6.2.0":
   version: 6.2.0
   resolution: "path-to-regexp@npm:6.2.0"
   checksum: 4116de71f5453163910347f199ab28fdd07f4053ed88093acb42dc044a2e5e7d9e18379e81e8d5d982d1b88291be3666e56be34a0741298673248fd21e3c1c16
@@ -7640,7 +7640,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pictograph@npm:^2.3.0":
+"pictograph@npm:2.3.0":
   version: 2.3.0
   resolution: "pictograph@npm:2.3.0"
   checksum: fc50e991ee625744eaf2b00f0034a82a69d5cfd62e95461c39e71397c455acf0c125f6c5bfc33614d1c24d528d777c3cab4ca77cdfe258c89eb649fd0e5682e4
@@ -8280,7 +8280,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"quick-lru@npm:^5.1.1":
+"quick-lru@npm:5.1.1":
   version: 5.1.1
   resolution: "quick-lru@npm:5.1.1"
   checksum: fafb2b2fa1a948d6f2e88d4a60571be70b316d9b0be857d24fba0ac28fc31acebf535b643fe968473d689f8c655bcb2a0e4da67912f571059a4e4eb15740b021
@@ -8315,7 +8315,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"rc-progress@npm:^3.1.0":
+"rc-progress@npm:3.1.0":
   version: 3.1.0
   resolution: "rc-progress@npm:3.1.0"
   dependencies:
@@ -8348,7 +8348,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-helmet@npm:^6.1.0":
+"react-helmet@npm:6.1.0":
   version: 6.1.0
   resolution: "react-helmet@npm:6.1.0"
   dependencies:
@@ -8385,7 +8385,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-textarea-autosize@npm:^8.2.0":
+"react-textarea-autosize@npm:8.2.0":
   version: 8.2.0
   resolution: "react-textarea-autosize@npm:8.2.0"
   dependencies:
@@ -8398,7 +8398,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-virtuoso@npm:^0.20.0":
+"react-virtuoso@npm:0.20.0":
   version: 0.20.0
   resolution: "react-virtuoso@npm:0.20.0"
   dependencies:
@@ -8907,7 +8907,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"sanitize.css@npm:^12.0.1":
+"sanitize.css@npm:12.0.1":
   version: 12.0.1
   resolution: "sanitize.css@npm:12.0.1"
   checksum: cb6cf8a406b6190f418e9d734d30872668dfa22809038d3c0ff14a05b1543a8d90e6ae743f69bfdd454a2b1de11c9508ca5877aefd1816155a7ef50524ff4648
@@ -9642,7 +9642,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"styled-jsx@npm:^3.3.0":
+"styled-jsx@npm:3.3.0":
   version: 3.3.0
   resolution: "styled-jsx@npm:3.3.0"
   dependencies:
@@ -9786,7 +9786,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^4.1.0, terser-webpack-plugin@npm:^4.2.3":
+"terser-webpack-plugin@npm:4.2.3, terser-webpack-plugin@npm:^4.1.0":
   version: 4.2.3
   resolution: "terser-webpack-plugin@npm:4.2.3"
   dependencies:
@@ -10000,6 +10000,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"type-fest@npm:0.16.0":
+  version: 0.16.0
+  resolution: "type-fest@npm:0.16.0"
+  checksum: d30834bb1d96f0eb4ec53248d094bc96c026c06873be4f35816dee3812d210a85cbb23e1ac3f231d98c804efedb49aec83752b9b265c3f3aad03e2c23e4f2876
+  languageName: node
+  linkType: hard
+
 "type-fest@npm:^0.10.0":
   version: 0.10.0
   resolution: "type-fest@npm:0.10.0"
@@ -10011,13 +10018,6 @@ fsevents@^1.2.7:
   version: 0.11.0
   resolution: "type-fest@npm:0.11.0"
   checksum: 02e5cadf13590a5724cacf8d9133320efd173f6fb1b695fcb29e56551a315bf0f07ca988a780a1999b7b55bb3eaaa7f37223615207236d393af17bba6749dc95
-  languageName: node
-  linkType: hard
-
-"type-fest@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "type-fest@npm:0.16.0"
-  checksum: d30834bb1d96f0eb4ec53248d094bc96c026c06873be4f35816dee3812d210a85cbb23e1ac3f231d98c804efedb49aec83752b9b265c3f3aad03e2c23e4f2876
   languageName: node
   linkType: hard
 
@@ -10038,7 +10038,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-typescript@^4.1.0-beta:
+typescript@4.1.0-dev.20201011:
   version: 4.1.0-dev.20201011
   resolution: "typescript@npm:4.1.0-dev.20201011"
   bin:
@@ -10048,7 +10048,7 @@ typescript@^4.1.0-beta:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.1.0-beta#builtin<compat/typescript>":
+"typescript@patch:typescript@4.1.0-dev.20201011#builtin<compat/typescript>":
   version: 4.1.0-dev.20201011
   resolution: "typescript@patch:typescript@npm%3A4.1.0-dev.20201011#builtin<compat/typescript>::version=4.1.0-dev.20201011&hash=5bf698"
   bin:
@@ -10402,7 +10402,7 @@ typescript@^4.1.0-beta:
   languageName: node
   linkType: hard
 
-"webpack-bundle-analyzer@npm:^3.9.0":
+"webpack-bundle-analyzer@npm:3.9.0":
   version: 3.9.0
   resolution: "webpack-bundle-analyzer@npm:3.9.0"
   dependencies:
@@ -10425,7 +10425,7 @@ typescript@^4.1.0-beta:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:^4.0.0":
+"webpack-cli@npm:4.0.0":
   version: 4.0.0
   resolution: "webpack-cli@npm:4.0.0"
   dependencies:
@@ -10475,7 +10475,7 @@ typescript@^4.1.0-beta:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:^3.11.0":
+"webpack-dev-server@npm:3.11.0":
   version: 3.11.0
   resolution: "webpack-dev-server@npm:3.11.0"
   dependencies:
@@ -10562,7 +10562,7 @@ typescript@^4.1.0-beta:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.0.0":
+"webpack@npm:5.0.0":
   version: 5.0.0
   resolution: "webpack@npm:5.0.0"
   dependencies:

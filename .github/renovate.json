@@ -3,5 +3,5 @@
   "patch": {
     "automerge": true
   },
-  "commitMessageSuffix": ["skip netlify"]
+  "commitMessageSuffix": ["[skip netlify]"]
 }

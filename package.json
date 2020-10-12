@@ -11,7 +11,8 @@
     "dev": "webpack serve --watch --hot --mode development",
     "build": "rm -rf dist && NODE_ENV=production webpack --mode production --progress --stats-colors",
     "build:ci": "NODE_ENV=production webpack --mode production",
-    "bundle-analyze": "yarn run build --analyze"
+    "bundle-analyze": "yarn run build --analyze",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@linkage-community/bottlemail": "^3.0.0",

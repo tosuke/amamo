@@ -2145,7 +2145,7 @@ __metadata:
     sanitize.css: 12.0.1
     styled-jsx: 3.3.0
     terser-webpack-plugin: 4.2.3
-    type-fest: 0.16.0
+    type-fest: 0.17.0
     typescript: 4.1.0-beta
     webpack: 5.0.0
     webpack-bundle-analyzer: 3.9.0
@@ -10000,10 +10000,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"type-fest@npm:0.16.0":
-  version: 0.16.0
-  resolution: "type-fest@npm:0.16.0"
-  checksum: d30834bb1d96f0eb4ec53248d094bc96c026c06873be4f35816dee3812d210a85cbb23e1ac3f231d98c804efedb49aec83752b9b265c3f3aad03e2c23e4f2876
+"type-fest@npm:0.17.0":
+  version: 0.17.0
+  resolution: "type-fest@npm:0.17.0"
+  checksum: 8f3e758cff7a024768313fc48895758c76768a86906c555a756eaa892ac9742e1809678ab458edd7abf7983f095b6b5fc492bc79938587f2a29bd072dff73ebd
   languageName: node
   linkType: hard
 

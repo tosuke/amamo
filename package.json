@@ -53,6 +53,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
     "css-minimizer-webpack-plugin": "^1.1.5",
+    "dotenv-safe": "^8.2.0",
     "dotenv-webpack": "^3.0.0",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.0.0",

@@ -1,5 +1,6 @@
 const path = require('path');
 const crypto = require('crypto');
+const { config } = require('dotenv-safe');
 const HTMLPlugin = require('html-webpack-plugin');
 const CSSExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -12,6 +13,8 @@ const dev = process.env.NODE_ENV !== 'production';
 
 const TOTAL_PAGES = 4;
 
+const env = config();
+
 /**
  * @type{ import('webpack').Configuration }
  */
@@ -22,6 +25,7 @@ module.exports = {
     buildDependencies: {
       config: [__filename, path.join(__dirname, 'babel.config.js')],
     },
+    version: JSON.stringify(env.parsed) + (process.env.CACHE_VERSION || ''),
   },
   module: {
     rules: [

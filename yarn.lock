@@ -2124,6 +2124,7 @@ __metadata:
     css-loader: ^4.3.0
     css-minimizer-webpack-plugin: ^1.1.5
     dayjs: ^1.8.34
+    dotenv-safe: ^8.2.0
     dotenv-webpack: ^3.0.0
     history: ^5.0.0
     html-webpack-plugin: ^4.5.0
@@ -3981,6 +3982,15 @@ __metadata:
   dependencies:
     dotenv: ^8.2.0
   checksum: 53ac7d987bb9de5d9be0f76040460f398cd56708833143f95ed48732c8d73cf55868d4b368c4eb6dbeba704263da7262623c33557c897f5c06262973477abf0d
+  languageName: node
+  linkType: hard
+
+"dotenv-safe@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "dotenv-safe@npm:8.2.0"
+  dependencies:
+    dotenv: ^8.2.0
+  checksum: 8525ceed5a8ae4a4b9264080a3ad1550cb4c5d8d5990b4772fd62a6d245c01a01f77a540bab4fb16ae0513d9ea804cbaa6d19acb370b5bc68f2d103813c2eb2e
   languageName: node
   linkType: hard
 

@@ -5,7 +5,6 @@ import 'sanitize.css/typography.css';
 import 'sanitize.css/forms.css';
 import './theme.css';
 
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from '@/components/App';
 

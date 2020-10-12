@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect, useState } from 'react';
+import { useRef, useCallback, useEffect, useState, Children, cloneElement } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 // See: https://github.com/petyosi/react-virtuoso/issues/40
@@ -49,10 +49,10 @@ const WindowScrollContainer: NonNullable<React.ComponentProps<typeof Virtuoso>['
       className={className}
       tabIndex={0}
     >
-      {React.Children.map(children, (child, index) => {
+      {Children.map(children, (child, index) => {
         if (index === 0) {
           const c: React.DetailedReactHTMLElement<any, HTMLElement> = child as any;
-          return React.cloneElement(c, {
+          return cloneElement(c, {
             style: {
               ...c.props.style,
               maxHeight: '100vh',
@@ -73,7 +73,7 @@ export const WindowVirtuoso: React.ComponentType<React.ComponentProps<typeof Vir
       setTotalHeight(h);
       totalListHeightChanged?.(h);
     },
-    [totalListHeightChanged]
+    [totalListHeightChanged],
   );
   return (
     <Virtuoso

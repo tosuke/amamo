@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 import css from 'styled-jsx/css';
 import { colors } from '@/theme';
 import TextArea from 'react-textarea-autosize';
@@ -125,7 +125,7 @@ export const SeaPostForm = () => {
   };
   const handleTextChange = useCallback(
     (ev: React.ChangeEvent<HTMLTextAreaElement>) => dispatch({ type: 'textUpdated', text: ev.target.value }),
-    [dispatch]
+    [dispatch],
   );
   useEffect(() => {
     const handleKeypress = (ev: KeyboardEvent) => {

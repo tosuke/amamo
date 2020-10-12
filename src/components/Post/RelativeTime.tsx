@@ -1,6 +1,6 @@
+import { useState, useMemo, useEffect } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { ISO8601DateTime } from '@/models/commons';
-import React, { useState, useMemo, useEffect } from 'react';
 
 type RequestIdleCallbackHandle = any;
 type RequestIdleCallbackOptions = {
@@ -15,7 +15,7 @@ declare global {
   interface Window {
     requestIdleCallback: (
       callback: (deadline: RequestIdleCallbackDeadline) => void,
-      opts?: RequestIdleCallbackOptions
+      opts?: RequestIdleCallbackOptions,
     ) => RequestIdleCallbackHandle;
     cancelIdleCallback: (handle: RequestIdleCallbackHandle) => void;
   }
@@ -81,7 +81,7 @@ export const RelativeTime: React.FC<RelativeTimeProps> = ({ time, timeProvider =
       relativeTimeInterval.subscribe(() => {
         setRelativeTime(calcRelativeTime(dt, timeProvider()));
       }),
-    [dt, timeProvider]
+    [dt, timeProvider],
   );
   return <div title={absoluteTime}>{relativeTime}</div>;
 };

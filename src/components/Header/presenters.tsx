@@ -1,4 +1,3 @@
-import React from 'react';
 import css from 'styled-jsx/css';
 import { SeaUser } from '@/models/SeaUser';
 import { sizes, colors } from '@/theme';

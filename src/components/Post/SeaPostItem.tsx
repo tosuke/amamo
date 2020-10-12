@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment, memo } from 'react';
 import { NodeType } from '@linkage-community/bottlemail';
 import * as pictograph from 'pictograph';
 import { SeaPost } from '@/models/SeaPost';
@@ -45,7 +45,7 @@ const SeaPostBodyText: React.FC<{ readonly postBody: readonly NodeType[] }> = ({
               </span>
             );
           default:
-            return <React.Fragment key={i}>{node.raw}</React.Fragment>;
+            return <Fragment key={i}>{node.raw}</Fragment>;
         }
       })}
     </PostBodyTextWrapper>
@@ -85,7 +85,7 @@ export type SeaPostItemProps = {
   readonly author: SeaUser;
 };
 
-export const SeaPostItem = React.memo<SeaPostItemProps>(function SeaPostItem({ post, author }) {
+export const SeaPostItem = memo<SeaPostItemProps>(function SeaPostItem({ post, author }) {
   const linkToPost = new URL(`posts/${post.id}`, process.env.SEA_URL).href;
   return (
     <PostItemLayout

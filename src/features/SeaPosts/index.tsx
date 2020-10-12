@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react';
+import { useState, useCallback, useEffect, useContext, createContext } from 'react';
 import { useSeaApi, SeaApi, useTrySeaApi } from '@/infra/sea';
 import { Emitter, eventemit } from '@/utils/eventemit';
 import { SeaPost } from '@/models/SeaPost';
@@ -18,7 +18,7 @@ export function usePostToSea(onError?: (err: unknown) => void) {
         setPending(false);
       }
     },
-    [api, onError]
+    [api, onError],
   );
   return {
     pending,
@@ -32,7 +32,7 @@ type SeaPublicTimelineStreamState = Readonly<{
   postStream: Emitter<Readonly<{ post: SeaPost; author: SeaUser }>>;
   unreadCount: number;
 }>;
-const SeaPublicTimelineStreamStateContext = React.createContext<SeaPublicTimelineStreamState>({
+const SeaPublicTimelineStreamStateContext = createContext<SeaPublicTimelineStreamState>({
   connectionState: 'connecting',
   postStream: eventemit<never>()[1],
   unreadCount: 0,

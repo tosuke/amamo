@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from '@/middlewares/router';
 import { DefaultLayout } from './_layout/DefaultLayout';
 import { HeaderPlaceholder } from '../Header/Placeholder';

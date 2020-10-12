@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import { RouterContext } from './RouterContext';
 
 export const Link: React.FC<JSX.IntrinsicElements['a']> = (props) => {
@@ -11,7 +11,7 @@ export const Link: React.FC<JSX.IntrinsicElements['a']> = (props) => {
         history.push(href);
       }
     },
-    [history, href]
+    [history, href],
   );
   return <a onClick={handleClick} {...props} />;
 };

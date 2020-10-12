@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import css from 'styled-jsx/css';
 import clsx from 'clsx';
 import { colors } from '@/theme';

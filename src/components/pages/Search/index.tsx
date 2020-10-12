@@ -1,4 +1,4 @@
-import React, { useState, unstable_useTransition as useTransition, Suspense, useMemo, useEffect } from 'react';
+import { useState, unstable_useTransition as useTransition, Suspense, useMemo, useEffect } from 'react';
 import { debounce } from 'lodash-es';
 import { RedirectToLogin } from '../_commons/RedirectToLogin';
 import { AppContext, isLogined } from '@/app/context';
@@ -67,7 +67,7 @@ const SearchContent: React.FC<NonNullable<ReturnType<typeof getInitialProps>>> =
           handleQueryChange(query);
         }
       }),
-    [history, handleQueryChange]
+    [history, handleQueryChange],
   );
 
   // Workaround for https://github.com/ReactTraining/history/issues/814
@@ -77,7 +77,7 @@ const SearchContent: React.FC<NonNullable<ReturnType<typeof getInitialProps>>> =
         search: '',
       });
     },
-    []
+    [],
   );
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { LoginedAppContext } from '@/app/context';
 import { WindowVirtuoso } from '../WindowVirtuoso';
 import { TimelineContainer, TimelineItem, TimelineFooterItem } from '../presenters';
@@ -50,7 +50,7 @@ export const SeaTimeline = ({ postsPager, postStream }: SeaTimelineProps) => {
       postStream?.subscribe(({ post, author }) => {
         pushPost(post, author);
       }),
-    [postStream, pushPost]
+    [postStream, pushPost],
   );
   return (
     <Timeline posts={posts} users={users} endReached={() => loadNext(30)} loadingNext={loadingNext} hasNext={hasNext} />

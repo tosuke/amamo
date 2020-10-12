@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { useLocation } from '@/middlewares/router';
 import { LoginedAppContext } from '@/app/context';
 import { Loadable } from '@/utils/Loadable';

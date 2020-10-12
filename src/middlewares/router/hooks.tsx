@@ -1,4 +1,4 @@
-import React, {
+import {
   useContext,
   unstable_useTransition as useTransition,
   TimeoutConfig,
@@ -27,7 +27,7 @@ export function useRouter(suspenseConfig: TimeoutConfig = DEFAULT_SUSPENSE_CONFI
     return router.subscribe((nextRoutes) =>
       startTransition(() => {
         setRoutes(nextRoutes);
-      })
+      }),
     );
   }, [router, startTransition]);
 

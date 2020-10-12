@@ -1,5 +1,5 @@
 module.exports = (api) => {
-  const presets = ['@babel/preset-react', '@babel/preset-typescript'];
+  const presets = [['@babel/preset-react', { runtime: 'automatic' }], '@babel/preset-typescript'];
   const plugins = ['@babel/plugin-proposal-class-properties', 'styled-jsx/babel'];
 
   if (api.env('production')) {

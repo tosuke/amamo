@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const colors = Object.freeze({
   textRaw: 'var(--color-text-raw)',
   text: 'var(--color-text)',

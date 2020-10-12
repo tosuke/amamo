@@ -1,4 +1,3 @@
-import React from 'react';
 import { Helmet } from 'react-helmet';
 import { AppContext, isLogined } from '@/app/context';
 import { RedirectToLogin } from '../_commons/RedirectToLogin';

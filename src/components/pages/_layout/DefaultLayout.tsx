@@ -1,4 +1,3 @@
-import React from 'react';
 import { colors } from '@/theme';
 
 export type DefaultLayoutProps = Readonly<{

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { AppContext, isLogined } from '@/app/context';
 import { DefaultLayout } from './_layout/DefaultLayout';
 import { LoginedHeader, getLoginedHeaderInitialProps } from '@/components/Header/LoginedHeader';

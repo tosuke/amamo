@@ -1,4 +1,3 @@
-import React from 'react';
 import { pathToRegexp, Key } from 'path-to-regexp';
 import { AppContext } from '@/app/context';
 
@@ -75,7 +74,7 @@ export interface RouteBuilder {
   addRoute<Props>(
     pathname: string,
     options: RouteOptions<Props>,
-    routes?: (builder: RouteBuilder) => RouteBuilder
+    routes?: (builder: RouteBuilder) => RouteBuilder,
   ): RouteBuilder;
 }
 
@@ -85,7 +84,7 @@ export function createRoutes(buildRoutes: (builder: RouteBuilder) => RouteBuilde
     addRoute<P>(
       pathname: string,
       options: RouteOptions<P>,
-      routes?: (builder: RouteBuilderImpl) => RouteBuilderImpl
+      routes?: (builder: RouteBuilderImpl) => RouteBuilderImpl,
     ): RouteBuilderImpl {
       const children = routes?.(new RouteBuilderImpl([])).routes ?? [];
       return new RouteBuilderImpl([...this.routes, new Route(pathname, options, children)]);

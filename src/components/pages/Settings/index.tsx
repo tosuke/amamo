@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppContext } from '@/app/context';
 
 const AccountSettings: React.FC = () => <form />;

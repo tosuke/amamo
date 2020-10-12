@@ -20,7 +20,7 @@ module.exports = {
   cache: {
     type: 'filesystem',
     buildDependencies: {
-      config: [__filename],
+      config: [__filename, path.join(__dirname, 'babel.config.js')],
     },
   },
   module: {

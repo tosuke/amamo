@@ -211,7 +211,7 @@ export const createSeaApi = ({
       return user;
     },
     async fetchPublicTimeline(
-      payload: Readonly<{ count?: number; since?: SeaPostId; after?: SeaPostId; search?: string }>
+      payload: Readonly<{ count?: number; since?: SeaPostId; after?: SeaPostId; search?: string }>,
     ) {
       const params = new URLSearchParams();
       if (payload.count) params.append('count', `${payload.count}`);
@@ -235,9 +235,9 @@ export const createSeaApi = ({
                 type: 'connect',
                 stream: 'v1/timelines/public',
                 token,
-              })
+              }),
             );
-            res();
+            res(void 0);
           };
           const onError = (ev: Event) => {
             ws.removeEventListener('error', onError);

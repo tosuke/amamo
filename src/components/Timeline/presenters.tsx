@@ -1,4 +1,3 @@
-import React from 'react';
 import { colors } from '@/theme';
 import css from 'styled-jsx/css';
 import { CallbackRef } from 'react-virtuoso/dist/Utils';

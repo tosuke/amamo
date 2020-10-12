@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, lazy } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createRouter, useRouter, RouterProvider, Router, createRoutes } from '@/middlewares/router';
 import { AppContext, createAppContext } from '@/app/context';
@@ -17,38 +17,36 @@ const routes = createRoutes((builder) =>
   builder
     .addRoute('/login', {
       prepare: () => {},
-      component: React.lazy(() => import(/* webpackChunkName: "login" */ '../pages/Login')),
+      component: lazy(() => import(/* webpackChunkName: "login" */ '../pages/Login')),
     })
     .addRoute('/callback', {
       prepare: () => {},
-      component: React.lazy(() => import(/* webpackChunkName: "auth_callback" */ '../pages/AuthCallback')),
+      component: lazy(() => import(/* webpackChunkName: "auth_callback" */ '../pages/AuthCallback')),
     })
     .addRoute(
       '/',
       {
         prepare: (ctx) => Loadable.resolve(loadLoginedRoot().then((mod) => mod.getLoginedRootInitialProps(ctx))),
-        component: React.lazy(loadLoginedRoot),
+        component: lazy(loadLoginedRoot),
       },
       (child) =>
         child
           .addRoute('/', {
             exact: true,
             prepare: (ctx) => Loadable.resolve(loadHome().then((mod) => mod.getInitialProps(ctx))),
-            component: React.lazy(loadHome),
+            component: lazy(loadHome),
           })
           .addRoute('/search', {
             exact: true,
             prepare: (ctx) => Loadable.resolve(loadSearch().then((mod) => mod.getInitialProps(ctx))),
-            component: React.lazy(loadSearch),
+            component: lazy(loadSearch),
           })
           .addRoute('/settings', {
             exact: true,
             prepare: () => {},
-            component: React.lazy(() =>
-              import(/* webpackChunkName: "settings", webpackPrefetch: true*/ '../pages/Settings')
-            ),
-          })
-    )
+            component: lazy(() => import(/* webpackChunkName: "settings", webpackPrefetch: true*/ '../pages/Settings')),
+          }),
+    ),
 );
 
 const NAVIGATION_SUSPENSE_CONFIG: React.TimeoutConfig = { timeoutMs: 3000 };

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import css from 'styled-jsx/css';
 import { colors } from '@/theme';
 
-const Line = React.lazy(() => import(/* webpackChunkName: "logined" */ './Line'));
+const Line = lazy(() => import(/* webpackChunkName: "logined" */ './Line'));
 
 const navigationProgressStyles = css`
   .navigation-progress {

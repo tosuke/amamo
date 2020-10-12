@@ -1564,7 +1564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^14.11.8":
   version: 14.11.8
   resolution: "@types/node@npm:14.11.8"
   checksum: 5139c07ba76d791b4930fa02ec746656dacf78b43c431d56a7514a8285962d0511bf356bee870968a541033c14967b58f7b2a58c48ac81646ce4eb28d2ff433d
@@ -2111,6 +2111,7 @@ __metadata:
     "@linkage-community/bottlemail": ^3.0.0
     "@pmmmwh/react-refresh-webpack-plugin": ^0.4.2
     "@types/lodash-es": ^4.17.3
+    "@types/node": ^14.11.8
     "@types/react": ^16.9.49
     "@types/react-dom": ^16.9.8
     "@types/react-helmet": ^6.1.0
@@ -2144,7 +2145,7 @@ __metadata:
     styled-jsx: ^3.3.0
     terser-webpack-plugin: ^4.2.3
     type-fest: ^0.16.0
-    typescript: ^4.0.2
+    typescript: ^4.1.0-beta
     webpack: ^5.0.0
     webpack-bundle-analyzer: ^3.9.0
     webpack-cli: ^4.0.0
@@ -10027,23 +10028,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-typescript@^4.0.2:
-  version: 4.0.3
-  resolution: "typescript@npm:4.0.3"
+typescript@^4.1.0-beta:
+  version: 4.1.0-dev.20201011
+  resolution: "typescript@npm:4.1.0-dev.20201011"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 5c892e132756a83d22030d7fb38be47cde27613f71d233dbe7faf79e4a92852c5146bfddcaf8c2da1a37d35ae8bf7b8c888fdcd763d5ad184cea6b21e7466838
+  checksum: 2e4c133d1e2c821c6375f7e8cf7606e63ea3b5bf1ae275646be8fb2d448b4b0219ba4885fcb7b06b4c67a81a5eeb2ba83f52ba09b9aef29f1d08ede846828e47
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.0.2#builtin<compat/typescript>":
-  version: 4.0.3
-  resolution: "typescript@patch:typescript@npm%3A4.0.3#builtin<compat/typescript>::version=4.0.3&hash=5bf698"
+"typescript@patch:typescript@^4.1.0-beta#builtin<compat/typescript>":
+  version: 4.1.0-dev.20201011
+  resolution: "typescript@patch:typescript@npm%3A4.1.0-dev.20201011#builtin<compat/typescript>::version=4.1.0-dev.20201011&hash=5bf698"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 72db87d09f728c83062d64b5e12ed52effb6278963b6bc5c006219b22c104e02b8ce80164261de554923d3c47d894a1ca937ed542328caccb83ebaedeae98a69
+  checksum: 9215a5c07a0d3e806704c12f4db6a619b78962b93c8e12677a74aaea02fe4f3ba3d2454c68a4cec070acb7b3ff2929ebb791cd852204937dad0da0d1e9a4a07d
   languageName: node
   linkType: hard
 

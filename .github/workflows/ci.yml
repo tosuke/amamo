@@ -58,10 +58,3 @@ jobs:
           API_ROOT: ${{ secrets.API_ROOT }}
           WS_ROOT: ${{ secrets.WS_ROOT }}
           SEA_URL: ${{ secrets.SEA_URL }}
-      - name: Size Check
-        uses: preactjs/compressed-size-action@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: './dist/**/*'
-        env:
-          CHUNK_NAME: full

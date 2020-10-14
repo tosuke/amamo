@@ -49,4 +49,19 @@ jobs:
           path: .yarn/.cache
           key: v1-cache
       - name: Build
-        run: yarn build
+        run: yarn build:ci
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          AUTH_ROOT: ${{ secrets.AUTH_ROOT }}
+          AUTH_PROXY: ${{ secrets.AUTH_PROXY }}
+          API_ROOT: ${{ secrets.API_ROOT }}
+          WS_ROOT: ${{ secrets.WS_ROOT }}
+          SEA_URL: ${{ secrets.SEA_URL }}
+      - name: Size Check
+        uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: './dist/**/*'
+        env:
+          CHUNK_NAME: full

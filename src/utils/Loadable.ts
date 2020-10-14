@@ -20,7 +20,7 @@ export class Loadable<T> implements PromiseLike<T> {
     if (state.state === 'pending') {
       state.promise.then(
         (value) => (this.state = { state: 'fulfilled', value }),
-        (error) => (this.state = { state: 'rejected', error })
+        (error) => (this.state = { state: 'rejected', error }),
       );
     }
   }
@@ -80,7 +80,7 @@ export class Loadable<T> implements PromiseLike<T> {
 
   public then<TResult1 = T, TResult2 = never>(
     onFulfilled: (value: T) => TResult1 | PromiseLike<TResult1>,
-    onRejected?: (error: unknown) => TResult2 | PromiseLike<TResult2>
+    onRejected?: (error: unknown) => TResult2 | PromiseLike<TResult2>,
   ): Loadable<TResult1 | TResult2> {
     try {
       switch (this.state.state) {

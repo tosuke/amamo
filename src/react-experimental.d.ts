@@ -125,7 +125,7 @@ declare module 'react' {
 
   export function unstable_createMutableSource<Source>(
     source: Source,
-    getVersion: MutableSourceGetVersionFn
+    getVersion: MutableSourceGetVersionFn,
   ): MutableSource<Source>;
 
   /**
@@ -137,6 +137,6 @@ declare module 'react' {
   export function unstable_useMutableSource<Source, Snapshot>(
     source: MutableSource<Source>,
     getSnapshot: MutableSourceGetSnapshotFn<Source, Snapshot>,
-    subscribe: MutableSourceSubscribeFn<Source>
+    subscribe: MutableSourceSubscribeFn<Source>,
   ): Snapshot;
 }

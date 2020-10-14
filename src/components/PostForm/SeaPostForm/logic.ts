@@ -35,7 +35,7 @@ export function usePostForm() {
           return prev;
       }
     },
-    { text: '' }
+    { text: '' },
   );
   const disabled = state.text.length === 0;
 

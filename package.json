@@ -12,7 +12,8 @@
     "build": "rm -rf dist && NODE_ENV=production webpack --mode production --progress --stats-colors",
     "build:ci": "NODE_ENV=production webpack --mode production",
     "bundle-analyze": "yarn run build --analyze",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@linkage-community/bottlemail": "3.0.0",
@@ -57,6 +58,7 @@
     "dotenv-webpack": "3.0.0",
     "html-webpack-plugin": "4.5.0",
     "mini-css-extract-plugin": "1.0.0",
+    "prettier": "^2.1.2",
     "react-refresh": "experimental",
     "terser-webpack-plugin": "4.2.3",
     "type-fest": "0.17.0",

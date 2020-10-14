@@ -19,7 +19,7 @@ type Pager = Readonly<{
 export const createPager = (api: SeaApi, query?: string): Pager => {
   const fetchPublicTimeline = async (payload: Parameters<SeaApi['fetchPublicTimeline']>[0]) => {
     const { posts, users: userList } = await api.fetchPublicTimeline(
-      query != null ? { ...payload, search: query } : payload
+      query != null ? { ...payload, search: query } : payload,
     );
     const users = userList.reduce((pre, u) => ({ ...pre, [u.id]: u }), {} as Record<number, SeaUser>);
     return {

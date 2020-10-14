@@ -2,6 +2,7 @@
 /dist
 /.yarn/*
 !/.yarn/releases
+!/.yarn/sdks
 !/.yarn/plugins
 .pnp.*
 *.log

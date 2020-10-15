@@ -24,13 +24,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install --immutable
-      - uses: actions/cache@v2
+      - name: TypeScript Cache
+        uses: actions/cache@v2
         with:
-          path: .yarn/.cache
-          key: cache-v1-${{ github.ref }}-${{ github.sha }}
+          path: .yarn/.cache/tsconfig.tsbuildinfo
+          key: typescript-${{ github.ref }}-${{ github.sha }}
           restore-keys: |
-            cache-v1-${{ github.ref }}-
-            cache-v1
+            typescript-${{ github.ref }}-
+            typescript-
       - name: Lint
         run: yarn lint
       - name: Type Check
@@ -50,14 +51,15 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn install --immutable
-      - uses: actions/cache@v2
+      - name: Webpack Cache
+        uses: actions/cache@v2
         with:
-          path: .yarn/.cache
-          key: cache-v1-${{ github.ref }}-${{ github.sha }}
+          path: .yarn/.cache/webpack
+          key: webpack-${{ github.ref }}-${{ github.sha }}
           restore-keys: |
-            cache-v1-${{ github.ref }}-
-            cache-v1-
+            webpack-${{ github.ref }}-
+            webpack-
+      - run: yarn install --immutable
       - name: Build(Dev)
         if: github.event_name == 'pull_request'
         run: yarn build:ci

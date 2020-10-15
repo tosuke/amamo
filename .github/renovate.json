@@ -1,7 +1,3 @@
 {
-  "extends": ["config:base"],
-  "patch": {
-    "automerge": true
-  },
-  "commitMessageSuffix": ["[skip netlify]"]
+  "extends": ["config:base"]
 }

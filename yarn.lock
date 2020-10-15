@@ -2479,7 +2479,7 @@ __metadata:
     styled-jsx: 3.3.0
     terser-webpack-plugin: 4.2.3
     type-fest: 0.18.0
-    typescript: 4.1.0-dev.20201014
+    typescript: 4.1.0-dev.20201015
     webpack: 5.1.0
     webpack-bundle-analyzer: 3.9.0
     webpack-cli: 4.0.0
@@ -10405,23 +10405,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-typescript@4.1.0-dev.20201014:
-  version: 4.1.0-dev.20201014
-  resolution: "typescript@npm:4.1.0-dev.20201014"
+typescript@4.1.0-dev.20201015:
+  version: 4.1.0-dev.20201015
+  resolution: "typescript@npm:4.1.0-dev.20201015"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 625f4b47f0111f9e223dbc28ab3b04aae55c23ebf5843bb3ed5eef981731961d30120a16186d2ae7d41db44d491e970b5f0717fd5105ef46a36d679da3dd9753
+  checksum: 8ad179e6eaf7353764fe62cf93e2c5c16941a95341dd70749098e9fe82ca17d6ffeb689da11e4b3ddbdc0f9c6abf6a637c518ede66c65dcd17758f5580593d92
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.1.0-dev.20201014#builtin<compat/typescript>":
-  version: 4.1.0-dev.20201014
-  resolution: "typescript@patch:typescript@npm%3A4.1.0-dev.20201014#builtin<compat/typescript>::version=4.1.0-dev.20201014&hash=5bf698"
+"typescript@patch:typescript@4.1.0-dev.20201015#builtin<compat/typescript>":
+  version: 4.1.0-dev.20201015
+  resolution: "typescript@patch:typescript@npm%3A4.1.0-dev.20201015#builtin<compat/typescript>::version=4.1.0-dev.20201015&hash=5bf698"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2b85c2a5b99bc47e01c3a8d7c03bddcf70ff3831483be7b7d1a0c4ffce38f0049d3bf01eb8af4d42e616e10bda17cd75d8ea1d8fbdf837a5f8682390ca75e3f6
+  checksum: 8f4fc4542574f452991ada2447a382fa61b8a1b91c421573b3242aaab4ca597f12bf703d07ddb908ec046e892833ea65f5270b4936fd668a8db8c0aa5464b606
   languageName: node
   linkType: hard
 

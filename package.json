@@ -59,7 +59,7 @@
     "dotenv-webpack": "3.0.0",
     "html-webpack-plugin": "4.5.0",
     "mini-css-extract-plugin": "1.0.0",
-    "prettier": "^2.1.2",
+    "prettier": "2.1.2",
     "react-refresh": "experimental",
     "terser-webpack-plugin": "4.2.3",
     "type-fest": "0.17.0",

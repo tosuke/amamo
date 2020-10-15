@@ -21,11 +21,17 @@ jobs:
             .yarn/cache
             .pnp.js
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - run: yarn install --immutable
-      - uses: actions/cache@v2
+      - name: TypeScript Cache
+        uses: actions/cache@v2
         with:
-          path: .yarn/.cache
-          key: v1-cache
+          path: .yarn/.cache/tsconfig.tsbuildinfo
+          key: typescript-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            typescript-${{ github.ref }}-
+            typescript-
       - name: Lint
         run: yarn lint
       - name: Type Check
@@ -43,18 +49,36 @@ jobs:
             .yarn/cache
             .pnp.js
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-      - run: yarn install --immutable
-      - uses: actions/cache@v2
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Webpack Cache
+        uses: actions/cache@v2
         with:
-          path: .yarn/.cache
-          key: v1-cache
-      - name: Build
+          path: .yarn/.cache/webpack
+          key: webpack-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            webpack-${{ github.ref }}-
+            webpack-
+      - run: yarn install --immutable
+      - name: Build(Dev)
+        if: github.event_name == 'pull_request'
         run: yarn build:ci
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          AUTH_ROOT: ${{ secrets.AUTH_ROOT }}
-          AUTH_PROXY: ${{ secrets.AUTH_PROXY }}
+          OAUTH_TOKEN_URL: ${{ secrets.OAUTH_TOKEN_URL }}
+          OAUTH_AUTHORIZE_URL: ${{ secrets.OAUTH_AUTHORIZE_URL_DEV }}
+          API_ROOT: ${{ secrets.API_ROOT }}
+          WS_ROOT: ${{ secrets.WS_ROOT }}
+          SEA_URL: ${{ secrets.SEA_URL }}
+      - name: Build(Prod)
+        if: github.event_name == 'push'
+        run: yarn build:ci
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          OAUTH_TOKEN_URL: ${{ secrets.OAUTH_TOKEN_URL }}
+          OAUTH_AUTHORIZE_URL: ${{ secrets.OAUTH_AUTHORIZE_URL }}
           API_ROOT: ${{ secrets.API_ROOT }}
           WS_ROOT: ${{ secrets.WS_ROOT }}
           SEA_URL: ${{ secrets.SEA_URL }}

@@ -21,11 +21,16 @@ jobs:
             .yarn/cache
             .pnp.js
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - run: yarn install --immutable
       - uses: actions/cache@v2
         with:
           path: .yarn/.cache
-          key: v1-cache
+          key: cache-v1-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            cache-v1-${{ github.ref }}-
+            cache-v1
       - name: Lint
         run: yarn lint
       - name: Type Check
@@ -43,18 +48,35 @@ jobs:
             .yarn/cache
             .pnp.js
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - run: yarn install --immutable
       - uses: actions/cache@v2
         with:
           path: .yarn/.cache
-          key: v1-cache
-      - name: Build
+          key: cache-v1-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            cache-v1-${{ github.ref }}-
+            cache-v1-
+      - name: Build(Dev)
+        if: github.event_name == 'pull_request'
         run: yarn build:ci
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          AUTH_ROOT: ${{ secrets.AUTH_ROOT }}
-          AUTH_PROXY: ${{ secrets.AUTH_PROXY }}
+          OAUTH_TOKEN_URL: ${{ secrets.OAUTH_TOKEN_URL }}
+          OAUTH_AUTHORIZE_URL: ${{ secrets.OAUTH_AUTHORIZE_URL_DEV }}
+          API_ROOT: ${{ secrets.API_ROOT }}
+          WS_ROOT: ${{ secrets.WS_ROOT }}
+          SEA_URL: ${{ secrets.SEA_URL }}
+      - name: Build(Prod)
+        if: github.event_name == 'push'
+        run: yarn build:ci
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          OAUTH_TOKEN_URL: ${{ secrets.OAUTH_TOKEN_URL }}
+          OAUTH_AUTHORIZE_URL: ${{ secrets.OAUTH_AUTHORIZE_URL }}
           API_ROOT: ${{ secrets.API_ROOT }}
           WS_ROOT: ${{ secrets.WS_ROOT }}
           SEA_URL: ${{ secrets.SEA_URL }}

@@ -17,7 +17,7 @@ const Login = () => {
         <h1>認証!!</h1>
         <h2>
           <a href={url} onClick={handleClick}>
-            Auth with {new URL(process.env.AUTH_ROOT!).host}
+            Auth with {new URL(process.env.SEA_URL!).host}
           </a>
         </h2>
       </div>

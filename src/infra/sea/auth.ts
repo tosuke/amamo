@@ -7,7 +7,7 @@ const ACCESS_TOKEN = 'amamo:access_token';
 
 export function useAuthorizeUrl() {
   const state = nanoid();
-  const url = `${process.env.AUTH_PROXY}?state=${state}&response_type=code&client_id=${process.env.CLIENT_ID}`;
+  const url = `${process.env.OAUTH_AUTHORIZE_URL}?state=${state}&response_type=code&client_id=${process.env.CLIENT_ID}`;
 
   const handleClick = useCallback(() => {
     window.localStorage.setItem(AUTH_STATE, state);
@@ -25,7 +25,7 @@ export async function handleAuthCallback(state: string, code: string) {
     if (savedState == null || savedState !== state) throw new Error('invalid state');
 
     // FIXME: kyを使うとiOS Safariで壊れる
-    const result = await fetch(process.env.AUTH_ROOT + '/token', {
+    const result = await fetch(process.env.OAUTH_TOKEN_URL!, {
       method: 'POST',
       body: new URLSearchParams({
         client_id: process.env.CLIENT_ID!,

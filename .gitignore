@@ -8,3 +8,4 @@
 .pnp.*
 *.log
 .env
+.vercel

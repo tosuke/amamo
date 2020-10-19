@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect, lazy } from 'react';
+import { Suspense, SuspenseConfig, useState, useEffect, lazy } from 'react';
 import { ColorTheme, GlobalStyles } from '@/theme';
 import { createRouter, useRouter, RouterProvider, Router, createRoutes } from '@/middlewares/router';
 import { AppContext, createAppContext } from '@/app/context';
@@ -49,7 +49,7 @@ const routes = createRoutes((builder) =>
     ),
 );
 
-const NAVIGATION_SUSPENSE_CONFIG: React.TimeoutConfig = { timeoutMs: 3000 };
+const NAVIGATION_SUSPENSE_CONFIG: SuspenseConfig = { timeoutMs: 3000 };
 
 const AppContent: React.FC = () => {
   const { node, isPending } = useRouter(NAVIGATION_SUSPENSE_CONFIG);

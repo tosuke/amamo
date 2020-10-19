@@ -1,4 +1,4 @@
-import { useState, unstable_useTransition as useTransition, Suspense, useMemo, useEffect } from 'react';
+import { useState, unstable_useTransition as useTransition, Suspense, useMemo, useEffect, SuspenseConfig } from 'react';
 import { debounce } from 'lodash-es';
 import { RedirectToLogin } from '../_commons/RedirectToLogin';
 import { AppContext, isLogined } from '@/app/context';
@@ -35,7 +35,7 @@ const SearchPlaceholder: React.FC = ({ children }) => (
   </div>
 );
 
-const SUSPENSE_CONFIG: React.TimeoutConfig = { timeoutMs: 1500 };
+const SUSPENSE_CONFIG: SuspenseConfig = { timeoutMs: 1500 };
 const SearchContent: React.FC<NonNullable<ReturnType<typeof getInitialProps>>> = ({ initialPager, initialQuery }) => {
   const api = useSeaApi();
   const history = useHistory();

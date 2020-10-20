@@ -58,7 +58,7 @@
     "dotenv-safe": "8.2.0",
     "dotenv-webpack": "3.0.0",
     "html-webpack-plugin": "4.5.0",
-    "mini-css-extract-plugin": "1.0.0",
+    "mini-css-extract-plugin": "1.1.0",
     "prettier": "2.1.2",
     "react-refresh": "experimental",
     "terser-webpack-plugin": "5.0.0",

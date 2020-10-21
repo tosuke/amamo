@@ -2022,7 +2022,7 @@ __metadata:
     pictograph: 2.3.0
     prettier: 2.1.2
     quick-lru: 5.1.1
-    rc-progress: 3.1.0
+    rc-progress: 3.1.1
     react: experimental
     react-dom: experimental
     react-helmet: 6.1.0
@@ -6969,16 +6969,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"rc-progress@npm:3.1.0":
-  version: 3.1.0
-  resolution: "rc-progress@npm:3.1.0"
+"rc-progress@npm:3.1.1":
+  version: 3.1.1
+  resolution: "rc-progress@npm:3.1.1"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: ^2.2.6
   peerDependencies:
-    react: ^16.0.0
-    react-dom: ^16.0.0
-  checksum: ec596087687e00ca2e28aedb8165e5a8a55bb9d9e957e80755c88adda61475bfd30a12ae2c5a5cb81773a51de06394379dc120dcb032f5242c73a71fbcf03d35
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: a2933d413c745845d60cc7107639a6a5e796fe3820e1d4417b4cc0c394dfcd811198a23ebd42fb7450bb85aeed3a883a5534c3f81c63352d7ce33dc65ef52345
   languageName: node
   linkType: hard
 

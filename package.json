@@ -28,7 +28,7 @@
     "path-to-regexp": "6.2.0",
     "pictograph": "2.3.0",
     "quick-lru": "5.1.1",
-    "rc-progress": "3.1.0",
+    "rc-progress": "3.1.1",
     "react": "experimental",
     "react-dom": "experimental",
     "react-helmet": "6.1.0",

@@ -2016,7 +2016,7 @@ __metadata:
     html-webpack-plugin: 4.5.0
     ky: 0.24.0
     lodash-es: 4.17.15
-    mini-css-extract-plugin: 1.1.0
+    mini-css-extract-plugin: 1.1.2
     nanoid: 3.1.14
     path-to-regexp: 6.2.0
     pictograph: 2.3.0
@@ -5596,16 +5596,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mini-css-extract-plugin@npm:1.1.0":
-  version: 1.1.0
-  resolution: "mini-css-extract-plugin@npm:1.1.0"
+"mini-css-extract-plugin@npm:1.1.2":
+  version: 1.1.2
+  resolution: "mini-css-extract-plugin@npm:1.1.2"
   dependencies:
     loader-utils: ^2.0.0
     schema-utils: ^3.0.0
     webpack-sources: ^1.1.0
   peerDependencies:
     webpack: ^4.4.0 || ^5.0.0
-  checksum: 39be1e2815057ee1011a518b30169a9b4853368f789511ee66bb672fc5bf58482a88b4c5581165ea80afc0031a1995e900e7a769114c1a005219e78e59388995
+  checksum: 67566a5d980f9b1dedcb79759f43fd3790bf618d01f982349f29998b47f6c5c74a53ebe59087f71dd0ff42452f7003a4e5fc0652ff6b009ab45a8e0f48fea366
   languageName: node
   linkType: hard
 

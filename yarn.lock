@@ -2030,7 +2030,7 @@ __metadata:
     react-textarea-autosize: 8.2.0
     react-virtuoso: 0.20.0
     sanitize.css: 12.0.1
-    styled-jsx: 3.3.0
+    styled-jsx: 3.3.1
     terser-webpack-plugin: 5.0.1
     type-fest: 0.18.0
     typescript: 4.1.0-dev.20201015
@@ -8034,9 +8034,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"styled-jsx@npm:3.3.0":
-  version: 3.3.0
-  resolution: "styled-jsx@npm:3.3.0"
+"styled-jsx@npm:3.3.1":
+  version: 3.3.1
+  resolution: "styled-jsx@npm:3.3.1"
   dependencies:
     "@babel/types": 7.8.3
     babel-plugin-syntax-jsx: 6.18.0
@@ -8047,8 +8047,8 @@ fsevents@^1.2.7:
     stylis: 3.5.4
     stylis-rule-sheet: 0.0.10
   peerDependencies:
-    react: 15.x.x || 16.x.x
-  checksum: 1a90d2f566bf69b44f86eca7d3afc099a346df4dd10be1ff2f5cb3ac178fe0dacb163248114957f82c026b13198c834a4d6ed6fe786e56be27d6dbe6d01cdc1c
+    react: 15.x.x || 16.x.x || 17.x.x
+  checksum: f43acf61308e2e6bf7a62ab99c6bdb98ccfbbba6207ea53cc012ffcf741b47e1a595448a2310ffa13f49e7e5cf6f26a3fa1aea9d770e1532c665afeaf2350120
   languageName: node
   linkType: hard
 

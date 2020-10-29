@@ -2034,7 +2034,7 @@ __metadata:
     terser-webpack-plugin: 5.0.3
     type-fest: 0.18.0
     typescript: 4.1.0-dev.20201015
-    webpack: 5.3.0
+    webpack: 5.3.1
     webpack-bundle-analyzer: 3.9.0
     webpack-cli: 4.1.0
     webpack-dev-server: 3.11.0
@@ -5144,7 +5144,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-worker@npm:^26.3.0, jest-worker@npm:^26.5.0":
+"jest-worker@npm:^26.3.0":
   version: 26.5.0
   resolution: "jest-worker@npm:26.5.0"
   dependencies:
@@ -8169,7 +8169,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:5.0.3":
+"terser-webpack-plugin@npm:5.0.3, terser-webpack-plugin@npm:^5.0.3":
   version: 5.0.3
   resolution: "terser-webpack-plugin@npm:5.0.3"
   dependencies:
@@ -8185,22 +8185,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "terser-webpack-plugin@npm:5.0.0"
-  dependencies:
-    jest-worker: ^26.5.0
-    p-limit: ^3.0.2
-    schema-utils: ^3.0.0
-    serialize-javascript: ^5.0.1
-    source-map: ^0.6.1
-    terser: ^5.3.5
-  peerDependencies:
-    webpack: ^5.1.0
-  checksum: 806b5b9651ebb7893b093ca199b291350d1528fae5c3e7671a3b685810d6c3c6607d9bb0cb5950cb4dfdf013f5675a3849861fd352c653cc7644909a67f27c4b
-  languageName: node
-  linkType: hard
-
 "terser@npm:^4.6.3":
   version: 4.8.0
   resolution: "terser@npm:4.8.0"
@@ -8211,19 +8195,6 @@ fsevents@^1.2.7:
   bin:
     terser: bin/terser
   checksum: d7ab95898b40e2aa3513b02fc74f520f8e65072a19d7f687b8224af01512ad4d2227bc1375c22cd050f67eb1ca3e440b4f09652c5f48f13ed9ee81c0c26015a3
-  languageName: node
-  linkType: hard
-
-"terser@npm:^5.3.5":
-  version: 5.3.5
-  resolution: "terser@npm:5.3.5"
-  dependencies:
-    commander: ^2.20.0
-    source-map: ~0.7.2
-    source-map-support: ~0.5.19
-  bin:
-    terser: bin/terser
-  checksum: a30a6d41d3737c626b000f672161f3b66fbe4a7daa2f7e0b9c1441a5a44424439865c412d455d5b47bac2a029ced7c698a46cfc146e43db5504b6b582ee692f5
   languageName: node
   linkType: hard
 
@@ -8827,19 +8798,19 @@ typescript@4.1.0-dev.20201015:
   languageName: node
   linkType: hard
 
-"webpack-sources@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "webpack-sources@npm:2.1.0"
+"webpack-sources@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "webpack-sources@npm:2.1.1"
   dependencies:
     source-list-map: ^2.0.1
     source-map: ^0.6.1
-  checksum: 3950d59661b33ecbfaa0dc4d96a118f2d5e6f9f1b3a24ba5cdb0575758745698035949beac486f52a9e9a69bd94dce5f5a138125632117b1ab708220929e9cda
+  checksum: dd0313ca09ca22c55cf31092943ad7a4853a2256ca4a85af3b3d622171b09b6a2b54d62b465841ae453a87c93b4760cf3780c6a5b596bb4af414a8509338ebd7
   languageName: node
   linkType: hard
 
-"webpack@npm:5.3.0":
-  version: 5.3.0
-  resolution: "webpack@npm:5.3.0"
+"webpack@npm:5.3.1":
+  version: 5.3.1
+  resolution: "webpack@npm:5.3.1"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.45
@@ -8862,15 +8833,15 @@ typescript@4.1.0-dev.20201015:
     pkg-dir: ^4.2.0
     schema-utils: ^3.0.0
     tapable: ^2.0.0
-    terser-webpack-plugin: ^5.0.0
+    terser-webpack-plugin: ^5.0.3
     watchpack: ^2.0.0
-    webpack-sources: ^2.1.0
+    webpack-sources: ^2.1.1
   peerDependenciesMeta:
     webpack-cli:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 039d91f1ea7f64d8258d94caf17ac65d5880a1b6474aec2ed8ace109b863fbad9fcf427e14a59d15a7ca61d72248e259a72e4e227fe716685882c7f77ac77fe8
+  checksum: a3e4155261d69a06c225e523c8a581ead5ce3e2009c88277a3e667b6b2a2564ecca761bf8b3144ec64bd652144ac5189f4f058bc6ea7c9e4739829ea9260a2f9
   languageName: node
   linkType: hard
 

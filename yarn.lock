@@ -2011,7 +2011,7 @@ __metadata:
     css-minimizer-webpack-plugin: 1.1.5
     dayjs: 1.9.4
     dotenv-safe: 8.2.0
-    dotenv-webpack: 3.0.0
+    dotenv-webpack: 5.0.0
     history: 5.0.0
     html-webpack-plugin: 4.5.0
     ky: 0.24.0
@@ -3530,14 +3530,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-webpack@npm:3.0.0":
-  version: 3.0.0
-  resolution: "dotenv-webpack@npm:3.0.0"
+"dotenv-webpack@npm:5.0.0":
+  version: 5.0.0
+  resolution: "dotenv-webpack@npm:5.0.0"
   dependencies:
     dotenv-defaults: ^2.0.1
   peerDependencies:
     webpack: ^1 || ^2 || ^3 || ^4 || ^5
-  checksum: 38d555df551cb27e349d0bea55ada0c9d33245bd4aad10102575570a0b41b18e8743a5b9e5de8200aebf2dfb58a307f10e4aca33bd32774a949007b07ceb98c2
+  checksum: 3b449db886ef3077834b589e642cb7f2144b69e219728af55338aae89962bd0b8ca09e87c86bf90732a5299c34f9a589112285fbb048f8c960ca36aa81130bad
   languageName: node
   linkType: hard
 

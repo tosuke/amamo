@@ -1410,9 +1410,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pmmmwh/react-refresh-webpack-plugin@npm:0.4.2":
-  version: 0.4.2
-  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.4.2"
+"@pmmmwh/react-refresh-webpack-plugin@npm:0.4.3":
+  version: 0.4.3
+  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.4.3"
   dependencies:
     ansi-html: ^0.0.7
     error-stack-parser: ^2.0.6
@@ -1422,7 +1422,7 @@ __metadata:
     source-map: ^0.7.3
   peerDependencies:
     "@types/webpack": 4.x
-    react-refresh: ^0.8.3
+    react-refresh: ">=0.8.3 <0.10.0"
     sockjs-client: ^1.4.0
     type-fest: ^0.13.1
     webpack: ">=4.43.0 <6.0.0"
@@ -1442,7 +1442,7 @@ __metadata:
       optional: true
     webpack-plugin-serve:
       optional: true
-  checksum: cd70f32552ba053dbeefe605027c8fd97e435c0ff6d4cddb5e367d02444e3ed04f1d7fb9dca516780788c2cb17c640dcd353f0ec60412cd774f1bf0ce2d34f8a
+  checksum: 718853bf7b8a517616e1b136d698fdd600998c667b556982c7f460ba628da7575248f1c75a3b2b8fe0e2a458121c81039038d25ed1c79f4517c783e407417585
   languageName: node
   linkType: hard
 
@@ -1995,7 +1995,7 @@ __metadata:
     "@babel/preset-react": 7.12.1
     "@babel/preset-typescript": 7.12.1
     "@linkage-community/bottlemail": 3.0.0
-    "@pmmmwh/react-refresh-webpack-plugin": 0.4.2
+    "@pmmmwh/react-refresh-webpack-plugin": 0.4.3
     "@types/lodash-es": 4.17.3
     "@types/node": 14.14.6
     "@types/react": 16.9.55

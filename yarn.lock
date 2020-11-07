@@ -2028,7 +2028,7 @@ __metadata:
     react-helmet: 6.1.0
     react-refresh: experimental
     react-textarea-autosize: 8.2.0
-    react-virtuoso: 0.20.0
+    react-virtuoso: 0.20.1
     sanitize.css: 12.0.1
     styled-jsx: 3.3.1
     terser-webpack-plugin: 5.0.3
@@ -7072,15 +7072,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-virtuoso@npm:0.20.0":
-  version: 0.20.0
-  resolution: "react-virtuoso@npm:0.20.0"
+"react-virtuoso@npm:0.20.1":
+  version: 0.20.1
+  resolution: "react-virtuoso@npm:0.20.1"
   dependencies:
     resize-observer-polyfill: ^1.5.1
     tslib: ^1.11.1
   peerDependencies:
     react: ">=16"
-  checksum: cfbff9e88fe6379b8f78a35900b73f4f9067bf3bf06002bf48ae44e35a22f1d8222e4429a73936f6bd66ba8ae79d8e9bb854a3319460a5710a034152af5ea103
+  checksum: 186e6f208cab2abb3fd09217e62cf84ad46f3f92859327ebb352d2bd36dc0f70655a64be627f94836ed4f0e8faf51d0d43eb1f685aadf634eee386fc58e19d53
   languageName: node
   linkType: hard
 

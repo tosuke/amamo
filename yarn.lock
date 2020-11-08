@@ -2018,7 +2018,7 @@ __metadata:
     react-dom: experimental
     react-helmet: 6.1.0
     react-refresh: experimental
-    react-textarea-autosize: 8.2.0
+    react-textarea-autosize: 8.3.0
     react-virtuoso: 0.20.1
     sanitize.css: 12.0.1
     styled-jsx: 3.3.1
@@ -7093,16 +7093,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-textarea-autosize@npm:8.2.0":
-  version: 8.2.0
-  resolution: "react-textarea-autosize@npm:8.2.0"
+"react-textarea-autosize@npm:8.3.0":
+  version: 8.3.0
+  resolution: "react-textarea-autosize@npm:8.3.0"
   dependencies:
     "@babel/runtime": ^7.10.2
     use-composed-ref: ^1.0.0
     use-latest: ^1.0.0
   peerDependencies:
-    react: ^16.8.0
-  checksum: 27d83f57c59254366cb13255d3a7771813bf771f2f5b14c273497dbf80d26dc6c4f646feeff8b789c18a0c313ad04d9ba26a63fb5a9e4cfeaffc0569cc224643
+    react: ^16.8.0 || ^17.0.0
+  checksum: c60b553a8ab343e5dc40a32fdda59a558a55f3c46ab392728f7dfde17c68e2293189557ba0669cee57b21f1956f83eb77a36f85c2970c8920feaf01712e1bd69
   languageName: node
   linkType: hard
 

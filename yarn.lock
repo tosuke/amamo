@@ -1870,19 +1870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webpack-cli/serve@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@webpack-cli/serve@npm:1.0.1"
-  peerDependencies:
-    webpack-cli: 4.x.x
-  peerDependenciesMeta:
-    webpack-dev-server:
-      optional: true
-  checksum: d1dd4fb204a1937a7a2340d466b0e45ab0370fbf933244caa662627bc991893678755779b6d8e8c0775827c9dfb2b58274f58c948799f8c5efa80c83b4eb17b7
-  languageName: node
-  linkType: hard
-
-"@webpack-cli/serve@npm:^1.1.0":
+"@webpack-cli/serve@npm:1.1.0, @webpack-cli/serve@npm:^1.1.0":
   version: 1.1.0
   resolution: "@webpack-cli/serve@npm:1.1.0"
   peerDependencies:
@@ -2006,7 +1994,7 @@ __metadata:
     "@types/react-helmet": 6.1.0
     "@types/react-router-config": 5.0.1
     "@types/styled-jsx": 2.2.8
-    "@webpack-cli/serve": 1.0.1
+    "@webpack-cli/serve": 1.1.0
     babel-loader: 8.1.0
     clsx: 1.1.1
     core-js: 3.7.0

@@ -52,7 +52,7 @@
     "@types/react-router-config": "5.0.1",
     "@types/styled-jsx": "2.2.8",
     "@webpack-cli/serve": "1.1.0",
-    "babel-loader": "8.1.0",
+    "babel-loader": "8.2.1",
     "css-loader": "5.0.1",
     "css-minimizer-webpack-plugin": "1.1.5",
     "dotenv-safe": "8.2.0",

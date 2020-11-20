@@ -1611,13 +1611,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:16.9.56":
-  version: 16.9.56
-  resolution: "@types/react@npm:16.9.56"
+"@types/react@npm:16.14.0":
+  version: 16.14.0
+  resolution: "@types/react@npm:16.14.0"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
-  checksum: 139867e2b3d577723b9361234f105d0cf1b143202f51fef207355332f972dd74030cfb3918037cb311eefd203ee06e0a370c37755204eefdd35734f0fde070a1
+  checksum: 007fc9a3d4528516f65d52e9095096b709de913dc8470298951763452cbc3184405fc82fb2676de961decb0377be5e98b38505270ea05539e739ae352f2c0f3c
   languageName: node
   linkType: hard
 
@@ -1989,7 +1989,7 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": 0.4.3
     "@types/lodash-es": 4.17.3
     "@types/node": 14.14.8
-    "@types/react": 16.9.56
+    "@types/react": 16.14.0
     "@types/react-dom": 16.9.9
     "@types/react-helmet": 6.1.0
     "@types/react-router-config": 5.0.1

@@ -2093,7 +2093,7 @@ __metadata:
     ky: 0.25.0
     lodash-es: 4.17.15
     mini-css-extract-plugin: 1.3.1
-    nanoid: 3.1.18
+    nanoid: 3.1.20
     path-to-regexp: 6.2.0
     pictograph: 2.3.0
     prettier: 2.2.1
@@ -5911,12 +5911,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.1.18":
-  version: 3.1.18
-  resolution: "nanoid@npm:3.1.18"
+"nanoid@npm:3.1.20":
+  version: 3.1.20
+  resolution: "nanoid@npm:3.1.20"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: ae87f7a2542cb9cb546410dee7327a1eece71bd4bb6ef62aab30275342947554add78713bed50c9e012e5d45392cc948087c5bfbbae14ee126defb0926c4afd8
+  checksum: 4788d36edcfec7bb32ddf33ed8f1f46df2867f70e9b1993bb131f7677e04ead2b621e5d614d2736308be18db1d54208d8ab207b4586bd5b052f71fb9d4c0ebea
   languageName: node
   linkType: hard
 

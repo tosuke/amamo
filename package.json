@@ -23,7 +23,7 @@
     "dayjs": "1.9.7",
     "history": "5.0.0",
     "ky": "0.25.1",
-    "lodash-es": "4.17.15",
+    "lodash-es": "4.17.20",
     "nanoid": "3.1.20",
     "path-to-regexp": "6.2.0",
     "pictograph": "2.3.0",

@@ -54,7 +54,7 @@
     "@webpack-cli/serve": "1.1.0",
     "babel-loader": "8.2.2",
     "css-loader": "5.0.1",
-    "css-minimizer-webpack-plugin": "1.1.5",
+    "css-minimizer-webpack-plugin": "1.2.0",
     "dotenv-safe": "8.2.0",
     "dotenv-webpack": "6.0.0",
     "html-webpack-plugin": "4.5.0",

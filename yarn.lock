@@ -2124,7 +2124,7 @@ __metadata:
     clsx: 1.1.1
     core-js: 3.8.2
     css-loader: 5.0.1
-    css-minimizer-webpack-plugin: 1.1.5
+    css-minimizer-webpack-plugin: 1.2.0
     dayjs: 1.10.3
     dotenv-safe: 8.2.0
     dotenv-webpack: 6.0.0
@@ -3156,9 +3156,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-minimizer-webpack-plugin@npm:1.1.5":
-  version: 1.1.5
-  resolution: "css-minimizer-webpack-plugin@npm:1.1.5"
+"css-minimizer-webpack-plugin@npm:1.2.0":
+  version: 1.2.0
+  resolution: "css-minimizer-webpack-plugin@npm:1.2.0"
   dependencies:
     cacache: ^15.0.5
     cssnano: ^4.1.10
@@ -3171,7 +3171,7 @@ __metadata:
     webpack-sources: ^1.4.3
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
-  checksum: 5f2c8658e65b1253bfd725f5ce613dd329b87faef598a0b6d3ec1709db76e667131cc769ea72df947b46fb84059507cc0a33d2e65731667dfb4392c0b550bdea
+  checksum: 1da81ecf46865cd2db0bf639022c725489c0259e8fcc976f98738cc4cc6713660b8dbdc8e15e81eac56d06f93adef0e8f167c9d93f755d1013c4a82e5425133f
   languageName: node
   linkType: hard
 

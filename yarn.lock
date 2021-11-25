@@ -1938,7 +1938,7 @@ __metadata:
     "@webpack-cli/serve": 1.2.1
     babel-loader: 8.2.2
     clsx: 1.1.1
-    core-js: 3.18.3
+    core-js: 3.19.1
     css-loader: 5.0.2
     css-minimizer-webpack-plugin: 1.2.0
     dayjs: 1.10.3
@@ -2883,10 +2883,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.18.3":
-  version: 3.18.3
-  resolution: "core-js@npm:3.18.3"
-  checksum: 01a927d02974a95313bc2325d9f832bbb4801c0c7e69639392574799f87041ce3dae52bdee3646c7cd58b4f38750a6093ca05363bf9f772be9c38dc69608c25c
+"core-js@npm:3.19.1":
+  version: 3.19.1
+  resolution: "core-js@npm:3.19.1"
+  checksum: 32b2ecead4b19f134b4c385271a0dd99f089ef90896d73a3b554b27832d1b56fc7ffaa5a8b396b670ef43c332b9a5522ccd9d1172189dcd911bbe5c08077d0d5
   languageName: node
   linkType: hard
 

@@ -1657,12 +1657,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:17.0.0":
-  version: 17.0.0
-  resolution: "@types/react-dom@npm:17.0.0"
+"@types/react-dom@npm:17.0.18":
+  version: 17.0.18
+  resolution: "@types/react-dom@npm:17.0.18"
   dependencies:
-    "@types/react": "*"
-  checksum: 7ca9351b6c2523327cd7afe40082a37034898f65e9d86700236682efed910ba7c9cec10e9a3b829aa7b804b18791a28743ce468fcb42e9a788bfc33b84137e45
+    "@types/react": ^17
+  checksum: 518931cf5d95c8a38d09c93fc3715b1086df6fca771c5759111d704575eeed83707cc84686ab91c9005c2f2e0ec752c580bf0e356383acb7c87e4dbd2c9868f3
   languageName: node
   linkType: hard
 
@@ -1706,7 +1706,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.0":
+"@types/react@npm:17.0.0, @types/react@npm:^17":
   version: 17.0.0
   resolution: "@types/react@npm:17.0.0"
   dependencies:
@@ -2055,7 +2055,7 @@ __metadata:
     "@types/lodash-es": 4.17.4
     "@types/node": 14.14.22
     "@types/react": 17.0.0
-    "@types/react-dom": 17.0.0
+    "@types/react-dom": 17.0.18
     "@types/react-helmet": 6.1.0
     "@types/react-router-config": 5.0.1
     "@types/styled-jsx": 2.2.8

@@ -1706,13 +1706,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.0":
-  version: 17.0.0
-  resolution: "@types/react@npm:17.0.0"
+"@types/react@npm:17.0.52":
+  version: 17.0.52
+  resolution: "@types/react@npm:17.0.52"
   dependencies:
     "@types/prop-types": "*"
+    "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: dcef2034b822a949c5528fa8fa3c64da654fdbb822bd8f0488c0084d84cadb8b90af68813a6c95153d4754079f50b1cab206552c7c20f6b67a26c3641383fe31
+  checksum: a930a9088690fe818b9239c80a9a60054bd5c6c5da522e3382ead9586049fdb13be000acaf0ed9ce75545818c1fe7365dd7ea0420b04ab94add3396e9615f210
+  languageName: node
+  linkType: hard
+
+"@types/scheduler@npm:*":
+  version: 0.16.2
+  resolution: "@types/scheduler@npm:0.16.2"
+  checksum: e78d1bb50ca9321a76826c0f5a5ed7f1b6e995597127993cad658bd18d7f7de4324cd7efdfd0140079ee212a05774bbbd95eecfdf72370d14023acb99b841a30
   languageName: node
   linkType: hard
 
@@ -2054,7 +2062,7 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": 0.4.3
     "@types/lodash-es": 4.17.4
     "@types/node": 14.14.22
-    "@types/react": 17.0.0
+    "@types/react": 17.0.52
     "@types/react-dom": 17.0.0
     "@types/react-helmet": 6.1.0
     "@types/react-router-config": 5.0.1

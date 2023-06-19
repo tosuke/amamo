@@ -1723,12 +1723,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/styled-jsx@npm:2.2.8":
-  version: 2.2.8
-  resolution: "@types/styled-jsx@npm:2.2.8"
+"@types/styled-jsx@npm:2.2.9":
+  version: 2.2.9
+  resolution: "@types/styled-jsx@npm:2.2.9"
   dependencies:
     "@types/react": "*"
-  checksum: 4066e48c71d7d1c10ee77115522830cb11dec621d1555340b03cc2b48c5954c3124a436d5cf59e62f6226cc1704919c828a332fda4a9f997014f2d73c7d33f3f
+  checksum: 7a687d6bea1825d3b8e70bfa8ff4999b22e1ce4efbd672acd9bce3a75eac60f6472bf99e5afdc7ede399c711b0bf550908d42fd2a4822495739e9170ba97dedc
   languageName: node
   linkType: hard
 
@@ -2058,7 +2058,7 @@ __metadata:
     "@types/react-dom": 17.0.0
     "@types/react-helmet": 6.1.0
     "@types/react-router-config": 5.0.1
-    "@types/styled-jsx": 2.2.8
+    "@types/styled-jsx": 2.2.9
     "@webpack-cli/serve": 1.2.1
     babel-loader: 8.2.3
     clsx: 1.1.1

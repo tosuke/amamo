@@ -2065,7 +2065,7 @@ __metadata:
     core-js: 3.19.1
     css-loader: 5.0.2
     css-minimizer-webpack-plugin: 1.2.0
-    dayjs: 1.10.3
+    dayjs: 1.11.10
     dotenv-safe: 8.2.0
     dotenv-webpack: 6.0.0
     history: 5.0.0
@@ -3330,10 +3330,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.10.3":
-  version: 1.10.3
-  resolution: "dayjs@npm:1.10.3"
-  checksum: df7d13e99a2932c12efb3fc9c36e537ee6722ed1763fb2b74559bf9a864828b3d3eac6d3ae59f0c1dbef8dae52444059d8c8bc540c7edb13d665fcd2b08028e6
+"dayjs@npm:1.11.10":
+  version: 1.11.10
+  resolution: "dayjs@npm:1.11.10"
+  checksum: 694a87c93520abc24f98101df8f4b90af690ffb3658079f7ef82192d5b3c56bb34488b7a9e52943e8da81098013f43e877045a1410aa582ad61493a7b77ed4de
   languageName: node
   linkType: hard
 

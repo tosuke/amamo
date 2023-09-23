@@ -1636,10 +1636,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.14.22":
-  version: 14.14.22
-  resolution: "@types/node@npm:14.14.22"
-  checksum: e46e32685b4d0261779c13c10ba3ff220cfa714b5c12f8f571fd52cc309546bdbc8ffc86cbad20559ad88e7b17e66fc51c98b067d8c3766597092c05df157b9b
+"@types/node@npm:14.18.63":
+  version: 14.18.63
+  resolution: "@types/node@npm:14.18.63"
+  checksum: fdc3d899bb4c4e80055b9ab776922c5e9ca0b2449d993dd9a867d447575cb8a735c99bb0895baeef58cdf1727a75f19ba8e480c10d31b17a84b5ee9d62f9a1da
   languageName: node
   linkType: hard
 
@@ -2053,7 +2053,7 @@ __metadata:
     "@linkage-community/bottlemail": 3.0.0
     "@pmmmwh/react-refresh-webpack-plugin": 0.4.3
     "@types/lodash-es": 4.17.4
-    "@types/node": 14.14.22
+    "@types/node": 14.18.63
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
     "@types/react-helmet": 6.1.0

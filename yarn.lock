@@ -1606,12 +1606,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash-es@npm:4.17.4":
-  version: 4.17.4
-  resolution: "@types/lodash-es@npm:4.17.4"
+"@types/lodash-es@npm:4.17.12":
+  version: 4.17.12
+  resolution: "@types/lodash-es@npm:4.17.12"
   dependencies:
     "@types/lodash": "*"
-  checksum: 5a56261030df09302229a6bbabfcb5a0a63a290bdcc0ca9ee6a96a4fbf7a34101fae4b772fedf5dc4a2b49212ddaf9019b3f014b8c7c84adfea500ece157ec1b
+  checksum: fdd937303b6252d8983a9d65709877c4e535b179af9d135eb30e5e45c7a10184b7fa2beef784669311920cc1c884626839819757838ffa93c5e8e74e4bea5a32
   languageName: node
   linkType: hard
 
@@ -2052,7 +2052,7 @@ __metadata:
     "@babel/preset-typescript": 7.16.0
     "@linkage-community/bottlemail": 3.0.0
     "@pmmmwh/react-refresh-webpack-plugin": 0.4.3
-    "@types/lodash-es": 4.17.4
+    "@types/lodash-es": 4.17.12
     "@types/node": 14.14.22
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0

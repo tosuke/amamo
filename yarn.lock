@@ -1666,12 +1666,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:6.1.0":
-  version: 6.1.0
-  resolution: "@types/react-helmet@npm:6.1.0"
+"@types/react-helmet@npm:6.1.11":
+  version: 6.1.11
+  resolution: "@types/react-helmet@npm:6.1.11"
   dependencies:
     "@types/react": "*"
-  checksum: b7aaa3aa2d81cd3b14a0e77a858de86934a3400f4ec35945117edb3979b8a41130e70b8a27241de295195e365962a9b5bc149a2a029d23795fd0f6c740d1de77
+  checksum: 9247ff5c52c3ef8172f000a62671ed2f35ffd04ba7d5ae07af5c83154d1092a84ec66a6183813b5b65affe2c34d3b47d86bfe9ee165d95db7729243c410012e3
   languageName: node
   linkType: hard
 
@@ -2056,7 +2056,7 @@ __metadata:
     "@types/node": 14.14.22
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
-    "@types/react-helmet": 6.1.0
+    "@types/react-helmet": 6.1.11
     "@types/react-router-config": 5.0.1
     "@types/styled-jsx": 2.2.8
     "@webpack-cli/serve": 1.2.1

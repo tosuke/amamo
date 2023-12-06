@@ -1585,10 +1585,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/history@npm:*":
-  version: 4.7.8
-  resolution: "@types/history@npm:4.7.8"
-  checksum: 54020371a412e949d0a329cc325253f16daf5b33e2e485135d39d3b30d3f9a8e323b00ce1162da82387c8ecf0397a8da49ad36ab309f06284326c064092879c7
+"@types/history@npm:^4.7.11":
+  version: 4.7.11
+  resolution: "@types/history@npm:4.7.11"
+  checksum: 6925b29bcd26c918618e521a3b3e1cb7599956798435b1ca1d01854a582d4aa4e2b1b6e86dc0680b2aadc6f9a19936a999134636d1e33e72f414d890c1012411
   languageName: node
   linkType: hard
 
@@ -1675,24 +1675,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-config@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@types/react-router-config@npm:5.0.1"
+"@types/react-router-config@npm:5.0.11":
+  version: 5.0.11
+  resolution: "@types/react-router-config@npm:5.0.11"
   dependencies:
-    "@types/history": "*"
+    "@types/history": ^4.7.11
     "@types/react": "*"
-    "@types/react-router": "*"
-  checksum: b5254528fa9c32bdbf72ccb2ce297b59c21e77c0cbf42064b69eb589e307ab18a918558a5984941fc94afce638a1f3b5035168bb00be68b2889f3c55471c147c
+    "@types/react-router": ^5.1.0
+  checksum: df47a1c08577b7d4d929e71aa3743c34d0ce81fca12c265b28a9c4e4ebda95fc6db4539e00c9543e3822a91ce628d4bdd62aa37cf02ff1e90e6b1051975441c7
   languageName: node
   linkType: hard
 
-"@types/react-router@npm:*":
-  version: 5.1.8
-  resolution: "@types/react-router@npm:5.1.8"
+"@types/react-router@npm:^5.1.0":
+  version: 5.1.20
+  resolution: "@types/react-router@npm:5.1.20"
   dependencies:
-    "@types/history": "*"
+    "@types/history": ^4.7.11
     "@types/react": "*"
-  checksum: 8b4c8fefdba877971aeaa642d81074d0fda0db9d8891709071c8586c32c75afca1baf478c3b26bcbd404503304599d8ea3243beb4e01080ee77f48f56815ee73
+  checksum: 2f17a7f120c9d737132a36008d65d173cd37b13bfc601133607008b5c7ea5b8a5d9b9394860ee187a66eefe98c6b7f2249b9322f1f4c2caebd8bd3a4e8117308
   languageName: node
   linkType: hard
 
@@ -2057,7 +2057,7 @@ __metadata:
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
     "@types/react-helmet": 6.1.0
-    "@types/react-router-config": 5.0.1
+    "@types/react-router-config": 5.0.11
     "@types/styled-jsx": 2.2.8
     "@webpack-cli/serve": 1.2.1
     babel-loader: 8.2.3
